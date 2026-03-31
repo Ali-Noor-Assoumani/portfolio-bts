@@ -4,88 +4,555 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
-    <title>Stage SMABTP — Ali-Noor ASSOUMANI</title>
-    <meta name="description" content="Bilan du stage à la DSI de SMABTP. Maintenance matérielle et déploiement de postes.">
+    <title>Ali-Noor ASSOUMANI — Portfolio Technicien Systèmes & Réseaux (BTS SIO SISR)</title>
+    <meta name="description" content="Portfolio d'Ali-Noor ASSOUMANI, Technicien Informatique Systèmes et Réseaux. Étudiant en BTS SIO SISR. Découvrez mes projets, mon expérience (SMABTP) et mon CV.">
+    <meta name="keywords" content="Ali-Noor ASSOUMANI, Ali Noor, Assoumani, Portfolio, BTS SIO, SISR, Technicien Informatique, Systèmes et Réseaux, Administrateur Réseau, Cybersécurité, SMABTP, Paris, Bagnolet, Windows Server, Intune, GLPI">
+    <meta name="author" content="Ali-Noor ASSOUMANI">
     <meta name="robots" content="index, follow">
 
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Ali-Noor ASSOUMANI — Portfolio Informatique">
+    <meta property="og:description" content="Découvrez mon parcours, mes compétences en administration systèmes & réseaux et mes projets techniques.">
+    <meta property="og:url" content="https://ali-noor-assoumani.github.io/portfolio-bts/"> 
+    <meta property="og:site_name" content="Portfolio Ali-Noor ASSOUMANI">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700&family=Geist+Mono:wght@300;400;500&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
     *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+
+    /* ===== VARIABLES CSS (PALETTE ORANGE VIBRANTE) ===== */
     :root {
-        --bg: #050505; --bg-sidebar: rgba(5,5,5,0.6); --bg-card: rgba(20,20,25,0.5); --bg-hover: rgba(35,35,45,0.7);
-        --border: rgba(255,255,255,0.1); --border-h: rgba(255,255,255,0.3);
-        --accent: #ff6a00; --accent-glow: rgba(255,106,0,0.18);
-        --text-hi: #ffffff; --text-mid: #e2e8f0; --text: #e2e8f0; --text-muted: #94a3b8;
-        --sans: 'Geist', sans-serif; --mono: 'Geist Mono', monospace;
-        --glow-grad: radial-gradient(circle at 10% 10%, rgba(255,106,0,0.2) 0%, rgba(239,68,68,0.1) 40%, transparent 70%);
+        --bg:           #050505;
+        --bg-sidebar:   rgba(5, 5, 5, 0.6);
+        --bg-card:      rgba(20, 20, 25, 0.5);
+        --bg-hover:     rgba(35, 35, 45, 0.7);
+        --border:       rgba(255, 255, 255, 0.1);
+        --border-h:     rgba(255, 255, 255, 0.3);
+        
+        --accent:       #ff6a00; 
+        --accent-dim:   #ee5d00; 
+        --accent-glow:  rgba(255, 106, 0, 0.18);
+        --accent-line:  rgba(255, 106, 0, 0.4);
+        
+        --green:        #ff6a00; 
+        --green-dim:    #ee5d00;
+        --green-glow:   rgba(255, 106, 0, 0.18);
+        --green-line:   rgba(255, 106, 0, 0.4);
+        
+        --text-hi:      #ffffff;
+        --text-mid:     #e2e8f0;
+        --text:         #e2e8f0;
+        --text-lo:      #94a3b8;
+        --text-muted:   #94a3b8;
+        --text-lo-faint:#64748b;
+        --text-faint:   #64748b;
+        
+        --mono:         'Geist Mono', monospace;
+        --sans:         'Geist', sans-serif;
+        --ease:         cubic-bezier(0.16, 1, 0.3, 1);
+        --sidebar:      300px;
+        --r:            10px;
+
+        --glow-grad: radial-gradient(circle at 10% 10%, rgba(255, 106, 0, 0.18) 0%, rgba(239, 68, 68, 0.08) 40%, transparent 70%);
     }
+
+    /* ===== MODE CLAIR ===== */
     body.light-mode {
-        --bg: #f8fafc; --bg-sidebar: rgba(255,255,255,0.85); --bg-card: #ffffff; --bg-hover: #f1f5f9;
-        --border: rgba(0,0,0,0.1); --border-h: rgba(0,0,0,0.25);
-        --accent: #c2410c; --accent-glow: rgba(194,65,12,0.08);
-        --text-hi: #0f172a; --text-mid: #334155; --text: #334155; --text-muted: #64748b;
-        --glow-grad: radial-gradient(circle at 10% 10%, rgba(249,115,22,0.08) 0%, transparent 70%);
+        --bg:           #f8fafc;
+        --bg-sidebar:   rgba(255, 255, 255, 0.85);
+        --bg-card:      #ffffff;
+        --bg-hover:     #f1f5f9;
+        --border:       rgba(0, 0, 0, 0.1);
+        --border-h:     rgba(0, 0, 0, 0.25);
+        
+        --accent:       #c2410c; 
+        --accent-glow:  rgba(194, 65, 12, 0.08);
+        --accent-line:  rgba(194, 65, 12, 0.25);
+        
+        --green:        #c2410c; 
+        --green-glow:   rgba(194, 65, 12, 0.08);
+        --green-line:   rgba(194, 65, 12, 0.25);
+        
+        --text-hi:      #0f172a;
+        --text-mid:     #334155;
+        --text:         #334155;
+        --text-lo:      #64748b;
+        --text-muted:   #64748b;
+        --text-lo-faint:#94a3b8;
+        --text-faint:   #94a3b8;
+
+        --glow-grad: radial-gradient(circle at 10% 10%, rgba(249, 115, 22, 0.08) 0%, transparent 70%);
     }
-    body { font-family: var(--sans); background: var(--bg); color: var(--text); transition: background 0.3s, color 0.3s; }
-    body::before { content: ''; position: fixed; top: -10%; left: 10%; width: 55vw; height: 55vw; background: var(--glow-grad); z-index: 0; pointer-events: none; filter: blur(80px); transition: background 0.5s;}
-    nav { position: fixed; top: 0; width: 100%; background: var(--bg-sidebar); backdrop-filter: blur(20px); border-bottom: 1px solid var(--border); padding: 1rem 2.5rem; z-index: 1000; display:flex; justify-content:space-between;}
-    .nav-inner { max-width: 860px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; width: 100%;}
-    .nav-logo { font-family: var(--mono); color: var(--text-muted); text-decoration: none; display: flex; align-items: center; gap: .6rem; }
-    .nav-back { font-family: var(--mono); color: var(--text-muted); text-decoration: none; padding: .4rem .8rem; border: 1px solid var(--border); border-radius: 7px; }
-    .theme-toggle { background: transparent; border: 1px solid var(--border); color: var(--text); padding: 0.4rem 0.8rem; border-radius: 6px; cursor: pointer; font-family: var(--sans); font-size: 0.8rem; margin-left: 1rem;}
-    .page { max-width: 860px; margin: 0 auto; padding: 7rem 2rem 5rem; position: relative; z-index: 1; }
-    h1 { font-size: 2.5rem; color: var(--text-hi); margin-bottom: 1rem; }
+
+    body { font-family: var(--sans); background: var(--bg); color: var(--text-mid); line-height: 1.7; overflow-x: hidden; -webkit-font-smoothing: antialiased; transition: background-color 0.3s, color 0.3s; }
+    body::before { content: ''; position: fixed; top: -20%; left: 20%; width: 60vw; height: 60vw; background: var(--glow-grad); z-index: -1; pointer-events: none; filter: blur(60px); transition: background 0.5s; }
+    body::after { content: ''; position: fixed; inset: 0; pointer-events: none; z-index: 9998; opacity: 0.12; background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.05'/%3E%3C/svg%3E"); }
+
+    ::-webkit-scrollbar { width: 4px; }
+    ::-webkit-scrollbar-track { background: var(--bg); }
+    ::-webkit-scrollbar-thumb { background: var(--text-lo-faint); border-radius: 4px; }
+
+    .layout { display: flex; min-height: 100vh; }
+    .container { max-width: 900px; margin: 0 auto; width: 100%; }
+
+    /* Theme Toggle */
+    .theme-toggle { display: flex; align-items: center; justify-content: center; gap: 0.6rem; padding: 0.7rem 1.2rem; background: var(--bg-card); border: 1px solid var(--border); color: var(--text-mid); border-radius: 8px; font-family: var(--sans); font-size: 0.8rem; font-weight: 500; cursor: pointer; transition: all 0.2s var(--ease); margin-bottom: 2rem; width: 100%; }
+    .theme-toggle:hover { border-color: var(--accent); color: var(--accent); background: var(--bg-hover); }
+
+    /* Sidebar */
+    .sidebar { position: fixed; top: 0; left: 0; width: var(--sidebar); height: 100vh; display: flex; flex-direction: column; padding: 3.5rem 2.5rem; border-right: 1px solid var(--border); background: var(--bg-sidebar); backdrop-filter: blur(12px); z-index: 100; overflow-y: auto; transition: background-color 0.3s; }
+    .sidebar-top { flex: 1; }
+    .avatar { width: 56px; height: 56px; border: 1px solid var(--border); border-radius: 14px; display: flex; align-items: center; justify-content: center; font-size: 1.2rem; font-weight: 700; color: var(--text-hi); margin-bottom: 1.6rem; }
+    .sidebar-name { font-size: 1.1rem; font-weight: 700; color: var(--text-hi); margin-bottom: .3rem; }
+    .sidebar-role { font-family: var(--mono); font-size: .75rem; color: var(--accent); margin-bottom: 1.4rem; }
+    .sidebar-bio { font-size: .85rem; color: var(--text-lo); margin-bottom: 2rem; }
+    .status-badge { display: inline-flex; align-items: center; gap: .5rem; background: var(--accent-glow); border: 1px solid var(--accent-line); color: var(--accent); font-family: var(--mono); font-size: .7rem; padding: .3rem .8rem; border-radius: 20px; margin-bottom: 2.5rem; }
+    .status-dot { width: 6px; height: 6px; background: var(--accent); border-radius: 50%; box-shadow: 0 0 8px var(--accent); animation: blink 2s ease infinite; }
+    @keyframes blink { 0%,100%{opacity:1} 50%{opacity:.4} }
     
-    .gallery { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px,1fr)); gap: 1.5rem; margin-top:2rem;}
-    .g-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: 10px; overflow: hidden; text-decoration: none; display: flex; flex-direction: column; transition: all .2s; }
-    .g-card:hover { border-color: var(--accent); transform: translateY(-4px); }
-    .g-img { width: 100%; height: 145px; object-fit: cover; border-bottom: 1px solid var(--border); }
-    .g-file { height: 145px; display: flex; align-items: center; justify-content: center; border-bottom: 1px solid var(--border); background: var(--accent-glow); color: var(--accent); font-size: 2.2rem; }
-    .g-info { padding: 1rem; }
-    .g-info h4 { font-size: .85rem; color: var(--text-hi); margin-bottom: .3rem; }
-    .g-info p { font-size: .75rem; color: var(--text-muted); margin: 0; }
+    .sidebar-nav { list-style: none; margin-bottom: 2.5rem; }
+    .sidebar-nav a { display: flex; align-items: center; gap: .75rem; padding: .6rem .8rem; font-size: .85rem; color: var(--text-mid); text-decoration: none; border-radius: 8px; transition: all 0.2s var(--ease); }
+    .sidebar-nav a:hover { background: var(--bg-hover); color: var(--text-hi); }
+    .sidebar-nav a.active { background: var(--accent-glow); color: var(--accent); }
+
+    .sidebar-contacts { display: flex; flex-direction: column; gap: .8rem; margin-bottom: 1.5rem; }
+    .sidebar-contact { display: flex; align-items: center; gap: .8rem; font-family: var(--mono); font-size: .75rem; color: var(--text-mid); text-decoration: none; transition: color 0.2s; }
+    .sidebar-contact:hover { color: var(--accent); }
+    .sidebar-cv { display: flex; align-items: center; justify-content: center; gap: .5rem; padding: .7rem 1rem; background: var(--text-hi); color: var(--bg); border-radius: 8px; font-size: .8rem; font-weight: 600; text-decoration: none; transition: all 0.2s var(--ease); }
+    .sidebar-cv:hover { transform: translateY(-2px); opacity: 0.9; }
+
+    /* Main Content */
+    .main { margin-left: var(--sidebar); width: calc(100% - var(--sidebar)); min-height: 100vh; transition: margin 0.3s; }
+    section { padding: 6rem 3rem; border-bottom: 1px solid var(--border); position: relative; z-index: 1; }
+    section:last-of-type { border-bottom: none; }
+    .sec-label { font-family: var(--mono); font-size: .7rem; letter-spacing: .15em; color: var(--accent); text-transform: uppercase; margin-bottom: 1rem; }
+    .sec-title { font-size: clamp(1.8rem,3vw,2.5rem); font-weight: 700; color: var(--text-hi); margin-bottom: 3rem; }
+
+    /* Hero */
+    #accueil { min-height: 100vh; display: flex; flex-direction: column; justify-content: center; }
+    .hero-eyebrow { font-family: var(--mono); font-size: .8rem; color: var(--text-lo); margin-bottom: 1.5rem; display: flex; align-items: center; gap: .8rem; }
+    .hero-eyebrow::before { content: ''; width: 30px; height: 1px; background: var(--border-h); }
+    .hero-title { font-size: clamp(3rem,5vw,4.5rem); font-weight: 700; margin-bottom: 1.5rem; background: linear-gradient(to right, var(--text-hi), var(--text-lo-faint)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+    .hero-title span { background: linear-gradient(to right, var(--accent), var(--accent-dim)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+    .hero-desc { font-size: 1.1rem; color: var(--text-mid); line-height: 1.8; max-width: 550px; margin-bottom: 2.5rem; }
+    .hero-desc strong { color: var(--text-hi); font-weight: 500; }
+    .hero-actions { display: flex; gap: 1rem; flex-wrap: wrap; }
+    .btn { display: inline-flex; align-items: center; gap: .5rem; padding: .8rem 1.5rem; border-radius: 8px; font-size: .9rem; font-weight: 500; text-decoration: none; transition: all 0.2s var(--ease); border: none; cursor: pointer;}
+    .btn-primary { background: var(--text-hi); color: var(--bg); }
+    .btn-primary:hover { transform: translateY(-2px); opacity: 0.9; }
+    .btn-ghost { background: var(--bg-card); border: 1px solid var(--border); color: var(--text-hi); backdrop-filter: blur(10px); }
+    .btn-ghost:hover { border-color: var(--accent); color: var(--accent); }
+
+    /* Skills */
+    .skills-cols { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; }
+    .skill-group-label { font-family: var(--mono); font-size: .75rem; color: var(--text-lo); text-transform: uppercase; margin-bottom: 2rem; border-bottom: 1px solid var(--border); padding-bottom: .8rem;}
+    .skill-item { margin-bottom: 1.5rem; }
+    .skill-row { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: .6rem; }
+    .skill-name { font-size: .9rem; font-weight: 500; color: var(--text-mid); }
+    .skill-pct { font-family: var(--mono); font-size: .75rem; color: var(--text-lo); }
+    .skill-track { height: 3px; background: var(--border); border-radius: 2px; }
+    .skill-fill { height: 100%; background: var(--accent); border-radius: 2px; width: 0; transition: width 1.2s var(--ease); }
+
+    /* Table E5 Raccourcie */
+    .table-wrap { overflow-x: auto; border: 1px solid var(--border); border-radius: 12px; background: var(--bg-card); backdrop-filter: blur(10px); margin-top: 3rem; }
+    table { width: 100%; border-collapse: collapse; min-width: 600px; }
+    th { padding: 1.2rem; text-align: left; font-size: .8rem; color: var(--text-lo); border-bottom: 1px solid var(--border); }
+    td { padding: 1.2rem; border-bottom: 1px solid var(--border); font-size: .9rem; color: var(--text-mid); }
+    .check { text-align: center; color: var(--accent); font-size: .9rem; }
+    .group-header td { background: var(--accent-glow); color: var(--accent); font-family: var(--mono); font-size: 0.75rem; font-weight: 600; text-transform: uppercase; }
+
+    /* Experience */
+    .exp-block { background: var(--bg-card); border: 1px solid var(--border); border-radius: 16px; padding: 2.5rem; transition: border-color .3s var(--ease); margin-bottom: 2rem; }
+    .exp-block:hover { border-color: var(--accent); }
+    .exp-top { display: flex; align-items: center; gap: 1.5rem; margin-bottom: 2rem; }
+    .exp-icon { width: 50px; height: 50px; border: 1px solid var(--border); border-radius: 12px; display: flex; align-items: center; justify-content: center; color: var(--text-hi); font-size: 1.2rem; }
+    .exp-meta h3 { font-size: 1.2rem; color: var(--text-hi); margin-bottom: .2rem; }
+    .exp-role { font-family: var(--mono); font-size: .8rem; color: var(--text-lo); }
+    .exp-desc { font-size: .95rem; color: var(--text-mid); line-height: 1.8; margin-bottom: 2rem; }
+    .exp-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 1rem; }
+    .exp-item { background: rgba(0,0,0,0.1); border: 1px solid var(--border); border-radius: 10px; padding: 1.2rem; }
+    .exp-item h4 { font-size: .85rem; color: var(--text-hi); margin-bottom: .5rem; display: flex; align-items: center; gap: .5rem; }
+    .exp-item h4 i { color: var(--accent); }
+    .exp-item p { font-size: .8rem; color: var(--text-lo); }
+
+    /* Galerie Preuves */
+    .proof-section { margin-top: 2.5rem; padding-top: 2.5rem; border-top: 1px solid var(--border); }
+    .proof-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px,1fr)); gap: 1rem; }
+    .proof-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: 10px; overflow: hidden; display: flex; flex-direction: column; text-decoration: none; transition: all 0.3s; }
+    .proof-card:hover { border-color: var(--accent); transform: translateY(-4px); }
+    .proof-img { width: 100%; height: 140px; object-fit: cover; border-bottom: 1px solid var(--border); }
+    .proof-file-icon { height: 140px; display: flex; align-items: center; justify-content: center; background: var(--accent-glow); color: var(--accent); font-size: 2.4rem; border-bottom: 1px solid var(--border); }
+    .proof-info { padding: 1rem; }
+    .proof-info h5 { color: var(--text-hi); font-size: .85rem; margin-bottom: .3rem; }
+    .proof-info p { color: var(--text-muted); font-size: .75rem; line-height: 1.5; }
+
+    /* Projets & Veille */
+    .projects-grid, .veille-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; }
+    .proj-card, .veille-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: 16px; padding: 2rem; display: flex; flex-direction: column; text-decoration: none; transition: all 0.3s; }
+    .proj-card:hover, .veille-card:hover { border-color: var(--accent); transform: translateY(-4px); }
+    .proj-icon, .v-icon { width: 45px; height: 45px; border: 1px solid var(--border); border-radius: 10px; display: flex; align-items: center; justify-content: center; color: var(--text-hi); font-size: 1.1rem; margin-bottom: 1.5rem; }
+    .proj-card h3, .veille-card h3 { font-size: 1.1rem; color: var(--text-hi); margin-bottom: .8rem; }
+    .proj-card p, .veille-card p { font-size: .9rem; color: var(--text-mid); flex: 1; margin-bottom: 1.5rem; }
+    .proj-tags, .veille-tags { display: flex; flex-wrap: wrap; gap: .5rem; margin-bottom: 1.5rem; }
+    .proj-tag, .veille-tag { font-family: var(--mono); font-size: .7rem; padding: .3rem .8rem; border-radius: 6px; border: 1px solid var(--border); color: var(--text-lo); }
+    .proj-link { font-size: .85rem; color: var(--accent); font-weight: 500; display: flex; align-items: center; gap: .5rem; margin-top: auto; }
+
+    /* Contact */
+    .contact-layout { display: grid; grid-template-columns: 1fr 1.5fr; gap: 5rem; }
+    .contact-blurb { color: var(--text-mid); margin-bottom: 2rem; }
+    .form-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: 16px; padding: 2.5rem; }
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+    .form-group { margin-bottom: 1.2rem; }
+    .form-group label { display: block; font-size: .85rem; color: var(--text-lo); margin-bottom: .5rem; }
+    .form-group input, .form-group textarea { width: 100%; background: rgba(0,0,0,0.2); border: 1px solid var(--border); border-radius: 8px; color: var(--text-hi); padding: .8rem 1rem; font-family: var(--sans); }
+    .form-group input:focus, .form-group textarea:focus { outline: none; border-color: var(--accent); }
+    .form-group textarea { min-height: 120px; resize: vertical; }
+
+    /* Footer */
+    footer { margin-left: var(--sidebar); padding: 3rem; border-top: 1px solid var(--border); background: var(--bg-card); }
+    .footer-content { display: flex; justify-content: space-between; color: var(--text-lo); font-size: 0.85rem; }
+
+    .r { opacity: 0; transform: translateY(20px); transition: all 0.8s var(--ease); }
+    .r.in { opacity: 1; transform: none; }
+
+    @media (max-width: 1024px) { :root { --sidebar: 280px; } section { padding: 5rem 2rem; } .skills-cols { gap: 2rem; } .projects-grid { grid-template-columns: 1fr; } }
+    @media (max-width: 768px) { .layout { flex-direction: column; } .sidebar { position: relative; width: 100%; height: auto; padding: 2rem; } .sidebar-nav { display: flex; flex-wrap: wrap; gap: 0.5rem; } .main { margin-left: 0; width: 100%; } footer { margin-left: 0; } .contact-layout, .exp-grid, .form-row { grid-template-columns: 1fr; } }
     </style>
 </head>
 <body>
-<nav>
-    <div class="nav-inner">
-        <a href="index.html" class="nav-logo"><i class="fas fa-circle" style="color:var(--accent);"></i> Ali-Noor</a>
-        <div style="display:flex; align-items:center;">
-            <a href="index.html#experience" class="nav-back"><i class="fas fa-arrow-left"></i> Retour</a>
-            <button id="themeToggle" class="theme-toggle"><i class="fas fa-sun"></i> Mode Clair</button>
+
+<div class="layout">
+    <aside class="sidebar">
+        <div class="sidebar-top">
+            <button id="themeToggle" class="theme-toggle">
+                <i class="fas fa-sun"></i> Mode Clair
+            </button>
+            <div class="avatar">AN</div>
+            <div class="sidebar-name">Ali-Noor ASSOUMANI</div>
+            <div class="sidebar-role">BTS SIO · SISR</div>
+            <div class="sidebar-bio">Étudiant en BTS SIO (SISR) fort d'une double expérience chez SMABTP. Spécialisé en déploiement (Intune/Autopilot) et support de proximité.</div>
+            <div class="status-badge"><span class="status-dot"></span> À la recherche d'opportunités</div>
+
+            <ul class="sidebar-nav" id="sidenav">
+                <li><a href="#accueil" class="active"><i class="fas fa-home"></i> Accueil</a></li>
+                <li><a href="#profil"><i class="fas fa-code"></i> Compétences</a></li>
+                <li><a href="#epreuve-e5"><i class="fas fa-table"></i> Épreuve E5</a></li>
+                <li><a href="#experience"><i class="fas fa-briefcase"></i> Expérience</a></li>
+                <li><a href="#projets"><i class="fas fa-layer-group"></i> Projets</a></li>
+                <li><a href="#veille"><i class="fas fa-satellite-dish"></i> Veille</a></li>
+                <li><a href="#contact"><i class="fas fa-paper-plane"></i> Contact</a></li>
+            </ul>
         </div>
-    </div>
-</nav>
-<div class="page">
-    <h1>Stage — SMABTP Paris</h1>
-    <p style="color:var(--text-muted);">Intégré au sein de la DSI de la SMABTP : support N1/N2, maintenance matérielle et déploiement (Intune/Autopilot/WDS).</p>
-    
-    <h2 style="color:var(--text-hi); margin-top:3rem;">Galerie de Preuves</h2>
-    <div class="gallery">
-      <a class="g-card" href="Maintenance_Materiel.jpg" target="_blank">
-        <img src="Maintenance_Materiel.jpg" alt="Maintenance matérielle" class="g-img">
-        <div class="g-info"><h4>Maintenance matérielle</h4><p>Ouverture et diagnostic des composants internes d'un poste.</p></div>
-      </a>
-      <a class="g-card" href="Masterisation_Table_1.jpg" target="_blank">
-        <img src="Masterisation_Table_1.jpg" alt="Mastérisation table 1" class="g-img">
-        <div class="g-info"><h4>Déploiement en série</h4><p>Préparation et mastérisation simultanée de plusieurs postes.</p></div>
-      </a>
-      <a class="g-card" href="Masterisation_Table_2.jpg" target="_blank">
-        <img src="Masterisation_Table_2.jpg" alt="Mastérisation table 2" class="g-img">
-        <div class="g-info"><h4>Processus de mastérisation</h4><p>Amorçage réseau et installation des masters DSI.</p></div>
-      </a>
-      
-      <a class="g-card" href="Stage_2eme_annee.pdf" target="_blank">
-        <div class="g-file"><i class="fas fa-project-diagram"></i></div>
-        <div class="g-info"><h4>Diagramme de Gantt</h4><p>Planification des missions du stage (Migration, incidents...).</p></div>
-      </a>
-    </div>
+        <div class="sidebar-bottom">
+            <div class="sidebar-contacts">
+                <a href="mailto:alinoor.assoumani.sio@gmail.com" class="sidebar-contact"><i class="fas fa-envelope"></i> Email</a>
+                <a href="tel:0686546711" class="sidebar-contact"><i class="fas fa-phone"></i> 06 86 54 67 11</a>
+                <a href="https://www.linkedin.com/in/ali-noor-assoumani-28b496327" target="_blank" class="sidebar-contact"><i class="fab fa-linkedin"></i> LinkedIn</a>
+            </div>
+            <a href="ASSOUMANI_CV.pdf" target="_blank" class="sidebar-cv"><i class="fas fa-file-pdf"></i> Voir mon CV</a>
+        </div>
+    </aside>
+
+    <main class="main">
+        <section id="accueil">
+            <div class="container">
+                <div class="hero-eyebrow r">Portfolio Technique</div>
+                <h1 class="hero-title r">Concevoir.<br>Déployer.<br><span>Sécuriser.</span></h1>
+                
+                <p class="hero-desc r">Je suis <strong>Ali-Noor</strong>, étudiant en BTS SIO (SISR). J'accompagne les utilisateurs, j'administre les serveurs et je sécurise les réseaux informatiques au quotidien.</p>
+                
+                <div class="hero-actions r">
+                    <a href="#projets" class="btn btn-primary">Explorer mes travaux</a>
+                    <a href="#contact" class="btn btn-ghost">Me contacter</a>
+                </div>
+            </div>
+        </section>
+
+        <section id="profil">
+            <div class="container">
+                <div class="sec-label r">Expertise</div>
+                <h2 class="sec-title r">Technologies maîtrisées</h2>
+                <div class="skills-cols r">
+                    <div>
+                        <div class="skill-group-label">Infrastructures & Réseaux</div>
+                        <div class="skill-item"><div class="skill-row"><span class="skill-name">Windows Server / AD</span></div><div class="skill-track"><div class="skill-fill" data-w="85"></div></div></div>
+                        <div class="skill-item"><div class="skill-row"><span class="skill-name">Intune / Autopilot</span></div><div class="skill-track"><div class="skill-fill" data-w="80"></div></div></div>
+                        <div class="skill-item"><div class="skill-row"><span class="skill-name">Stormshield & Cisco</span></div><div class="skill-track"><div class="skill-fill" data-w="65"></div></div></div>
+                    </div>
+                    <div>
+                        <div class="skill-group-label">Support & Outils</div>
+                        <div class="skill-item"><div class="skill-row"><span class="skill-name">Support Utilisateur (Kiosque IT)</span></div><div class="skill-track"><div class="skill-fill" data-w="95"></div></div></div>
+                        <div class="skill-item"><div class="skill-row"><span class="skill-name">Déploiement Windows 10/11</span></div><div class="skill-track"><div class="skill-fill" data-w="90"></div></div></div>
+                        <div class="skill-item"><div class="skill-row"><span class="skill-name">Ticketing (osTicket / GLPI)</span></div><div class="skill-track"><div class="skill-fill" data-w="85"></div></div></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="epreuve-e5">
+            <div class="container">
+                <div class="sec-label r">Évaluation E5</div>
+                <h2 class="sec-title r">Tableau de synthèse (Annexe VI-1)</h2>
+                
+                <div class="r d1" style="margin-bottom:2rem;">
+                    <a href="ASSOUMANI Ali-Noor 8 - EPREUVE ORALE E5 - MODELE DE TABLEAU DE SYNTHESE ANNEXE VI-1 - BTS SIO 2026.xlsx - Tableau de synthèse Épreuve E5.csv" target="_blank" class="btn btn-ghost" style="font-size:.78rem; padding:.5rem 1rem;">
+                        <i class="fas fa-file-excel" style="color:var(--accent); font-size:.72rem;"></i> Télécharger le fichier officiel complet
+                    </a>
+                </div>
+
+                <div class="table-wrap r d2">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th style="width:25%;">Réalisations</th>
+                                <th title="Gérer le patrimoine informatique">Patrimoine</th>
+                                <th title="Répondre aux incidents et demandes">Incidents</th>
+                                <th title="Développer la présence en ligne">Présence</th>
+                                <th title="Travailler en mode projet">Projet</th>
+                                <th title="Mettre à disposition un service">Service</th>
+                                <th title="Organiser son développement">Dév. Pro</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="group-header"><td colspan="7">En cours de formation</td></tr>
+                            <tr>
+                                <td><strong>AP : osTicket (GLPI)</strong></td>
+                                <td class="check"><i class="fas fa-circle"></i></td>
+                                <td class="check"><i class="fas fa-circle"></i></td>
+                                <td></td><td></td>
+                                <td class="check"><i class="fas fa-circle"></i></td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td><strong>Stormshield</strong></td>
+                                <td></td><td></td><td></td><td></td>
+                                <td class="check"><i class="fas fa-circle"></i></td>
+                                <td class="check"><i class="fas fa-circle"></i></td>
+                            </tr>
+                            <tr>
+                                <td><strong>AP : Windows Server</strong></td>
+                                <td></td><td></td><td></td>
+                                <td class="check"><i class="fas fa-circle"></i></td>
+                                <td class="check"><i class="fas fa-circle"></i></td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td><strong>Portfolio</strong></td>
+                                <td></td><td></td>
+                                <td class="check"><i class="fas fa-circle"></i></td>
+                                <td></td><td></td>
+                                <td class="check"><i class="fas fa-circle"></i></td>
+                            </tr>
+
+                            <tr class="group-header"><td colspan="7">Milieu professionnel (1ère année)</td></tr>
+                            <tr>
+                                <td><strong>Création Site Web</strong></td>
+                                <td></td><td></td>
+                                <td class="check"><i class="fas fa-circle"></i></td>
+                                <td class="check"><i class="fas fa-circle"></i></td>
+                                <td></td><td></td>
+                            </tr>
+                            <tr>
+                                <td><strong>Gestion Incidents & Serveur</strong></td>
+                                <td class="check"><i class="fas fa-circle"></i></td>
+                                <td class="check"><i class="fas fa-circle"></i></td>
+                                <td></td><td></td>
+                                <td class="check"><i class="fas fa-circle"></i></td>
+                                <td></td>
+                            </tr>
+
+                            <tr class="group-header"><td colspan="7">Milieu professionnel (2nde année)</td></tr>
+                            <tr>
+                                <td><strong>Migration PC</strong></td>
+                                <td class="check"><i class="fas fa-circle"></i></td>
+                                <td></td><td></td>
+                                <td class="check"><i class="fas fa-circle"></i></td>
+                                <td class="check"><i class="fas fa-circle"></i></td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td><strong>Support & Incidents</strong></td>
+                                <td></td>
+                                <td class="check"><i class="fas fa-circle"></i></td>
+                                <td></td><td></td><td></td><td></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <section id="experience">
+            <div class="container">
+                <div class="sec-label r">Professionnel</div>
+                <h2 class="sec-title r">Expérience en entreprise</h2>
+
+                <div class="exp-block r" style="border-color: var(--accent);">
+                    <div class="exp-top"><div class="exp-icon"><i class="fas fa-building"></i></div><div class="exp-meta"><h3>SMABTP — DSI</h3><div class="exp-role">Support & Préparation · Stage 2026</div></div></div>
+                    <p class="exp-desc">Déploiement en masse et support informatique de niveau 1/2.</p>
+                    <div class="exp-grid">
+                        <div class="exp-item"><h4><i class="fab fa-microsoft"></i> Intune</h4><p>Déploiement avec Microsoft Intune et Autopilot.</p></div>
+                        <div class="exp-item"><h4><i class="fas fa-headset"></i> Kiosque IT</h4><p>Résolution d'incidents critiques en proximité.</p></div>
+                        <div class="exp-item"><h4><i class="fas fa-network-wired"></i> Aménagement</h4><p>Logistique et brassage réseau.</p></div>
+                    </div>
+                    <div class="proof-section">
+                        <div class="proof-section-label">Preuve d'intervention</div>
+                        <div class="proof-grid">
+                            <a class="proof-card" href="Stage_2eme_annee.pdf" target="_blank">
+                                <div class="proof-file-icon"><i class="fas fa-project-diagram"></i></div>
+                                <div class="proof-info"><h5>Diagramme de Gantt</h5><p>Planification des missions du stage.</p></div>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="exp-block r">
+                    <div class="exp-top"><div class="exp-icon"><i class="fas fa-building"></i></div><div class="exp-meta"><h3>SMABTP — DSI</h3><div class="exp-role">Technicien Support · Stage 2025</div></div></div>
+                    <p class="exp-desc">Première expérience axée sur la réparation matérielle et le déploiement de postes.</p>
+                    <div class="proof-section">
+                        <div class="proof-section-label">Galerie des missions</div>
+                        <div class="proof-grid">
+                            <a href="Maintenance_Materiel.jpg" target="_blank" class="proof-card">
+                                <img src="Maintenance_Materiel.jpg" class="proof-img">
+                                <div class="proof-info"><h5>Maintenance</h5><p>Diagnostic et remplacement matériel.</p></div>
+                            </a>
+                            <a href="Masterisation_Table_1.jpg" target="_blank" class="proof-card">
+                                <img src="Masterisation_Table_1.jpg" class="proof-img">
+                                <div class="proof-info"><h5>Mastérisation</h5><p>Déploiement réseau en série.</p></div>
+                            </a>
+                            <a href="Masterisation_Table_2.jpg" target="_blank" class="proof-card">
+                                <img src="Masterisation_Table_2.jpg" class="proof-img">
+                                <div class="proof-info"><h5>Processus de mastérisation</h5><p>Amorçage via PXE et installation OS.</p></div>
+                            </a>
+                        </div>
+                    </div>
+                    <a href="fiche_stage_smabtp.html" class="btn btn-ghost" style="margin-top:2rem;"><i class="fas fa-folder-open"></i> Bilan complet</a>
+                </div>
+            </div>
+        </section>
+
+        <section id="projets">
+            <div class="container">
+                <div class="sec-label r">Missions</div>
+                <h2 class="sec-title r">Projets Techniques</h2>
+                <div class="projects-grid">
+                    <a href="fiche_glpi.html" class="proj-card r">
+                        <div class="proj-icon"><i class="fas fa-ticket-alt"></i></div>
+                        <h3>Plateforme Ticketing</h3>
+                        <p>Déploiement d'osTicket sous Linux. Création de catégories et SLA.</p>
+                        <div class="proj-tags"><span class="proj-tag">osTicket</span><span class="proj-tag">ITIL</span></div>
+                        <div class="proj-link">Voir la fiche <i class="fas fa-arrow-right"></i></div>
+                        
+                        <div style="margin-top: 1rem; border-top: 1px solid var(--border); padding-top: 1rem;">
+                            <object data="AP-osTicket.pdf" style="pointer-events: none; color: var(--accent); font-size: 0.85rem;"><i class="fas fa-project-diagram"></i> Contient un Diagramme de Gantt</object>
+                        </div>
+                    </a>
+                    <a href="fiche_stormshield.html" class="proj-card r">
+                        <div class="proj-icon"><i class="fas fa-shield-alt"></i></div>
+                        <h3>Sécurisation Réseau</h3>
+                        <p>Pare-feu Stormshield, NAT/PAT et VPN IPsec.</p>
+                        <div class="proj-tags"><span class="proj-tag">Stormshield</span><span class="proj-tag">VPN</span></div>
+                        <div class="proj-link">Voir la fiche <i class="fas fa-arrow-right"></i></div>
+                    </a>
+                    <a href="fiche_windows_server.html" class="proj-card r">
+                        <div class="proj-icon"><i class="fas fa-server"></i></div>
+                        <h3>Windows Server</h3>
+                        <p>AD DS, DNS et scripts de connexion via GPO.</p>
+                        <div class="proj-tags"><span class="proj-tag">Active Directory</span><span class="proj-tag">GPO</span></div>
+                        <div class="proj-link">Voir la fiche <i class="fas fa-arrow-right"></i></div>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <section id="veille">
+            <div class="container">
+                <div class="sec-label r">Information</div>
+                <h2 class="sec-title r">Veille Technologique</h2>
+                <div class="veille-grid">
+                    <div class="veille-card r"><div class="v-icon"><i class="fas fa-lock"></i></div><h3>Cybersécurité Hybride</h3><p>Menaces (Ransomwares) ciblant les PME et Cloud.</p></div>
+                    <div class="veille-card r"><div class="v-icon"><i class="fas fa-rss"></i></div><h3>Sources & Outils</h3><p>Utilisation de Feedly et alertes CERT-FR.</p></div>
+                </div>
+            </div>
+        </section>
+
+        <section id="contact">
+            <div class="container">
+                <div class="sec-label r">Échanger</div>
+                <h2 class="sec-title r">Prêt à collaborer</h2>
+                <div class="contact-layout">
+                    <div class="r">
+                        <p class="contact-blurb">Actuellement à la recherche d'opportunités en administration réseaux et support.</p>
+                        <p style="color: var(--text-hi); margin-bottom:1rem;"><i class="fas fa-envelope" style="color:var(--accent); margin-right:10px;"></i> alinoor.assoumani.sio@gmail.com</p>
+                        <p style="color: var(--text-hi); margin-bottom:1rem;"><i class="fas fa-phone" style="color:var(--accent); margin-right:10px;"></i> 06 86 54 67 11</p>
+                        <p style="color: var(--text-hi); margin-bottom:1rem;">
+                            <i class="fab fa-linkedin" style="color:var(--accent); margin-right:10px;"></i> 
+                            <a href="https://www.linkedin.com/in/ali-noor-assoumani-28b496327" target="_blank" style="color: inherit; text-decoration: none; transition: color 0.2s;" onmouseover="this.style.color='var(--accent)'" onmouseout="this.style.color='inherit'">Ali-Noor ASSOUMANI</a>
+                        </p>
+                    </div>
+                    <div class="form-card r">
+                        <form onsubmit="event.preventDefault(); alert('Test envoyé !');">
+                            <div class="form-group"><label>Nom</label><input type="text" required></div>
+                            <div class="form-group"><label>Email</label><input type="email" required></div>
+                            <div class="form-group"><label>Message</label><textarea required></textarea></div>
+                            <button type="submit" class="btn btn-primary" style="width:100%; justify-content:center;"><i class="fas fa-paper-plane"></i> Envoyer</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
 </div>
+
 <script>
-    const t = document.getElementById('themeToggle'); const b = document.body;
-    if (localStorage.getItem('theme') === 'light-mode') { b.classList.add('light-mode'); t.innerHTML = '<i class="fas fa-moon"></i> Sombre'; }
-    t.addEventListener('click', () => { b.classList.toggle('light-mode'); const isL = b.classList.contains('light-mode'); localStorage.setItem('theme', isL ? 'light-mode' : 'dark-mode'); t.innerHTML = isL ? '<i class="fas fa-moon"></i> Sombre' : '<i class="fas fa-sun"></i> Clair'; });
+/* Theme Toggle */
+const themeToggle = document.getElementById('themeToggle');
+const themeIcon = themeToggle.querySelector('i');
+const body = document.body;
+const currentTheme = localStorage.getItem('theme');
+if (currentTheme === 'light-mode') {
+    body.classList.add('light-mode');
+    themeIcon.classList.replace('fa-sun', 'fa-moon');
+    themeToggle.childNodes[2].textContent = " Mode Sombre";
+}
+themeToggle.addEventListener('click', () => {
+    body.classList.toggle('light-mode');
+    let theme = body.classList.contains('light-mode') ? 'light-mode' : 'dark-mode';
+    if (theme === 'light-mode') {
+        themeIcon.classList.replace('fa-sun', 'fa-moon');
+        themeToggle.childNodes[2].textContent = " Mode Sombre";
+    } else {
+        themeIcon.classList.replace('fa-moon', 'fa-sun');
+        themeToggle.childNodes[2].textContent = " Mode Clair";
+    }
+    localStorage.setItem('theme', theme);
+});
+
+/* Active Nav */
+const sections = document.querySelectorAll('section[id]');
+const navLinks = document.querySelectorAll('.sidebar-nav a');
+window.addEventListener('scroll', () => {
+    let cur = '';
+    sections.forEach(s => { if (window.scrollY >= s.offsetTop - 200) cur = s.id; });
+    navLinks.forEach(a => a.classList.toggle('active', a.getAttribute('href') === '#' + cur));
+});
+
+/* Reveal */
+const obs = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+        if (!e.isIntersecting) return;
+        e.target.classList.add('in');
+        e.target.querySelectorAll('.skill-fill[data-w]').forEach(b => {
+            setTimeout(() => { b.style.width = b.dataset.w + '%'; }, 200);
+        });
+        obs.unobserve(e.target);
+    });
+}, { threshold: 0.1 });
+document.querySelectorAll('.r').forEach(el => obs.observe(el));
 </script>
 </body>
 </html>
