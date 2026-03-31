@@ -3,444 +3,472 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ali-Noor ASSOUMANI - Portfolio BTS SIO SISR</title>
-    <meta name="description" content="Portfolio de Ali-Noor ASSOUMANI, étudiant en BTS SIO option SISR">
+    
+    <title>Ali-Noor ASSOUMANI — Portfolio Technicien Systèmes & Réseaux (BTS SIO SISR)</title>
+    <meta name="description" content="Portfolio d'Ali-Noor ASSOUMANI, Technicien Informatique Systèmes et Réseaux. Étudiant en BTS SIO SISR. Découvrez mes projets, mon expérience (SMABTP) et mon CV.">
+    <meta name="keywords" content="Ali-Noor ASSOUMANI, Ali Noor, Assoumani, Portfolio, BTS SIO, SISR, Technicien Informatique, Systèmes et Réseaux, Administrateur Réseau, Cybersécurité, SMABTP, Paris, Bagnolet, Windows Server, Intune, GLPI">
+    <meta name="author" content="Ali-Noor ASSOUMANI">
+    <meta name="robots" content="index, follow">
+
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Ali-Noor ASSOUMANI — Portfolio Informatique">
+    <meta property="og:description" content="Découvrez mon parcours, mes compétences en administration systèmes & réseaux et mes projets techniques.">
+    <meta property="og:url" content="https://ali-noor-assoumani.github.io/portfolio-bts/"> 
+    <meta property="og:site_name" content="Portfolio Ali-Noor ASSOUMANI">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700&family=Geist+Mono:wght@300;400;500&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        /* ===== VARIABLES CSS (Thème Vert Tech / Hacker) ===== */
-        :root {
-            --primary-color: #22c55e; /* Vert principal vif */
-            --primary-dark: #16a34a; /* Vert plus sombre pour le survol */
-            --secondary-color: #10b981; /* Vert émeraude pour les dégradés */
-            --bg-dark: #0f172a; /* On garde un fond sombre gris/bleuté très élégant */
-            --bg-darker: #020617;
-            --bg-secondary: #1e293b;
-            --text-light: #f1f5f9;
-            --text-gray: #94a3b8;
-            --accent: #4ade80; /* Vert clair / fluo pour les petites touches */
-            --success: #10b981;
-            --border-radius: 12px;
-            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            --shadow-primary: 0 10px 30px rgba(34, 197, 94, 0.2); /* Ombre verte projetée */
-            --shadow-lg: 0 20px 60px rgba(0, 0, 0, 0.4);
-        }
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
 
-        /* ===== BASE ===== */
-        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
-        html { scroll-behavior: smooth; scroll-padding-top: 80px; }
-        body {
-            font-family: 'Inter', 'Segoe UI', Tahoma, sans-serif;
-            background: var(--bg-dark);
-            color: var(--text-light);
-            line-height: 1.7;
-            overflow-x: hidden;
-        }
-
-        /* Background Animé avec halo vert */
-        body::before {
-            content: ''; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: radial-gradient(circle at 10% 20%, rgba(34, 197, 94, 0.05) 0%, transparent 20%),
-                        radial-gradient(circle at 90% 80%, rgba(16, 185, 129, 0.05) 0%, transparent 20%);
-            z-index: -1; pointer-events: none;
-        }
-
-        /* ===== TYPOGRAPHIE ===== */
-        h1 {
-            font-size: clamp(2.5rem, 5vw, 3.8rem); margin-bottom: 1.5rem;
-            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color), var(--accent));
-            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-            animation: gradientShift 8s ease infinite; background-size: 200% 200%;
-        }
-        h2 {
-            font-size: clamp(2rem, 4vw, 2.5rem); margin-bottom: 3rem; text-align: center; position: relative; width: 100%;
-        }
-        h2::after {
-            content: ''; position: absolute; bottom: -15px; left: 50%; transform: translateX(-50%);
-            width: 100px; height: 4px; background: linear-gradient(90deg, var(--primary-color), var(--secondary-color)); border-radius: 2px;
-        }
-        h3 { font-size: 1.8rem; margin-bottom: 1rem; color: var(--primary-color); }
-        p { margin-bottom: 1.5rem; color: var(--text-gray); }
-
-        /* ===== NAVIGATION ===== */
-        nav {
-            position: fixed; top: 0; width: 100%;
-            background: rgba(15, 23, 42, 0.85); backdrop-filter: blur(15px);
-            padding: 1.2rem 2rem; z-index: 1000; border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-            transition: var(--transition);
-        }
-        nav.scrolled { padding: 0.8rem 2rem; box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2); }
-        .nav-container { max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; }
-        .logo { font-weight: 700; font-size: 1.5rem; color: var(--text-light); text-decoration: none; display: flex; align-items: center; gap: 10px; }
-        .logo-icon { color: var(--primary-color); }
-        nav ul { display: flex; gap: 2.5rem; list-style: none; }
-        nav a {
-            color: var(--text-gray); text-decoration: none; font-weight: 500; transition: var(--transition); position: relative; padding: 0.5rem 0;
-        }
-        nav a::after {
-            content: ''; position: absolute; bottom: 0; left: 0; width: 0; height: 2px;
-            background: linear-gradient(90deg, var(--primary-color), var(--secondary-color)); transition: width 0.3s ease;
-        }
-        nav a:hover, nav a.active { color: var(--text-light); }
-        nav a:hover::after, nav a.active::after { width: 100%; }
-        .mobile-toggle { display: none; background: none; border: none; color: var(--text-light); font-size: 1.5rem; cursor: pointer; }
-
-        /* ===== SECTIONS ===== */
-        section { padding: 6rem 2rem 4rem; position: relative; }
-        .container { max-width: 1200px; margin: 0 auto; }
-
-        /* ===== BOUTONS ===== */
-        .btn {
-            display: inline-flex; align-items: center; justify-content: center; gap: 10px; padding: 1rem 2rem;
-            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
-            color: white; text-decoration: none; border-radius: 50px; font-weight: 600;
-            transition: var(--transition); box-shadow: var(--shadow-primary); border: none; cursor: pointer;
-        }
-        .btn:hover { transform: translateY(-3px); box-shadow: 0 15px 30px rgba(34, 197, 94, 0.4); }
-        .btn-secondary { background: transparent; border: 2px solid var(--primary-color); color: var(--text-light); box-shadow: none; }
-        .btn-secondary:hover { background: var(--primary-color); }
-        .btn-small { padding: 0.6rem 1.2rem; font-size: 0.9rem; border-radius: 8px; }
-
-        /* ===== CARTES & GRILLES ===== */
-        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; }
-        .card {
-            background: var(--bg-secondary); padding: 2rem; border-radius: var(--border-radius);
-            border: 1px solid rgba(255, 255, 255, 0.1); transition: var(--transition); height: 100%;
-            display: flex; flex-direction: column;
-        }
-        .card:hover { transform: translateY(-10px); border-color: var(--primary-color); box-shadow: var(--shadow-lg); }
+    /* ===== VARIABLES CSS (PALETTE ORANGE VIBRANTE) ===== */
+    :root {
+        --bg:           #050505;
+        --bg-sidebar:   rgba(5, 5, 5, 0.6);
+        --bg-card:      rgba(20, 20, 25, 0.5);
+        --bg-hover:     rgba(35, 35, 45, 0.7);
+        --border:       rgba(255, 255, 255, 0.1);
+        --border-h:     rgba(255, 255, 255, 0.3);
         
-        /* ===== TABLEAU E5 ===== */
-        .table-container { overflow-x: auto; background: var(--bg-secondary); padding: 20px; border-radius: var(--border-radius); border: 1px solid rgba(255,255,255,0.1); margin-top: 3rem; }
-        table { width: 100%; border-collapse: collapse; min-width: 800px; }
-        th, td { padding: 15px; text-align: left; border-bottom: 1px solid rgba(255,255,255,0.05); }
-        th { color: var(--accent); font-weight: 600; background: rgba(0,0,0,0.2); }
-        .check { color: var(--success); font-weight: bold; text-align: center; font-size: 1.2rem; }
+        --accent:       #ff6a00; 
+        --accent-dim:   #ee5d00; 
+        --accent-glow:  rgba(255, 106, 0, 0.18);
+        --accent-line:  rgba(255, 106, 0, 0.4);
+        
+        --green:        #ff6a00; 
+        --green-dim:    #ee5d00;
+        --green-glow:   rgba(255, 106, 0, 0.18);
+        --green-line:   rgba(255, 106, 0, 0.4);
+        
+        --text-hi:      #ffffff;
+        --text-mid:     #e2e8f0;
+        --text:         #e2e8f0;
+        --text-lo:      #94a3b8;
+        --text-muted:   #94a3b8;
+        --text-lo-faint:#64748b;
+        --text-faint:   #64748b;
+        
+        --mono:         'Geist Mono', monospace;
+        --sans:         'Geist', sans-serif;
+        --ease:         cubic-bezier(0.16, 1, 0.3, 1);
+        --sidebar:      300px;
+        --r:            10px;
 
-        /* ===== TAGS ===== */
-        .tags { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 1rem; margin-bottom: 1.5rem; }
-        .tag { padding: 0.4rem 1rem; background: var(--bg-dark); border-radius: 20px; font-size: 0.85rem; color: var(--accent); border: 1px solid var(--accent); transition: 0.3s; }
-        .tag:hover { background: var(--accent); color: var(--bg-dark); }
+        --glow-grad: radial-gradient(circle at 10% 10%, rgba(255, 106, 0, 0.18) 0%, rgba(239, 68, 68, 0.08) 40%, transparent 70%);
+    }
 
-        /* ===== ANIMATIONS ===== */
-        @keyframes gradientShift { 0% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } 100% { background-position: 0% 50%; } }
-        .fade-in { opacity: 0; transform: translateY(30px); transition: opacity 0.8s ease, transform 0.8s ease; }
-        .fade-in.visible { opacity: 1; transform: translateY(0); }
+    /* ===== MODE CLAIR ===== */
+    body.light-mode {
+        --bg:           #f8fafc;
+        --bg-sidebar:   rgba(255, 255, 255, 0.85);
+        --bg-card:      #ffffff;
+        --bg-hover:     #f1f5f9;
+        --border:       rgba(0, 0, 0, 0.1);
+        --border-h:     rgba(0, 0, 0, 0.25);
+        
+        --accent:       #c2410c; 
+        --accent-glow:  rgba(194, 65, 12, 0.08);
+        --accent-line:  rgba(194, 65, 12, 0.25);
+        
+        --green:        #c2410c; 
+        --green-glow:   rgba(194, 65, 12, 0.08);
+        --green-line:   rgba(194, 65, 12, 0.25);
+        
+        --text-hi:      #0f172a;
+        --text-mid:     #334155;
+        --text:         #334155;
+        --text-lo:      #64748b;
+        --text-muted:   #64748b;
+        --text-lo-faint:#94a3b8;
+        --text-faint:   #94a3b8;
 
-        /* ===== CONTACT FORM ===== */
-        .form-group { margin-bottom: 1.5rem; }
-        .form-group input, .form-group textarea {
-            width: 100%; padding: 1rem; background: var(--bg-dark); border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 10px; color: var(--text-light); font-family: inherit; transition: 0.3s;
-        }
-        .form-group input:focus, .form-group textarea:focus { outline: none; border-color: var(--primary-color); }
-        .form-group textarea { min-height: 150px; resize: vertical; }
+        --glow-grad: radial-gradient(circle at 10% 10%, rgba(249, 115, 22, 0.08) 0%, transparent 70%);
+    }
 
-        /* ===== FOOTER ===== */
-        footer { background: var(--bg-darker); padding: 3rem 2rem; text-align: center; border-top: 1px solid rgba(255, 255, 255, 0.1); }
+    body { font-family: var(--sans); background: var(--bg); color: var(--text-mid); line-height: 1.7; overflow-x: hidden; -webkit-font-smoothing: antialiased; transition: background-color 0.3s, color 0.3s; }
+    body::before { content: ''; position: fixed; top: -20%; left: 20%; width: 60vw; height: 60vw; background: var(--glow-grad); z-index: -1; pointer-events: none; filter: blur(60px); transition: background 0.5s; }
+    body::after { content: ''; position: fixed; inset: 0; pointer-events: none; z-index: 9998; opacity: 0.12; background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.05'/%3E%3C/svg%3E"); }
 
-        /* ===== RESPONSIVE ===== */
-        @media (max-width: 768px) {
-            .mobile-toggle { display: block; }
-            nav ul {
-                display: none; position: absolute; top: 100%; left: 0; width: 100%; flex-direction: column;
-                background: var(--bg-secondary); padding: 1rem 0; gap: 0;
-            }
-            nav ul.active { display: flex; }
-            nav ul li a { padding: 1rem 2rem; display: block; border-bottom: 1px solid rgba(255,255,255,0.05); }
-        }
+    ::-webkit-scrollbar { width: 4px; }
+    ::-webkit-scrollbar-track { background: var(--bg); }
+    ::-webkit-scrollbar-thumb { background: var(--text-lo-faint); border-radius: 4px; }
+
+    .layout { display: flex; min-height: 100vh; }
+    .container { max-width: 900px; margin: 0 auto; width: 100%; }
+
+    /* Theme Toggle */
+    .theme-toggle { display: flex; align-items: center; justify-content: center; gap: 0.6rem; padding: 0.7rem 1.2rem; background: var(--bg-card); border: 1px solid var(--border); color: var(--text-mid); border-radius: 8px; font-family: var(--sans); font-size: 0.8rem; font-weight: 500; cursor: pointer; transition: all 0.2s var(--ease); margin-bottom: 2rem; width: 100%; }
+    .theme-toggle:hover { border-color: var(--accent); color: var(--accent); background: var(--bg-hover); }
+
+    /* Sidebar */
+    .sidebar { position: fixed; top: 0; left: 0; width: var(--sidebar); height: 100vh; display: flex; flex-direction: column; padding: 3.5rem 2.5rem; border-right: 1px solid var(--border); background: var(--bg-sidebar); backdrop-filter: blur(12px); z-index: 100; overflow-y: auto; transition: background-color 0.3s; }
+    .sidebar-top { flex: 1; }
+    .avatar { width: 56px; height: 56px; border: 1px solid var(--border); border-radius: 14px; display: flex; align-items: center; justify-content: center; font-size: 1.2rem; font-weight: 700; color: var(--text-hi); margin-bottom: 1.6rem; }
+    .sidebar-name { font-size: 1.1rem; font-weight: 700; color: var(--text-hi); margin-bottom: .3rem; }
+    .sidebar-role { font-family: var(--mono); font-size: .75rem; color: var(--accent); margin-bottom: 1.4rem; }
+    .sidebar-bio { font-size: .85rem; color: var(--text-lo); margin-bottom: 2rem; }
+    .status-badge { display: inline-flex; align-items: center; gap: .5rem; background: var(--accent-glow); border: 1px solid var(--accent-line); color: var(--accent); font-family: var(--mono); font-size: .7rem; padding: .3rem .8rem; border-radius: 20px; margin-bottom: 2.5rem; }
+    .status-dot { width: 6px; height: 6px; background: var(--accent); border-radius: 50%; box-shadow: 0 0 8px var(--accent); animation: blink 2s ease infinite; }
+    @keyframes blink { 0%,100%{opacity:1} 50%{opacity:.4} }
+    
+    .sidebar-nav { list-style: none; margin-bottom: 2.5rem; }
+    .sidebar-nav a { display: flex; align-items: center; gap: .75rem; padding: .6rem .8rem; font-size: .85rem; color: var(--text-mid); text-decoration: none; border-radius: 8px; transition: all 0.2s var(--ease); }
+    .sidebar-nav a:hover { background: var(--bg-hover); color: var(--text-hi); }
+    .sidebar-nav a.active { background: var(--accent-glow); color: var(--accent); }
+
+    .sidebar-contacts { display: flex; flex-direction: column; gap: .8rem; margin-bottom: 1.5rem; }
+    .sidebar-contact { display: flex; align-items: center; gap: .8rem; font-family: var(--mono); font-size: .75rem; color: var(--text-mid); text-decoration: none; transition: color 0.2s; }
+    .sidebar-contact:hover { color: var(--accent); }
+    .sidebar-cv { display: flex; align-items: center; justify-content: center; gap: .5rem; padding: .7rem 1rem; background: var(--text-hi); color: var(--bg); border-radius: 8px; font-size: .8rem; font-weight: 600; text-decoration: none; transition: all 0.2s var(--ease); }
+    .sidebar-cv:hover { transform: translateY(-2px); opacity: 0.9; }
+
+    /* Main Content */
+    .main { margin-left: var(--sidebar); width: calc(100% - var(--sidebar)); min-height: 100vh; transition: margin 0.3s; }
+    section { padding: 6rem 3rem; border-bottom: 1px solid var(--border); position: relative; z-index: 1; }
+    section:last-of-type { border-bottom: none; }
+    .sec-label { font-family: var(--mono); font-size: .7rem; letter-spacing: .15em; color: var(--accent); text-transform: uppercase; margin-bottom: 1rem; }
+    .sec-title { font-size: clamp(1.8rem,3vw,2.5rem); font-weight: 700; color: var(--text-hi); margin-bottom: 3rem; }
+
+    /* Hero */
+    #accueil { min-height: 100vh; display: flex; flex-direction: column; justify-content: center; }
+    .hero-eyebrow { font-family: var(--mono); font-size: .8rem; color: var(--text-lo); margin-bottom: 1.5rem; display: flex; align-items: center; gap: .8rem; }
+    .hero-eyebrow::before { content: ''; width: 30px; height: 1px; background: var(--border-h); }
+    .hero-title { font-size: clamp(3rem,5vw,4.5rem); font-weight: 700; margin-bottom: 1.5rem; background: linear-gradient(to right, var(--text-hi), var(--text-lo-faint)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+    .hero-title span { background: linear-gradient(to right, var(--accent), var(--accent-dim)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+    .hero-desc { font-size: 1.1rem; color: var(--text-mid); line-height: 1.8; max-width: 550px; margin-bottom: 2.5rem; }
+    .hero-actions { display: flex; gap: 1rem; flex-wrap: wrap; }
+    .btn { display: inline-flex; align-items: center; gap: .5rem; padding: .8rem 1.5rem; border-radius: 8px; font-size: .9rem; font-weight: 500; text-decoration: none; transition: all 0.2s var(--ease); border: none; cursor: pointer;}
+    .btn-primary { background: var(--text-hi); color: var(--bg); }
+    .btn-primary:hover { transform: translateY(-2px); opacity: 0.9; }
+    .btn-ghost { background: var(--bg-card); border: 1px solid var(--border); color: var(--text-hi); backdrop-filter: blur(10px); }
+    .btn-ghost:hover { border-color: var(--accent); color: var(--accent); }
+
+    /* Skills */
+    .skills-cols { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; }
+    .skill-group-label { font-family: var(--mono); font-size: .75rem; color: var(--text-lo); text-transform: uppercase; margin-bottom: 2rem; border-bottom: 1px solid var(--border); padding-bottom: .8rem;}
+    .skill-item { margin-bottom: 1.5rem; }
+    .skill-row { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: .6rem; }
+    .skill-name { font-size: .9rem; font-weight: 500; color: var(--text-mid); }
+    .skill-pct { font-family: var(--mono); font-size: .75rem; color: var(--text-lo); }
+    .skill-track { height: 3px; background: var(--border); border-radius: 2px; }
+    .skill-fill { height: 100%; background: var(--accent); border-radius: 2px; width: 0; transition: width 1.2s var(--ease); }
+
+    /* Table */
+    .table-wrap { overflow-x: auto; border: 1px solid var(--border); border-radius: 12px; background: var(--bg-card); margin-top: 3rem; }
+    table { width: 100%; border-collapse: collapse; min-width: 600px; }
+    th { padding: 1.2rem; text-align: left; font-size: .8rem; color: var(--text-lo); border-bottom: 1px solid var(--border); }
+    td { padding: 1.2rem; border-bottom: 1px solid var(--border); font-size: .9rem; color: var(--text-mid); }
+    .check { text-align: center; color: var(--accent); font-size: .9rem; }
+    .group-header td { background: var(--accent-glow); color: var(--accent); font-family: var(--mono); font-size: 0.75rem; font-weight: 600; text-transform: uppercase; }
+
+    /* Experience */
+    .exp-block { background: var(--bg-card); border: 1px solid var(--border); border-radius: 16px; padding: 2.5rem; transition: border-color .3s var(--ease); margin-bottom: 2rem; }
+    .exp-block:hover { border-color: var(--accent); }
+    .exp-top { display: flex; align-items: center; gap: 1.5rem; margin-bottom: 2rem; }
+    .exp-icon { width: 50px; height: 50px; border: 1px solid var(--border); border-radius: 12px; display: flex; align-items: center; justify-content: center; color: var(--text-hi); font-size: 1.2rem; }
+    .exp-meta h3 { font-size: 1.2rem; color: var(--text-hi); margin-bottom: .2rem; }
+    .exp-role { font-family: var(--mono); font-size: .8rem; color: var(--text-lo); }
+    .exp-desc { font-size: .95rem; color: var(--text-mid); line-height: 1.8; margin-bottom: 2rem; }
+    .exp-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 1rem; }
+    .exp-item { background: rgba(0,0,0,0.1); border: 1px solid var(--border); border-radius: 10px; padding: 1.2rem; }
+    .exp-item h4 { font-size: .85rem; color: var(--text-hi); margin-bottom: .5rem; display: flex; align-items: center; gap: .5rem; }
+    .exp-item h4 i { color: var(--accent); }
+    .exp-item p { font-size: .8rem; color: var(--text-lo); }
+
+    /* Galerie Preuves */
+    .proof-section { margin-top: 2.5rem; padding-top: 2.5rem; border-top: 1px solid var(--border); }
+    .proof-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px,1fr)); gap: 1rem; }
+    .proof-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: 10px; overflow: hidden; display: flex; flex-direction: column; text-decoration: none; transition: all 0.3s; }
+    .proof-card:hover { border-color: var(--accent); transform: translateY(-4px); }
+    .proof-img { width: 100%; height: 140px; object-fit: cover; border-bottom: 1px solid var(--border); }
+    .proof-file-icon { height: 140px; display: flex; align-items: center; justify-content: center; background: var(--accent-glow); color: var(--accent); font-size: 2.4rem; border-bottom: 1px solid var(--border); }
+    .proof-info { padding: 1rem; }
+    .proof-info h5 { color: var(--text-hi); font-size: .85rem; margin-bottom: .3rem; }
+    .proof-info p { color: var(--text-muted); font-size: .75rem; line-height: 1.5; }
+
+    /* Projets & Veille */
+    .projects-grid, .veille-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; }
+    .proj-card, .veille-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: 16px; padding: 2rem; display: flex; flex-direction: column; text-decoration: none; transition: all 0.3s; }
+    .proj-card:hover, .veille-card:hover { border-color: var(--accent); transform: translateY(-4px); }
+    .proj-icon, .v-icon { width: 45px; height: 45px; border: 1px solid var(--border); border-radius: 10px; display: flex; align-items: center; justify-content: center; color: var(--text-hi); font-size: 1.1rem; margin-bottom: 1.5rem; }
+    .proj-card h3, .veille-card h3 { font-size: 1.1rem; color: var(--text-hi); margin-bottom: .8rem; }
+    .proj-card p, .veille-card p { font-size: .9rem; color: var(--text-mid); flex: 1; margin-bottom: 1.5rem; }
+    .proj-tags, .veille-tags { display: flex; flex-wrap: wrap; gap: .5rem; margin-bottom: 1.5rem; }
+    .proj-tag, .veille-tag { font-family: var(--mono); font-size: .7rem; padding: .3rem .8rem; border-radius: 6px; border: 1px solid var(--border); color: var(--text-lo); }
+    .proj-link { font-size: .85rem; color: var(--accent); font-weight: 500; display: flex; align-items: center; gap: .5rem; margin-top: auto; }
+
+    /* Contact */
+    .contact-layout { display: grid; grid-template-columns: 1fr 1.5fr; gap: 5rem; }
+    .contact-blurb { color: var(--text-mid); margin-bottom: 2rem; }
+    .form-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: 16px; padding: 2.5rem; }
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+    .form-group { margin-bottom: 1.2rem; }
+    .form-group label { display: block; font-size: .85rem; color: var(--text-lo); margin-bottom: .5rem; }
+    .form-group input, .form-group textarea { width: 100%; background: rgba(0,0,0,0.2); border: 1px solid var(--border); border-radius: 8px; color: var(--text-hi); padding: .8rem 1rem; font-family: var(--sans); }
+    .form-group input:focus, .form-group textarea:focus { outline: none; border-color: var(--accent); }
+    .form-group textarea { min-height: 120px; resize: vertical; }
+
+    /* Footer */
+    footer { margin-left: var(--sidebar); padding: 3rem; border-top: 1px solid var(--border); background: var(--bg-card); }
+    .footer-content { display: flex; justify-content: space-between; color: var(--text-lo); font-size: 0.85rem; }
+
+    .r { opacity: 0; transform: translateY(20px); transition: all 0.8s var(--ease); }
+    .r.in { opacity: 1; transform: none; }
+
+    @media (max-width: 1024px) { :root { --sidebar: 280px; } section { padding: 5rem 2rem; } .skills-cols { gap: 2rem; } .projects-grid { grid-template-columns: 1fr; } }
+    @media (max-width: 768px) { .layout { flex-direction: column; } .sidebar { position: relative; width: 100%; height: auto; padding: 2rem; } .sidebar-nav { display: flex; flex-wrap: wrap; gap: 0.5rem; } .main { margin-left: 0; width: 100%; } footer { margin-left: 0; } .contact-layout, .exp-grid, .form-row { grid-template-columns: 1fr; } }
     </style>
 </head>
 <body>
 
-    <nav id="mainNav">
-        <div class="nav-container">
-            <a href="#accueil" class="logo">
-                <i class="fas fa-network-wired logo-icon"></i>
-                <span>Ali-Noor ASSOUMANI</span>
-            </a>
-            <button class="mobile-toggle" id="mobileToggle"><i class="fas fa-bars"></i></button>
-            <ul id="navMenu">
-                <li><a href="#accueil" class="active">Accueil</a></li>
-                <li><a href="#profil">Profil & E5</a></li>
-                <li><a href="#experience">Expérience</a></li>
-                <li><a href="#projets">Projets SISR</a></li>
-                <li><a href="#veille">Veille</a></li>
-                <li><a href="#contact">Contact</a></li>
+<div class="layout">
+    <aside class="sidebar">
+        <div class="sidebar-top">
+            <button id="themeToggle" class="theme-toggle">
+                <i class="fas fa-sun"></i> Mode Clair
+            </button>
+            <div class="avatar">AN</div>
+            <div class="sidebar-name">Ali-Noor ASSOUMANI</div>
+            <div class="sidebar-role">BTS SIO · SISR</div>
+            <div class="sidebar-bio">Étudiant en BTS SIO (SISR) fort d'une double expérience chez SMABTP. Spécialisé en déploiement (Intune/Autopilot) et support de proximité.</div>
+            <div class="status-badge"><span class="status-dot"></span> À la recherche d'opportunités</div>
+
+            <ul class="sidebar-nav" id="sidenav">
+                <li><a href="#accueil" class="active"><i class="fas fa-home"></i> Accueil</a></li>
+                <li><a href="#profil"><i class="fas fa-code"></i> Compétences</a></li>
+                <li><a href="#epreuve-e5"><i class="fas fa-table"></i> Épreuve E5</a></li>
+                <li><a href="#experience"><i class="fas fa-briefcase"></i> Expérience</a></li>
+                <li><a href="#projets"><i class="fas fa-layer-group"></i> Projets</a></li>
+                <li><a href="#veille"><i class="fas fa-satellite-dish"></i> Veille</a></li>
+                <li><a href="#contact"><i class="fas fa-paper-plane"></i> Contact</a></li>
             </ul>
         </div>
-    </nav>
-
-    <section id="accueil" style="min-height: 100vh; display: flex; align-items: center;">
-        <div class="container" style="text-align: center;">
-            <div class="fade-in">
-                
-                <h1>Ali-Noor ASSOUMANI</h1>
-                <p style="font-size: 1.5rem; color: var(--text-light); margin-bottom: 1rem;">Étudiant en BTS SIO Option SISR</p>
-                <p style="max-width: 600px; margin: 0 auto 3rem auto;">
-                    "Toujours curieux, investi et motivé, je prends à cœur chaque défi et m'implique à 100 % pour faire avancer les projets d'infrastructure et de cybersécurité."
-                </p>
-                
-                <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
-                    <a href="#projets" class="btn">Découvrir mes réalisations</a>
-                    <a href="CV_ASSOUMANI_Ali-Noor.pdf" target="_blank" class="btn btn-secondary">
-                        <i class="fas fa-file-pdf"></i> Télécharger mon CV
-                    </a>
-                </div>
+        <div class="sidebar-bottom">
+            <div class="sidebar-contacts">
+                <a href="mailto:alinoor.assoumani.sio@gmail.com" class="sidebar-contact"><i class="fas fa-envelope"></i> Email</a>
+                <a href="tel:0686546711" class="sidebar-contact"><i class="fas fa-phone"></i> 06 86 54 67 11</a>
+                <a href="https://www.linkedin.com/in/ali-noor-assoumani-28b496327" target="_blank" class="sidebar-contact"><i class="fab fa-linkedin"></i> LinkedIn</a>
             </div>
+            <a href="ASSOUMANI_CV.pdf" target="_blank" class="sidebar-cv"><i class="fas fa-file-pdf"></i> Voir mon CV</a>
         </div>
-    </section>
+    </aside>
 
-    <section id="profil" style="background: var(--bg-secondary);">
-        <div class="container">
-            <h2>Profil & Compétences</h2>
-            <div class="grid">
-                <div class="card fade-in">
-                    <h3><i class="fas fa-university"></i> Mon Parcours</h3>
-                    <p>Étudiant au <strong>Lycée Louis Armand</strong>. Mon parcours académique et mes stages m'ont permis de développer une expertise en administration systèmes et réseaux, ainsi qu'en support utilisateur.</p>
-                    <div class="tags" style="margin-top: auto;">
-                        <span class="tag">Windows Server</span><span class="tag">Debian</span><span class="tag">Cisco</span>
-                        <span class="tag">Stormshield</span><span class="tag">GLPI</span><span class="tag">Active Directory</span>
-                        <span class="tag">Anglais B2</span><span class="tag">Outils IA</span>
-                    </div>
-                </div>
-                <div class="card fade-in">
-                    <h3><i class="fas fa-briefcase"></i> Objectif</h3>
-                    <p>Je suis constamment à la recherche de nouveaux défis techniques pour optimiser les infrastructures, automatiser les tâches et garantir la sécurité des données au sein des entreprises.</p>
+    <main class="main">
+        <section id="accueil">
+            <div class="container">
+                <div class="hero-eyebrow r">Portfolio Technique</div>
+                <h1 class="hero-title r">Concevoir.<br>Déployer.<br><span>Sécuriser.</span></h1>
+                <p class="hero-desc r">Je suis <strong>Ali-Noor</strong>, fort d'une double expérience en entreprise. De la réparation matérielle au déploiement en masse, je gère les incidents critiques tout en assurant un support de proximité de qualité.</p>
+                <div class="hero-actions r">
+                    <a href="#projets" class="btn btn-primary">Explorer mes travaux</a>
+                    <a href="#contact" class="btn btn-ghost">Me contacter</a>
                 </div>
             </div>
+        </section>
 
-            <div class="table-container fade-in">
-                <h3 style="margin-bottom: 1rem; text-align: center;">Tableau de Synthèse (Épreuve E5)</h3>
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Réalisation Professionnelle</th>
-                            <th>Cadre</th>
-                            <th>Gérer le patrimoine</th>
-                            <th>Incidents</th>
-                            <th>Service Info</th>
-                            <th>Dév. Pro</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td><strong>GLPI : osTicket</strong></td>
-                            <td>Projet de formation</td>
-                            <td class="check">✔</td>
-                            <td class="check">✔</td>
-                            <td class="check">✔</td>
-                            <td></td>
-                        </tr>
-                        <tr>
-                            <td><strong>Sécurisation Stormshield</strong></td>
-                            <td>Projet de formation</td>
-                            <td></td>
-                            <td></td>
-                            <td class="check">✔</td>
-                            <td class="check">✔</td>
-                        </tr>
-                        <tr>
-                            <td><strong>Windows Server (AD/DNS)</strong></td>
-                            <td>Projet de formation</td>
-                            <td></td>
-                            <td></td>
-                            <td class="check">✔</td>
-                            <td class="check">✔</td>
-                        </tr>
-                        <tr>
-                            <td><strong>Gestion de parc & Mastérisation</strong></td>
-                            <td>Stage (SMABTP)</td>
-                            <td class="check">✔</td>
-                            <td class="check">✔</td>
-                            <td class="check">✔</td>
-                            <td class="check">✔</td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-        </div>
-    </section>
-
-    <section id="experience">
-        <div class="container">
-            <h2>Expérience en Entreprise</h2>
-            <div class="card fade-in" style="background: var(--bg-darker); border-left: 4px solid var(--primary-color);">
-                <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 1.5rem;">
-                    <div style="font-size: 2.5rem; color: var(--primary-color);"><i class="fas fa-building"></i></div>
+        <section id="profil">
+            <div class="container">
+                <div class="sec-label r">Expertise</div>
+                <h2 class="sec-title r">Technologies maîtrisées</h2>
+                <div class="skills-cols r">
                     <div>
-                        <h3>SMABTP - Paris</h3>
-                        <p style="margin: 0; color: var(--accent);">Technicien Support Informatique (Stage)</p>
+                        <div class="skill-group-label">Infrastructures & Réseaux</div>
+                        <div class="skill-item"><div class="skill-row"><span class="skill-name">Windows Server / AD</span></div><div class="skill-track"><div class="skill-fill" data-w="85"></div></div></div>
+                        <div class="skill-item"><div class="skill-row"><span class="skill-name">Intune / Autopilot</span></div><div class="skill-track"><div class="skill-fill" data-w="80"></div></div></div>
+                        <div class="skill-item"><div class="skill-row"><span class="skill-name">Stormshield & Cisco</span></div><div class="skill-track"><div class="skill-fill" data-w="65"></div></div></div>
+                    </div>
+                    <div>
+                        <div class="skill-group-label">Support & Outils</div>
+                        <div class="skill-item"><div class="skill-row"><span class="skill-name">Support Utilisateur (Kiosque IT)</span></div><div class="skill-track"><div class="skill-fill" data-w="95"></div></div></div>
+                        <div class="skill-item"><div class="skill-row"><span class="skill-name">Déploiement Windows 10/11</span></div><div class="skill-track"><div class="skill-fill" data-w="90"></div></div></div>
+                        <div class="skill-item"><div class="skill-row"><span class="skill-name">Ticketing (osTicket / GLPI)</span></div><div class="skill-track"><div class="skill-fill" data-w="85"></div></div></div>
                     </div>
                 </div>
-                <p>Intégré au sein de la DSI de la SMABTP, j'ai eu l'opportunité de gérer le parc informatique et d'assurer le support direct aux utilisateurs dans un environnement professionnel exigeant.</p>
+            </div>
+        </section>
+
+        <section id="epreuve-e5">
+            <div class="container">
+                <div class="sec-label r">Évaluation E5</div>
+                <h2 class="sec-title r">Détail du parcours (Annexe VI-1)</h2>
+                <a href="ASSOUMANI_Ali-Noor_8_-_EPREUVE_ORALE_E5.csv" target="_blank" class="btn btn-ghost r" style="margin-bottom:2rem;"><i class="fas fa-file-excel"></i> Télécharger le Tableau Officiel</a>
                 
-                <div class="grid" style="margin-top: 2rem; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));">
-                    <div style="background: var(--bg-secondary); padding: 1.5rem; border-radius: 10px;">
-                        <h4 style="color: var(--text-light); margin-bottom: 1rem;"><i class="fas fa-tools" style="color: var(--accent);"></i> Maintenance</h4>
-                        <p style="font-size: 0.9rem;">Diagnostic, remplacement (écrans, batteries) et récupération de données sur PC défectueux.</p>
+                <div class="table-wrap r">
+                    <table>
+                        <thead>
+                            <tr><th>Réalisations</th><th>Période</th><th>Patrimoine</th><th>Incidents</th><th>Service Info</th><th>Dév. Pro</th></tr>
+                        </thead>
+                        <tbody>
+                            <tr class="group-header"><td colspan="6">Réalisation en cours de formation</td></tr>
+                            <tr><td><strong>GLPI : osTicket</strong></td><td>09/25 – 03/26</td><td class="check"><i class="fas fa-circle"></i></td><td class="check"><i class="fas fa-circle"></i></td><td class="check"><i class="fas fa-circle"></i></td><td></td></tr>
+                            <tr><td><strong>Stormshield</strong></td><td>10/25 – 02/26</td><td></td><td></td><td class="check"><i class="fas fa-circle"></i></td><td class="check"><i class="fas fa-circle"></i></td></tr>
+                            <tr><td><strong>Windows Server</strong></td><td>09/24 – 02/25</td><td></td><td></td><td class="check"><i class="fas fa-circle"></i></td><td class="check"><i class="fas fa-circle"></i></td></tr>
+                            <tr class="group-header"><td colspan="6">Réalisations en milieu professionnel</td></tr>
+                            <tr><td><strong>Gestion de parc & Support</strong></td><td>Stage SMABTP</td><td class="check"><i class="fas fa-circle"></i></td><td class="check"><i class="fas fa-circle"></i></td><td class="check"><i class="fas fa-circle"></i></td><td class="check"><i class="fas fa-circle"></i></td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <section id="experience">
+            <div class="container">
+                <div class="sec-label r">Professionnel</div>
+                <h2 class="sec-title r">Expérience en entreprise</h2>
+
+                <div class="exp-block r" style="border-color: var(--accent);">
+                    <div class="exp-top"><div class="exp-icon"><i class="fas fa-building"></i></div><div class="exp-meta"><h3>SMABTP — DSI</h3><div class="exp-role">Support & Préparation · Stage 2026</div></div></div>
+                    <p class="exp-desc">Déploiement en masse et support informatique de niveau 1/2.</p>
+                    <div class="exp-grid">
+                        <div class="exp-item"><h4><i class="fab fa-microsoft"></i> Intune</h4><p>Déploiement avec Microsoft Intune et Autopilot.</p></div>
+                        <div class="exp-item"><h4><i class="fas fa-headset"></i> Kiosque IT</h4><p>Résolution d'incidents critiques en proximité.</p></div>
+                        <div class="exp-item"><h4><i class="fas fa-network-wired"></i> Aménagement</h4><p>Logistique et brassage réseau.</p></div>
                     </div>
-                    <div style="background: var(--bg-secondary); padding: 1.5rem; border-radius: 10px;">
-                        <h4 style="color: var(--text-light); margin-bottom: 1rem;"><i class="fas fa-laptop-code" style="color: var(--accent);"></i> Déploiement</h4>
-                        <p style="font-size: 0.9rem;">Mastérisation de postes pour différents profils et gestion stricte des mises à jour système.</p>
-                    </div>
-                    <div style="background: var(--bg-secondary); padding: 1.5rem; border-radius: 10px;">
-                        <h4 style="color: var(--text-light); margin-bottom: 1rem;"><i class="fas fa-boxes" style="color: var(--accent);"></i> Gestion de Parc</h4>
-                        <p style="font-size: 0.9rem;">Inventaire matériel, gestion des stocks DSI, suivi de la flotte d'iPhones et organisation logistique.</p>
+                    <div class="proof-section">
+                        <div class="proof-section-label">Preuve d'intervention</div>
+                        <div class="proof-grid">
+                            <a class="proof-card" href="Stage_2eme_annee.pdf" target="_blank">
+                                <div class="proof-file-icon"><i class="fas fa-project-diagram"></i></div>
+                                <div class="proof-info"><h5>Diagramme de Gantt</h5><p>Planification des missions du stage.</p></div>
+                            </a>
+                        </div>
                     </div>
                 </div>
 
-                <div style="margin-top: 2rem;">
-                    <a href="Preuves_Stage_SMABTP.pdf" target="_blank" class="btn btn-secondary btn-small">
-                        <i class="fas fa-folder-open"></i> Voir le bilan de stage / Preuves
+                <div class="exp-block r">
+                    <div class="exp-top"><div class="exp-icon"><i class="fas fa-building"></i></div><div class="exp-meta"><h3>SMABTP — DSI</h3><div class="exp-role">Technicien Support · Stage 2025</div></div></div>
+                    <p class="exp-desc">Première expérience axée sur la réparation matérielle et le déploiement classique.</p>
+                    <div class="proof-section">
+                        <div class="proof-section-label">Galerie des missions</div>
+                        <div class="proof-grid">
+                            <a href="PXL_20250526_131134092.jpg" target="_blank" class="proof-card"><img src="PXL_20250526_131134092.jpg" class="proof-img"><div class="proof-info"><h5>Maintenance</h5><p>Ouverture et diagnostic.</p></div></a>
+                            <a href="PXL_20250613_132127234.jpg" target="_blank" class="proof-card"><img src="PXL_20250613_132127234.jpg" class="proof-img"><div class="proof-info"><h5>Mastérisation</h5><p>Amorçage via PXE.</p></div></a>
+                            <a href="IMG_0393.jpg" target="_blank" class="proof-card"><img src="IMG_0393.jpg" class="proof-img"><div class="proof-info"><h5>Flotte Mobile</h5><p>Préparation smartphones.</p></div></a>
+                            <a href="InventaireParcDSIPARIS.xlsx" target="_blank" class="proof-card"><div class="proof-file-icon"><i class="fas fa-file-excel"></i></div><div class="proof-info"><h5>Inventaire</h5><p>Suivi Excel.</p></div></a>
+                        </div>
+                    </div>
+                    <a href="fiche_stage_smabtp.html" class="btn btn-ghost" style="margin-top:2rem;"><i class="fas fa-folder-open"></i> Bilan complet</a>
+                </div>
+            </div>
+        </section>
+
+        <section id="projets">
+            <div class="container">
+                <div class="sec-label r">Missions</div>
+                <h2 class="sec-title r">Projets Techniques</h2>
+                <div class="projects-grid">
+                    <a href="fiche_glpi.html" class="proj-card r">
+                        <div class="proj-icon"><i class="fas fa-ticket-alt"></i></div>
+                        <h3>Plateforme Ticketing</h3>
+                        <p>Déploiement d'osTicket sous Linux. Création de catégories et SLA.</p>
+                        <div class="proj-tags"><span class="proj-tag">osTicket</span><span class="proj-tag">ITIL</span></div>
+                        <div class="proj-link">Voir la fiche <i class="fas fa-arrow-right"></i></div>
+                    </a>
+                    <a href="fiche_stormshield.html" class="proj-card r">
+                        <div class="proj-icon"><i class="fas fa-shield-alt"></i></div>
+                        <h3>Sécurisation Réseau</h3>
+                        <p>Pare-feu Stormshield, NAT/PAT et VPN IPsec.</p>
+                        <div class="proj-tags"><span class="proj-tag">Stormshield</span><span class="proj-tag">VPN</span></div>
+                        <div class="proj-link">Voir la fiche <i class="fas fa-arrow-right"></i></div>
+                    </a>
+                    <a href="fiche_windows_server.html" class="proj-card r">
+                        <div class="proj-icon"><i class="fas fa-server"></i></div>
+                        <h3>Windows Server</h3>
+                        <p>AD DS, DNS et scripts de connexion via GPO.</p>
+                        <div class="proj-tags"><span class="proj-tag">Active Directory</span><span class="proj-tag">GPO</span></div>
+                        <div class="proj-link">Voir la fiche <i class="fas fa-arrow-right"></i></div>
                     </a>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <section id="projets" style="background: var(--bg-secondary);">
-        <div class="container">
-            <h2>Réalisations Professionnelles</h2>
-            <div class="grid">
-                
-                <div class="card fade-in" style="background: var(--bg-dark);">
-                    <div style="font-size: 2.5rem; color: var(--primary-color); margin-bottom: 1rem;"><i class="fas fa-ticket-alt"></i></div>
-                    <h3>Gestion de Parc (GLPI)</h3>
-                    <p>Déploiement complet d'une solution de ticketing (osTicket/GLPI) pour automatiser l'inventaire matériel et optimiser le traitement des incidents utilisateurs.</p>
-                    <div class="tags"><span class="tag">Patrimoine</span><span class="tag">ITIL</span><span class="tag">Ticketing</span></div>
-                    
-                    <div style="margin-top: auto; padding-top: 1rem;">
-                        <a href="Preuves_GLPI.pdf" target="_blank" class="btn btn-secondary btn-small" style="width: 100%;">
-                            <i class="fas fa-file-alt"></i> Fiche & Preuves
-                        </a>
-                    </div>
-                </div>
-                
-                <div class="card fade-in" style="background: var(--bg-dark);">
-                    <div style="font-size: 2.5rem; color: var(--primary-color); margin-bottom: 1rem;"><i class="fas fa-shield-alt"></i></div>
-                    <h3>Sécurisation Stormshield</h3>
-                    <p>Mise en place d'un pare-feu matériel, configuration stricte des règles de filtrage réseau et création de tunnels VPN IPsec pour le télétravail sécurisé.</p>
-                    <div class="tags"><span class="tag">Firewall</span><span class="tag">VPN</span><span class="tag">Réseau</span></div>
-                    
-                    <div style="margin-top: auto; padding-top: 1rem;">
-                        <a href="Preuves_Stormshield.pdf" target="_blank" class="btn btn-secondary btn-small" style="width: 100%;">
-                            <i class="fas fa-file-alt"></i> Fiche & Preuves
-                        </a>
-                    </div>
-                </div>
-
-                <div class="card fade-in" style="background: var(--bg-dark);">
-                    <div style="font-size: 2.5rem; color: var(--primary-color); margin-bottom: 1rem;"><i class="fas fa-server"></i></div>
-                    <h3>Administration Windows Server</h3>
-                    <p>Déploiement d'une infrastructure centralisée : installation des rôles AD DS et DNS, gestion fine des droits NTFS et automatisation via des stratégies de groupe (GPO).</p>
-                    <div class="tags"><span class="tag">Active Directory</span><span class="tag">GPO</span><span class="tag">Système</span></div>
-                    
-                    <div style="margin-top: auto; padding-top: 1rem;">
-                        <a href="Preuves_Windows_Server.pdf" target="_blank" class="btn btn-secondary btn-small" style="width: 100%;">
-                            <i class="fas fa-file-alt"></i> Fiche & Preuves
-                        </a>
-                    </div>
-                </div>
-
-            </div>
-        </div>
-    </section>
-
-    <section id="veille">
-        <div class="container">
-            <h2>Veille Technologique</h2>
-            <div class="grid">
-                <div class="card fade-in">
-                    <div style="font-size: 2.5rem; color: var(--accent); margin-bottom: 1rem;"><i class="fas fa-cloud-meatball"></i></div>
-                    <h3>Cybersécurité Hybride</h3>
-                    <p>Étude continue sur la sécurisation des flux de données entre les infrastructures locales (On-Premise) et les solutions Cloud. Suivi des directives de l'ANSSI concernant les ransomwares.</p>
-                </div>
-                <div class="card fade-in">
-                    <div style="font-size: 2.5rem; color: var(--accent); margin-bottom: 1rem;"><i class="fas fa-rss"></i></div>
-                    <h3>Outils & Sources</h3>
-                    <p>Utilisation quotidienne d'agrégateurs de flux RSS (Feedly), d'alertes automatisées et suivi de comptes spécialisés sur LinkedIn et Twitter pour rester à la pointe de l'IT.</p>
+        <section id="veille">
+            <div class="container">
+                <div class="sec-label r">Information</div>
+                <h2 class="sec-title r">Veille Technologique</h2>
+                <div class="veille-grid">
+                    <div class="veille-card r"><div class="v-icon"><i class="fas fa-lock"></i></div><h3>Cybersécurité Hybride</h3><p>Menaces (Ransomwares) ciblant les PME et Cloud.</p></div>
+                    <div class="veille-card r"><div class="v-icon"><i class="fas fa-rss"></i></div><h3>Sources & Outils</h3><p>Utilisation de Feedly et alertes CERT-FR.</p></div>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <section id="contact" style="background: var(--bg-secondary);">
-        <div class="container">
-            <h2>Me Contacter</h2>
-            <div class="grid" style="grid-template-columns: 1fr 1fr; gap: 4rem;">
-                <div class="fade-in">
-                    <h3>Restons en contact</h3>
-                    <p>N'hésitez pas à me contacter pour toute opportunité professionnelle ou question sur mon profil.</p>
-                    <div style="margin-top: 2rem;">
-                        <p style="margin-bottom: 1rem; display: flex; align-items: center; gap: 1rem;">
-                            <i class="fas fa-envelope" style="font-size: 1.5rem; color: var(--primary-color);"></i> alinoor.assoumani.sio@gmail.com
-                        </p>
-                        <p style="margin-bottom: 1rem; display: flex; align-items: center; gap: 1rem;">
-                            <i class="fas fa-phone" style="font-size: 1.5rem; color: var(--primary-color);"></i> 06 86 54 67 11
-                        </p>
-                        <p style="display: flex; align-items: center; gap: 1rem;">
-                            <i class="fas fa-map-marker-alt" style="font-size: 1.5rem; color: var(--primary-color);"></i> 93170 Bagnolet
+        <section id="contact">
+            <div class="container">
+                <div class="sec-label r">Échanger</div>
+                <h2 class="sec-title r">Prêt à collaborer</h2>
+                <div class="contact-layout">
+                    <div class="r">
+                        <p class="contact-blurb">Actuellement à la recherche d'opportunités en administration réseaux et support.</p>
+                        <p style="color: var(--text-hi); margin-bottom:1rem;"><i class="fas fa-envelope" style="color:var(--accent); margin-right:10px;"></i> alinoor.assoumani.sio@gmail.com</p>
+                        <p style="color: var(--text-hi); margin-bottom:1rem;"><i class="fas fa-phone" style="color:var(--accent); margin-right:10px;"></i> 06 86 54 67 11</p>
+                        <p style="color: var(--text-hi); margin-bottom:1rem;">
+                            <i class="fab fa-linkedin" style="color:var(--accent); margin-right:10px;"></i> 
+                            <a href="https://www.linkedin.com/in/ali-noor-assoumani-28b496327" target="_blank" style="color: inherit; text-decoration: none; transition: color 0.2s;" onmouseover="this.style.color='var(--accent)'" onmouseout="this.style.color='inherit'">Ali-Noor ASSOUMANI</a>
                         </p>
                     </div>
+                    <div class="form-card r">
+                        <form onsubmit="event.preventDefault(); alert('Test envoyé !');">
+                            <div class="form-group"><label>Nom</label><input type="text" required></div>
+                            <div class="form-group"><label>Email</label><input type="email" required></div>
+                            <div class="form-group"><label>Message</label><textarea required></textarea></div>
+                            <button type="submit" class="btn btn-primary" style="width:100%; justify-content:center;"><i class="fas fa-paper-plane"></i> Envoyer</button>
+                        </form>
+                    </div>
                 </div>
-                
-                <form class="fade-in" style="background: var(--bg-dark); padding: 2rem; border-radius: 12px;">
-                    <div class="form-group">
-                        <label style="color: var(--text-gray); font-size: 0.9rem;">Nom complet</label>
-                        <input type="text" placeholder="Votre nom" required>
-                    </div>
-                    <div class="form-group">
-                        <label style="color: var(--text-gray); font-size: 0.9rem;">Email</label>
-                        <input type="email" placeholder="votre@email.com" required>
-                    </div>
-                    <div class="form-group">
-                        <label style="color: var(--text-gray); font-size: 0.9rem;">Message</label>
-                        <textarea placeholder="Votre message..." required></textarea>
-                    </div>
-                    <button type="submit" class="btn" style="width: 100%; justify-content: center;"><i class="fas fa-paper-plane"></i> Envoyer</button>
-                </form>
             </div>
-        </div>
-    </section>
+        </section>
+    </main>
+</div>
 
-    <footer>
-        <div class="container">
-            <div class="logo" style="justify-content: center; margin-bottom: 1rem;">
-                <i class="fas fa-network-wired logo-icon"></i>
-                <span>Ali-Noor ASSOUMANI</span>
-            </div>
-            <p>Portfolio BTS SIO SISR - Tous droits réservés</p>
-        </div>
-    </footer>
+<script>
+/* Theme Toggle */
+const themeToggle = document.getElementById('themeToggle');
+const themeIcon = themeToggle.querySelector('i');
+const body = document.body;
+const currentTheme = localStorage.getItem('theme');
+if (currentTheme === 'light-mode') {
+    body.classList.add('light-mode');
+    themeIcon.classList.replace('fa-sun', 'fa-moon');
+    themeToggle.childNodes[2].textContent = " Mode Sombre";
+}
+themeToggle.addEventListener('click', () => {
+    body.classList.toggle('light-mode');
+    let theme = body.classList.contains('light-mode') ? 'light-mode' : 'dark-mode';
+    if (theme === 'light-mode') {
+        themeIcon.classList.replace('fa-sun', 'fa-moon');
+        themeToggle.childNodes[2].textContent = " Mode Sombre";
+    } else {
+        themeIcon.classList.replace('fa-moon', 'fa-sun');
+        themeToggle.childNodes[2].textContent = " Mode Clair";
+    }
+    localStorage.setItem('theme', theme);
+});
 
-    <script>
-        // Menu Mobile
-        const mobileToggle = document.getElementById('mobileToggle');
-        const navMenu = document.getElementById('navMenu');
-        mobileToggle.addEventListener('click', () => { navMenu.classList.toggle('active'); });
-        document.querySelectorAll('#navMenu a').forEach(link => {
-            link.addEventListener('click', () => { navMenu.classList.remove('active'); });
+/* Active Nav */
+const sections = document.querySelectorAll('section[id]');
+const navLinks = document.querySelectorAll('.sidebar-nav a');
+window.addEventListener('scroll', () => {
+    let cur = '';
+    sections.forEach(s => { if (window.scrollY >= s.offsetTop - 200) cur = s.id; });
+    navLinks.forEach(a => a.classList.toggle('active', a.getAttribute('href') === '#' + cur));
+});
+
+/* Reveal */
+const obs = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+        if (!e.isIntersecting) return;
+        e.target.classList.add('in');
+        e.target.querySelectorAll('.skill-fill[data-w]').forEach(b => {
+            setTimeout(() => { b.style.width = b.dataset.w + '%'; }, 200);
         });
-
-        // Sticky Nav & Active links
-        window.addEventListener('scroll', () => {
-            const nav = document.getElementById('mainNav');
-            if (window.scrollY > 50) nav.classList.add('scrolled');
-            else nav.classList.remove('scrolled');
-        });
-
-        // Animations au scroll (Fade-In)
-        const observerOptions = { threshold: 0.1, rootMargin: '0px 0px -50px 0px' };
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('visible');
-                    observer.unobserve(entry.target);
-                }
-            });
-        }, observerOptions);
-
-        document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
-    </script>
+        obs.unobserve(e.target);
+    });
+}, { threshold: 0.1 });
+document.querySelectorAll('.r').forEach(el => obs.observe(el));
+</script>
 </body>
 </html>

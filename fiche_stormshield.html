@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <title>Projet Stormshield — Ali-Noor ASSOUMANI</title>
+    <meta name="description" content="Configuration de pare-feu Stormshield par Ali-Noor ASSOUMANI : filtrage, DMZ, et VPN IPsec.">
+    <meta name="robots" content="index, follow">
+
+    <link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700&family=Geist+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    :root {
+        --bg: #050505; --bg-sidebar: rgba(5,5,5,0.6); --bg-card: rgba(20,20,25,0.5); --bg-hover: rgba(35,35,45,0.7);
+        --border: rgba(255,255,255,0.1); --border-h: rgba(255,255,255,0.3);
+        --accent: #ff6a00; --accent-glow: rgba(255,106,0,0.18);
+        --text-hi: #ffffff; --text-mid: #e2e8f0; --text: #e2e8f0; --text-muted: #94a3b8;
+        --sans: 'Geist', sans-serif; --mono: 'Geist Mono', monospace;
+        --glow-grad: radial-gradient(circle at 10% 10%, rgba(255,106,0,0.2) 0%, rgba(239,68,68,0.1) 40%, transparent 70%);
+    }
+    body.light-mode {
+        --bg: #f8fafc; --bg-sidebar: rgba(255,255,255,0.85); --bg-card: #ffffff;
+        --border: rgba(0,0,0,0.1); --accent: #c2410c; --accent-glow: rgba(194,65,12,0.08);
+        --text-hi: #0f172a; --text-mid: #334155; --text: #334155; --text-muted: #64748b;
+        --glow-grad: radial-gradient(circle at 10% 10%, rgba(249,115,22,0.08) 0%, transparent 70%);
+    }
+    body { font-family: var(--sans); background: var(--bg); color: var(--text); transition: background 0.3s, color 0.3s; }
+    body::before { content: ''; position: fixed; top: -10%; left: 10%; width: 55vw; height: 55vw; background: var(--glow-grad); z-index: 0; pointer-events: none; filter: blur(80px); transition: background 0.5s;}
+    nav { position: fixed; top: 0; width: 100%; background: var(--bg-sidebar); backdrop-filter: blur(20px); border-bottom: 1px solid var(--border); padding: 1rem 2.5rem; z-index: 1000; display:flex; justify-content:space-between;}
+    .nav-inner { max-width: 860px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; width: 100%;}
+    .nav-logo { font-family: var(--mono); color: var(--text-muted); text-decoration: none; display: flex; align-items: center; gap: .6rem; }
+    .nav-back { font-family: var(--mono); color: var(--text-muted); text-decoration: none; padding: .4rem .8rem; border: 1px solid var(--border); border-radius: 7px; }
+    .theme-toggle { background: transparent; border: 1px solid var(--border); color: var(--text); padding: 0.4rem 0.8rem; border-radius: 6px; cursor: pointer; font-family: var(--sans); font-size: 0.8rem; margin-left: 1rem;}
+    .page { max-width: 860px; margin: 0 auto; padding: 7rem 2rem 5rem; position: relative; z-index: 1; }
+    h1 { font-size: 2.5rem; color: var(--text-hi); margin-bottom: 1rem; }
+    .p-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: 10px; padding: 2rem; margin-top:2rem;}
+    .p-link { display: inline-flex; gap: 0.5rem; color: var(--text-muted); margin-top: 1rem; text-decoration: none;}
+    </style>
+</head>
+<body>
+<nav>
+    <div class="nav-inner">
+        <a href="index.html" class="nav-logo"><i class="fas fa-circle" style="color:var(--accent);"></i> Ali-Noor</a>
+        <div style="display:flex; align-items:center;">
+            <a href="index.html#projets" class="nav-back"><i class="fas fa-arrow-left"></i> Retour</a>
+            <button id="themeToggle" class="theme-toggle"><i class="fas fa-sun"></i> Mode Clair</button>
+        </div>
+    </div>
+</nav>
+<div class="page">
+    <h1>Sécurisation Stormshield</h1>
+    <p style="color:var(--text-muted);">Mise en place d'un pare-feu matériel, segmentation du réseau (LAN/DMZ) et tunnel VPN IPsec.</p>
+    <div class="p-card">
+        <h4 style="color:var(--text-hi); font-size: 1.2rem; margin-bottom: 0.5rem;"><i class="fas fa-shield-alt" style="color:var(--accent); margin-right:10px;"></i> Configuration des règles</h4>
+        <p>Filtrage, NAT/PAT et mise en place du VPN pour le télétravail.</p>
+        <a href="Preuves_Stormshield.pdf" target="_blank" class="p-link"><i class="fas fa-file-pdf" style="color:var(--accent);"></i> Télécharger la fiche de preuves PDF</a>
+    </div>
+</div>
+<script>
+    const t = document.getElementById('themeToggle'); const b = document.body;
+    if (localStorage.getItem('theme') === 'light-mode') { b.classList.add('light-mode'); t.innerHTML = '<i class="fas fa-moon"></i> Sombre'; }
+    t.addEventListener('click', () => { b.classList.toggle('light-mode'); const isL = b.classList.contains('light-mode'); localStorage.setItem('theme', isL ? 'light-mode' : 'dark-mode'); t.innerHTML = isL ? '<i class="fas fa-moon"></i> Sombre' : '<i class="fas fa-sun"></i> Clair'; });
+</script>
+</body>
+</html>

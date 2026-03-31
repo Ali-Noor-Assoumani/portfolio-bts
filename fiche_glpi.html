@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <title>Projet osTicket — Ali-Noor ASSOUMANI</title>
+    <meta name="description" content="Déploiement d'osTicket par Ali-Noor ASSOUMANI (BTS SIO). Configuration, portail utilisateur et diagramme de Gantt.">
+    <meta name="robots" content="index, follow">
+
+    <link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700&family=Geist+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    :root {
+        --bg: #050505; --bg-sidebar: rgba(5,5,5,0.6); --bg-card: rgba(20,20,25,0.5); --bg-hover: rgba(35,35,45,0.7);
+        --border: rgba(255,255,255,0.1); --border-h: rgba(255,255,255,0.3);
+        --accent: #ff6a00; --accent-glow: rgba(255,106,0,0.18); --accent-line: rgba(255,106,0,0.4);
+        --green: #ff6a00; --green-glow: rgba(255,106,0,0.18); --green-line: rgba(255,106,0,0.4);
+        --text-hi: #ffffff; --text-mid: #e2e8f0; --text: #e2e8f0; --text-muted: #94a3b8; --text-faint: #64748b;
+        --mono: 'Geist Mono', monospace; --sans: 'Geist', sans-serif; --r: 10px;
+        --glow-grad: radial-gradient(circle at 10% 10%, rgba(255,106,0,0.2) 0%, rgba(239,68,68,0.1) 40%, transparent 70%);
+    }
+    body.light-mode {
+        --bg: #f8fafc; --bg-sidebar: rgba(255,255,255,0.85); --bg-card: #ffffff; --bg-hover: #f1f5f9;
+        --border: rgba(0,0,0,0.1); --border-h: rgba(0,0,0,0.25);
+        --accent: #c2410c; --accent-glow: rgba(194,65,12,0.08); --accent-line: rgba(194,65,12,0.25);
+        --green: #c2410c; --green-glow: rgba(194,65,12,0.08); --green-line: rgba(194,65,12,0.25);
+        --text-hi: #0f172a; --text-mid: #334155; --text: #334155; --text-muted: #64748b; --text-faint: #94a3b8;
+        --glow-grad: radial-gradient(circle at 10% 10%, rgba(249,115,22,0.08) 0%, transparent 70%);
+    }
+    body { font-family: var(--sans); background: var(--bg); color: var(--text); transition: background 0.3s, color 0.3s; }
+    body::before { content: ''; position: fixed; top: -10%; left: 10%; width: 55vw; height: 55vw; background: var(--glow-grad); z-index: 0; pointer-events: none; filter: blur(80px); transition: background 0.5s;}
+    nav { position: fixed; top: 0; width: 100%; background: var(--bg-sidebar); backdrop-filter: blur(20px); border-bottom: 1px solid var(--border); padding: 1rem 2.5rem; z-index: 1000; display:flex; justify-content:space-between;}
+    .nav-inner { max-width: 860px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; width: 100%;}
+    .nav-logo { font-family: var(--mono); color: var(--text-muted); text-decoration: none; display: flex; align-items: center; gap: .6rem; }
+    .nav-back { font-family: var(--mono); color: var(--text-muted); text-decoration: none; padding: .4rem .8rem; border: 1px solid var(--border); border-radius: 7px; }
+    .theme-toggle { background: transparent; border: 1px solid var(--border); color: var(--text); padding: 0.4rem 0.8rem; border-radius: 6px; cursor: pointer; font-family: var(--sans); font-size: 0.8rem; margin-left: 1rem;}
+    .page { max-width: 860px; margin: 0 auto; padding: 7rem 2rem 5rem; position: relative; z-index: 1; }
+    h1 { font-size: 2.5rem; color: var(--text-hi); margin-bottom: 1rem; }
+    .preuves { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px,1fr)); gap: 1.5rem; margin-top: 1.5rem;}
+    .p-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--r); text-decoration: none; display: flex; flex-direction: column; transition: all 0.2s;}
+    .p-card:hover { border-color: var(--accent); transform: translateY(-4px); }
+    .p-thumb { height: 120px; display: flex; align-items: center; justify-content: center; border-bottom: 1px solid var(--border); font-size: 2.5rem; color: var(--accent); background: var(--accent-glow);}
+    .p-body { padding: 1rem; }
+    .p-body h4 { color: var(--text-hi); margin-bottom: 0.5rem; }
+    .p-link { display: inline-flex; gap: 0.5rem; color: var(--text-muted); margin-top: 0.5rem;}
+    </style>
+</head>
+<body>
+<nav>
+    <div class="nav-inner">
+        <a href="index.html" class="nav-logo"><i class="fas fa-circle" style="color:var(--accent);"></i> Ali-Noor</a>
+        <div style="display:flex; align-items:center;">
+            <a href="index.html#projets" class="nav-back"><i class="fas fa-arrow-left"></i> Retour</a>
+            <button id="themeToggle" class="theme-toggle"><i class="fas fa-sun"></i> Mode Clair</button>
+        </div>
+    </div>
+</nav>
+<div class="page">
+    <h1>Ticketing & Support osTicket</h1>
+    <p style="color:var(--text-muted); margin-bottom:3rem;">Déploiement et configuration d'osTicket sur Debian : portail de soumission de tickets utilisateurs, catégories d'incidents et suivi des demandes.</p>
+    
+    <h2 style="color:var(--text-hi);">Captures & Documents</h2>
+    <div class="preuves">
+        <div class="p-card">
+            <div class="p-thumb"><i class="fas fa-ticket-alt"></i></div>
+            <div class="p-body">
+                <h4>Portail utilisateur</h4>
+                <p style="font-size:0.85rem; color:var(--text-muted);">Interface de création de tickets catégorisés.</p>
+                <a href="Preuves_GLPI.pdf" target="_blank" class="p-link"><i class="fas fa-file-pdf"></i> PDF</a>
+            </div>
+        </div>
+        
+        <div class="p-card">
+            <div class="p-thumb"><i class="fas fa-project-diagram"></i></div>
+            <div class="p-body">
+                <h4>Diagramme de Gantt</h4>
+                <p style="font-size:0.85rem; color:var(--text-muted);">Planification du projet osTicket en 7 phases.</p>
+                <a href="AP-osTicket.pdf" target="_blank" class="p-link"><i class="fas fa-file-pdf"></i> Voir le PDF</a>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    const t = document.getElementById('themeToggle'); const b = document.body;
+    if (localStorage.getItem('theme') === 'light-mode') { b.classList.add('light-mode'); t.innerHTML = '<i class="fas fa-moon"></i> Sombre'; }
+    t.addEventListener('click', () => { b.classList.toggle('light-mode'); const isL = b.classList.contains('light-mode'); localStorage.setItem('theme', isL ? 'light-mode' : 'dark-mode'); t.innerHTML = isL ? '<i class="fas fa-moon"></i> Sombre' : '<i class="fas fa-sun"></i> Clair'; });
+</script>
+</body>
+</html>
