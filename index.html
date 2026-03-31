@@ -139,6 +139,7 @@
     .hero-title { font-size: clamp(3rem,5vw,4.5rem); font-weight: 700; margin-bottom: 1.5rem; background: linear-gradient(to right, var(--text-hi), var(--text-lo-faint)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
     .hero-title span { background: linear-gradient(to right, var(--accent), var(--accent-dim)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
     .hero-desc { font-size: 1.1rem; color: var(--text-mid); line-height: 1.8; max-width: 550px; margin-bottom: 2.5rem; }
+    .hero-desc strong { color: var(--text-hi); font-weight: 500; }
     .hero-actions { display: flex; gap: 1rem; flex-wrap: wrap; }
     .btn { display: inline-flex; align-items: center; gap: .5rem; padding: .8rem 1.5rem; border-radius: 8px; font-size: .9rem; font-weight: 500; text-decoration: none; transition: all 0.2s var(--ease); border: none; cursor: pointer;}
     .btn-primary { background: var(--text-hi); color: var(--bg); }
@@ -157,7 +158,7 @@
     .skill-fill { height: 100%; background: var(--accent); border-radius: 2px; width: 0; transition: width 1.2s var(--ease); }
 
     /* Table */
-    .table-wrap { overflow-x: auto; border: 1px solid var(--border); border-radius: 12px; background: var(--bg-card); margin-top: 3rem; }
+    .table-wrap { overflow-x: auto; border: 1px solid var(--border); border-radius: 12px; background: var(--bg-card); backdrop-filter: blur(10px); margin-top: 3rem; }
     table { width: 100%; border-collapse: collapse; min-width: 600px; }
     th { padding: 1.2rem; text-align: left; font-size: .8rem; color: var(--text-lo); border-bottom: 1px solid var(--border); }
     td { padding: 1.2rem; border-bottom: 1px solid var(--border); font-size: .9rem; color: var(--text-mid); }
@@ -261,7 +262,9 @@
             <div class="container">
                 <div class="hero-eyebrow r">Portfolio Technique</div>
                 <h1 class="hero-title r">Concevoir.<br>Déployer.<br><span>Sécuriser.</span></h1>
-                <p class="hero-desc r">Je suis <strong>Ali-Noor</strong>, fort d'une double expérience en entreprise. De la réparation matérielle au déploiement en masse, je gère les incidents critiques tout en assurant un support de proximité de qualité.</p>
+                
+                <p class="hero-desc r">Je suis <strong>Ali-Noor</strong>, étudiant en BTS SIO (SISR). J'accompagne les utilisateurs, j'administre les serveurs et je sécurise les réseaux informatiques au quotidien.</p>
+                
                 <div class="hero-actions r">
                     <a href="#projets" class="btn btn-primary">Explorer mes travaux</a>
                     <a href="#contact" class="btn btn-ghost">Me contacter</a>
@@ -293,21 +296,90 @@
         <section id="epreuve-e5">
             <div class="container">
                 <div class="sec-label r">Évaluation E5</div>
-                <h2 class="sec-title r">Détail du parcours (Annexe VI-1)</h2>
-                <a href="ASSOUMANI_Ali-Noor_8_-_EPREUVE_ORALE_E5.csv" target="_blank" class="btn btn-ghost r" style="margin-bottom:2rem;"><i class="fas fa-file-excel"></i> Télécharger le Tableau Officiel</a>
+                <h2 class="sec-title r">Tableau de synthèse (Annexe VI-1)</h2>
                 
-                <div class="table-wrap r">
+                <div class="r d1" style="margin-bottom:2rem;">
+                    <a href="ASSOUMANI_Ali-Noor_8_-_EPREUVE_ORALE_E5.csv" target="_blank" class="btn btn-ghost" style="font-size:.78rem; padding:.5rem 1rem;">
+                        <i class="fas fa-file-excel" style="color:var(--accent); font-size:.72rem;"></i> Télécharger le fichier officiel complet
+                    </a>
+                </div>
+
+                <div class="table-wrap r d2">
                     <table>
                         <thead>
-                            <tr><th>Réalisations</th><th>Période</th><th>Patrimoine</th><th>Incidents</th><th>Service Info</th><th>Dév. Pro</th></tr>
+                            <tr>
+                                <th style="width:25%;">Réalisations</th>
+                                <th title="Gérer le patrimoine informatique">Patrimoine</th>
+                                <th title="Répondre aux incidents et demandes">Incidents</th>
+                                <th title="Développer la présence en ligne">Présence</th>
+                                <th title="Travailler en mode projet">Projet</th>
+                                <th title="Mettre à disposition un service">Service</th>
+                                <th title="Organiser son développement">Dév. Pro</th>
+                            </tr>
                         </thead>
                         <tbody>
-                            <tr class="group-header"><td colspan="6">Réalisation en cours de formation</td></tr>
-                            <tr><td><strong>GLPI : osTicket</strong></td><td>09/25 – 03/26</td><td class="check"><i class="fas fa-circle"></i></td><td class="check"><i class="fas fa-circle"></i></td><td class="check"><i class="fas fa-circle"></i></td><td></td></tr>
-                            <tr><td><strong>Stormshield</strong></td><td>10/25 – 02/26</td><td></td><td></td><td class="check"><i class="fas fa-circle"></i></td><td class="check"><i class="fas fa-circle"></i></td></tr>
-                            <tr><td><strong>Windows Server</strong></td><td>09/24 – 02/25</td><td></td><td></td><td class="check"><i class="fas fa-circle"></i></td><td class="check"><i class="fas fa-circle"></i></td></tr>
-                            <tr class="group-header"><td colspan="6">Réalisations en milieu professionnel</td></tr>
-                            <tr><td><strong>Gestion de parc & Support</strong></td><td>Stage SMABTP</td><td class="check"><i class="fas fa-circle"></i></td><td class="check"><i class="fas fa-circle"></i></td><td class="check"><i class="fas fa-circle"></i></td><td class="check"><i class="fas fa-circle"></i></td></tr>
+                            <tr class="group-header"><td colspan="7">En cours de formation</td></tr>
+                            <tr>
+                                <td><strong>AP : osTicket (GLPI)</strong></td>
+                                <td class="check"><i class="fas fa-circle"></i></td>
+                                <td class="check"><i class="fas fa-circle"></i></td>
+                                <td></td><td></td>
+                                <td class="check"><i class="fas fa-circle"></i></td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td><strong>Stormshield</strong></td>
+                                <td></td><td></td><td></td><td></td>
+                                <td class="check"><i class="fas fa-circle"></i></td>
+                                <td class="check"><i class="fas fa-circle"></i></td>
+                            </tr>
+                            <tr>
+                                <td><strong>AP : Windows Server</strong></td>
+                                <td></td><td></td><td></td>
+                                <td class="check"><i class="fas fa-circle"></i></td>
+                                <td class="check"><i class="fas fa-circle"></i></td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td><strong>Portfolio</strong></td>
+                                <td></td><td></td>
+                                <td class="check"><i class="fas fa-circle"></i></td>
+                                <td></td><td></td>
+                                <td class="check"><i class="fas fa-circle"></i></td>
+                            </tr>
+
+                            <tr class="group-header"><td colspan="7">Milieu professionnel (1ère année)</td></tr>
+                            <tr>
+                                <td><strong>Création Site Web</strong></td>
+                                <td></td><td></td>
+                                <td class="check"><i class="fas fa-circle"></i></td>
+                                <td class="check"><i class="fas fa-circle"></i></td>
+                                <td></td><td></td>
+                            </tr>
+                            <tr>
+                                <td><strong>Gestion Incidents & Serveur</strong></td>
+                                <td class="check"><i class="fas fa-circle"></i></td>
+                                <td class="check"><i class="fas fa-circle"></i></td>
+                                <td></td><td></td>
+                                <td class="check"><i class="fas fa-circle"></i></td>
+                                <td></td>
+                            </tr>
+
+                            <tr class="group-header"><td colspan="7">Milieu professionnel (2nde année)</td></tr>
+                            <tr>
+                                <td><strong>Migration PC & Inventaire</strong></td>
+                                <td class="check"><i class="fas fa-circle"></i></td>
+                                <td></td><td></td>
+                                <td class="check"><i class="fas fa-circle"></i></td>
+                                <td class="check"><i class="fas fa-circle"></i></td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td><strong>Support & Incidents</strong></td>
+                                <td></td>
+                                <td class="check"><i class="fas fa-circle"></i></td>
+                                <td></td><td></td><td></td><td></td>
+                            </tr>
                         </tbody>
                     </table>
                 </div>
@@ -332,7 +404,7 @@
                         <div class="proof-grid">
                             <a class="proof-card" href="Stage_2eme_annee.pdf" target="_blank">
                                 <div class="proof-file-icon"><i class="fas fa-project-diagram"></i></div>
-                                <div class="proof-info"><h5>Diagramme de Gantt</h5><p>Planification des missions du stage.</p></div>
+                                <div class="proof-info"><h5>Diagramme de Gantt</h5><p>Planification du stage (Migration, incidents...).</p></div>
                             </a>
                         </div>
                     </div>
