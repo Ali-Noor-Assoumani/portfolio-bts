@@ -3,9 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
     <title>Projet osTicket — Ali-Noor ASSOUMANI</title>
-    <meta name="description" content="Déploiement d'osTicket par Ali-Noor ASSOUMANI (BTS SIO). Guide d'installation technique sous Debian et diagramme de Gantt.">
+    <meta name="description" content="Déploiement d'osTicket par Ali-Noor ASSOUMANI (BTS SIO). Guide d'installation technique et diagramme de Gantt.">
     <meta name="robots" content="index, follow">
 
     <link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700&family=Geist+Mono:wght@300;400;500&display=swap" rel="stylesheet">
@@ -15,16 +14,17 @@
     :root {
         --bg: #050505; --bg-sidebar: rgba(5,5,5,0.6); --bg-card: rgba(20,20,25,0.5); --bg-hover: rgba(35,35,45,0.7);
         --border: rgba(255,255,255,0.1); --border-h: rgba(255,255,255,0.3);
-        --accent: #ff6a00; --accent-glow: rgba(255,106,0,0.18); --accent-line: rgba(255,106,0,0.4);
-        --text-hi: #ffffff; --text-mid: #e2e8f0; --text: #e2e8f0; --text-muted: #94a3b8; --text-faint: #64748b;
-        --sans: 'Geist', sans-serif; --r: 10px;
+        --accent: #ff6a00; --accent-dim: #ee5d00; --accent-glow: rgba(255,106,0,0.18);
+        --text-hi: #ffffff; --text-mid: #e2e8f0; --text: #e2e8f0; --text-muted: #94a3b8;
+        --sans: 'Geist', sans-serif; --mono: 'Geist Mono', monospace; --r: 10px;
         --glow-grad: radial-gradient(circle at 10% 10%, rgba(255,106,0,0.2) 0%, rgba(239,68,68,0.1) 40%, transparent 70%);
+        --ease: cubic-bezier(0.16, 1, 0.3, 1);
     }
     body.light-mode {
         --bg: #f8fafc; --bg-sidebar: rgba(255,255,255,0.85); --bg-card: #ffffff; --bg-hover: #f1f5f9;
         --border: rgba(0,0,0,0.1); --border-h: rgba(0,0,0,0.25);
-        --accent: #c2410c; --accent-glow: rgba(194,65,12,0.08); --accent-line: rgba(194,65,12,0.25);
-        --text-hi: #0f172a; --text-mid: #334155; --text: #334155; --text-muted: #64748b; --text-faint: #94a3b8;
+        --accent: #c2410c; --accent-dim: #9a3412; --accent-glow: rgba(194,65,12,0.08);
+        --text-hi: #0f172a; --text-mid: #334155; --text: #334155; --text-muted: #64748b;
         --glow-grad: radial-gradient(circle at 10% 10%, rgba(249,115,22,0.08) 0%, transparent 70%);
     }
     body { font-family: var(--sans); background: var(--bg); color: var(--text); transition: background 0.3s, color 0.3s; }
@@ -43,6 +43,23 @@
     .p-body { padding: 1rem; }
     .p-body h4 { color: var(--text-hi); margin-bottom: 0.5rem; }
     .p-link { display: inline-flex; gap: 0.5rem; color: var(--text-muted); margin-top: 0.5rem;}
+
+    /* ===== CSS DU DIAGRAMME DE GANTT ===== */
+    .gantt-container { background: var(--bg-card); border: 1px solid var(--border); border-radius: 12px; padding: 2rem; margin-top: 3rem; }
+    .gantt-header { font-size: 1.2rem; font-weight: 600; color: var(--text-hi); margin-bottom: 2rem; display: flex; align-items: center; gap: 0.8rem; }
+    .gantt-header i { color: var(--accent); }
+    .gantt-row { display: flex; align-items: center; margin-bottom: 1rem; gap: 1rem; }
+    .gantt-label { width: 220px; font-size: 0.85rem; color: var(--text-mid); font-weight: 500; flex-shrink: 0; }
+    .gantt-track { flex: 1; background: rgba(255,255,255,0.05); height: 10px; border-radius: 5px; position: relative; }
+    body.light-mode .gantt-track { background: rgba(0,0,0,0.06); }
+    .gantt-bar { position: absolute; top: 0; bottom: 0; background: linear-gradient(90deg, var(--accent-dim), var(--accent)); border-radius: 5px; box-shadow: 0 0 12px var(--accent-glow); transition: width 1.5s var(--ease); }
+    .gantt-date { width: 120px; font-family: var(--mono); font-size: 0.75rem; color: var(--text-muted); text-align: right; flex-shrink: 0; }
+    @media (max-width: 768px) {
+        .gantt-row { flex-direction: column; align-items: flex-start; gap: 0.4rem; margin-bottom: 1.5rem; }
+        .gantt-label { width: 100%; font-size: 0.9rem; }
+        .gantt-date { text-align: left; width: 100%; margin-top: 0.2rem; }
+        .gantt-track { width: 100%; }
+    }
     </style>
 </head>
 <body>
@@ -61,7 +78,6 @@
     
     <h2 style="color:var(--text-hi);">Documentation technique</h2>
     <div class="preuves">
-        
         <div class="p-card">
             <div class="p-thumb"><i class="fas fa-book"></i></div>
             <div class="p-body">
@@ -70,16 +86,47 @@
                 <a href="osTicket_Documentation.pdf" target="_blank" class="p-link"><i class="fas fa-file-pdf"></i> Voir le PDF</a>
             </div>
         </div>
-        
-        <div class="p-card">
-            <div class="p-thumb"><i class="fas fa-project-diagram"></i></div>
-            <div class="p-body">
-                <h4>Diagramme de Gantt</h4>
-                <p style="font-size:0.85rem; color:var(--text-muted);">Planification du projet osTicket en 7 phases d'implémentation.</p>
-                <a href="AP-osTicket.pdf" target="_blank" class="p-link"><i class="fas fa-file-pdf"></i> Voir le PDF</a>
-            </div>
+    </div>
+
+    <div class="gantt-container">
+        <div class="gantt-header">
+            <i class="fas fa-project-diagram"></i> Planification du Projet (Diagramme de Gantt)
         </div>
-        
+        <div class="gantt-row">
+            <div class="gantt-label">Phase 1 : Lancement</div>
+            <div class="gantt-track"><div class="gantt-bar" style="left: 0%; width: 3%;"></div></div>
+            <div class="gantt-date">11/09 - 16/09</div>
+        </div>
+        <div class="gantt-row">
+            <div class="gantt-label">Phase 2 : Configuration</div>
+            <div class="gantt-track"><div class="gantt-bar" style="left: 3%; width: 11%;"></div></div>
+            <div class="gantt-date">17/09 - 06/10</div>
+        </div>
+        <div class="gantt-row">
+            <div class="gantt-label">Phase 3 : Intégration</div>
+            <div class="gantt-track"><div class="gantt-bar" style="left: 14%; width: 7%;"></div></div>
+            <div class="gantt-date">07/10 - 20/10</div>
+        </div>
+        <div class="gantt-row">
+            <div class="gantt-label">Phase 4 : Tests</div>
+            <div class="gantt-track"><div class="gantt-bar" style="left: 21%; width: 3%;"></div></div>
+            <div class="gantt-date">21/10 - 27/10</div>
+        </div>
+        <div class="gantt-row">
+            <div class="gantt-label">Phase 5 : Déploiement</div>
+            <div class="gantt-track"><div class="gantt-bar" style="left: 24%; width: 11%;"></div></div>
+            <div class="gantt-date">28/10 - 16/11</div>
+        </div>
+        <div class="gantt-row">
+            <div class="gantt-label">Phase 6 : Configuration HTTPS</div>
+            <div class="gantt-track"><div class="gantt-bar" style="left: 35%; width: 13%;"></div></div>
+            <div class="gantt-date">17/11 - 11/12</div>
+        </div>
+        <div class="gantt-row">
+            <div class="gantt-label">Phase 7 : Routage IN vers DMZ</div>
+            <div class="gantt-track"><div class="gantt-bar" style="left: 48%; width: 52%;"></div></div>
+            <div class="gantt-date">12/12 - 09/03</div>
+        </div>
     </div>
 </div>
 <script>

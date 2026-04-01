@@ -158,7 +158,7 @@
     .skill-fill { height: 100%; background: var(--accent); border-radius: 2px; width: 0; transition: width 1.2s var(--ease); }
 
     /* Table E5 Raccourcie */
-    .table-wrap { overflow-x: auto; border: 1px solid var(--border); border-radius: 12px; background: var(--bg-card); backdrop-filter: blur(10px); margin-top: 2rem; }
+    .table-wrap { overflow-x: auto; border: 1px solid var(--border); border-radius: 12px; background: var(--bg-card); backdrop-filter: blur(10px); margin-top: 3rem; }
     table { width: 100%; border-collapse: collapse; min-width: 600px; }
     th { padding: 1.2rem; text-align: left; font-size: .8rem; color: var(--text-lo); border-bottom: 1px solid var(--border); }
     td { padding: 1.2rem; border-bottom: 1px solid var(--border); font-size: .9rem; color: var(--text-mid); }
@@ -179,13 +179,22 @@
     .exp-item h4 i { color: var(--accent); }
     .exp-item p { font-size: .8rem; color: var(--text-lo); }
 
+    /* GANTT MINIATURE (CSS) */
+    .gantt-mini { margin-top: 2rem; border-top: 1px solid var(--border); padding-top: 1.5rem; }
+    .gantt-mini h4 { font-size: 0.9rem; color: var(--text-hi); margin-bottom: 1rem; display: flex; align-items: center; gap: 0.5rem;}
+    .gantt-mini h4 i { color: var(--accent); }
+    .gm-row { display: flex; align-items: center; margin-bottom: 0.5rem; gap: 1rem; }
+    .gm-label { width: 120px; font-size: 0.75rem; color: var(--text-mid); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .gm-track { flex: 1; background: rgba(255,255,255,0.05); height: 6px; border-radius: 3px; position: relative; }
+    body.light-mode .gm-track { background: rgba(0,0,0,0.06); }
+    .gm-bar { position: absolute; top: 0; bottom: 0; background: var(--accent); border-radius: 3px; }
+    
     /* Galerie Preuves */
     .proof-section { margin-top: 2.5rem; padding-top: 2.5rem; border-top: 1px solid var(--border); }
     .proof-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px,1fr)); gap: 1rem; }
     .proof-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: 10px; overflow: hidden; display: flex; flex-direction: column; text-decoration: none; transition: all 0.3s; }
     .proof-card:hover { border-color: var(--accent); transform: translateY(-4px); }
     .proof-img { width: 100%; height: 140px; object-fit: cover; border-bottom: 1px solid var(--border); }
-    .proof-file-icon { height: 140px; display: flex; align-items: center; justify-content: center; background: var(--accent-glow); color: var(--accent); font-size: 2.4rem; border-bottom: 1px solid var(--border); }
     .proof-info { padding: 1rem; }
     .proof-info h5 { color: var(--text-hi); font-size: .85rem; margin-bottom: .3rem; }
     .proof-info p { color: var(--text-muted); font-size: .75rem; line-height: 1.5; }
@@ -220,7 +229,7 @@
     .r.in { opacity: 1; transform: none; }
 
     @media (max-width: 1024px) { :root { --sidebar: 280px; } section { padding: 5rem 2rem; } .skills-cols { gap: 2rem; } .projects-grid { grid-template-columns: 1fr; } }
-    @media (max-width: 768px) { .layout { flex-direction: column; } .sidebar { position: relative; width: 100%; height: auto; padding: 2rem; } .sidebar-nav { display: flex; flex-wrap: wrap; gap: 0.5rem; } .main { margin-left: 0; width: 100%; } footer { margin-left: 0; } .contact-layout, .exp-grid, .form-row { grid-template-columns: 1fr; } }
+    @media (max-width: 768px) { .layout { flex-direction: column; } .sidebar { position: relative; width: 100%; height: auto; padding: 2rem; } .sidebar-nav { display: flex; flex-wrap: wrap; gap: 0.5rem; } .main { margin-left: 0; width: 100%; } footer { margin-left: 0; } .contact-layout, .exp-grid, .form-row { grid-template-columns: 1fr; } .gm-label { width: 80px;} }
     </style>
 </head>
 <body>
@@ -399,15 +408,15 @@
                         <div class="exp-item"><h4><i class="fas fa-headset"></i> Kiosque IT</h4><p>Résolution d'incidents critiques en proximité.</p></div>
                         <div class="exp-item"><h4><i class="fas fa-network-wired"></i> Aménagement</h4><p>Logistique et brassage réseau.</p></div>
                     </div>
-                    <div class="proof-section">
-                        <div class="proof-section-label">Preuve d'intervention</div>
-                        <div class="proof-grid">
-                            <a class="proof-card" href="Stage_2eme_annee.pdf" target="_blank">
-                                <div class="proof-file-icon"><i class="fas fa-project-diagram"></i></div>
-                                <div class="proof-info"><h5>Diagramme de Gantt</h5><p>Planification des missions du stage.</p></div>
-                            </a>
-                        </div>
+                    
+                    <div class="gantt-mini">
+                        <h4><i class="fas fa-project-diagram"></i> Planification du Stage (Aperçu Gantt)</h4>
+                        <div class="gm-row"><div class="gm-label">Migration PC</div><div class="gm-track"><div class="gm-bar" style="left:0%; width:100%;"></div></div></div>
+                        <div class="gm-row"><div class="gm-label">Incidents</div><div class="gm-track"><div class="gm-bar" style="left:0%; width:100%;"></div></div></div>
+                        <div class="gm-row"><div class="gm-label">Changement matériel</div><div class="gm-track"><div class="gm-bar" style="left:25%; width:75%;"></div></div></div>
                     </div>
+                    
+                    <a href="fiche_stage_smabtp.html" class="btn btn-ghost" style="margin-top:1rem; font-size:0.8rem;"><i class="fas fa-arrow-right"></i> Voir tout le diagramme</a>
                 </div>
 
                 <div class="exp-block r">
@@ -426,11 +435,10 @@
                             </a>
                             <a href="Masterisation_Table_2.jpg" target="_blank" class="proof-card">
                                 <img src="Masterisation_Table_2.jpg" class="proof-img">
-                                <div class="proof-info"><h5>Processus de mastérisation</h5><p>Amorçage via PXE et installation OS.</p></div>
+                                <div class="proof-info"><h5>Processus</h5><p>Amorçage PXE et OS.</p></div>
                             </a>
                         </div>
                     </div>
-                    <a href="fiche_stage_smabtp.html" class="btn btn-ghost" style="margin-top:2rem;"><i class="fas fa-folder-open"></i> Bilan complet</a>
                 </div>
             </div>
         </section>
@@ -445,16 +453,12 @@
                         <h3>Plateforme Ticketing</h3>
                         <p>Déploiement d'osTicket sous Linux. Création de catégories et SLA.</p>
                         <div class="proj-tags"><span class="proj-tag">osTicket</span><span class="proj-tag">ITIL</span></div>
-                        <div class="proj-link">Voir la fiche <i class="fas fa-arrow-right"></i></div>
-                        
-                        <div style="margin-top: 1rem; border-top: 1px solid var(--border); padding-top: 1rem;">
-                            <object data="AP-osTicket.pdf" style="pointer-events: none; color: var(--accent); font-size: 0.85rem;"><i class="fas fa-project-diagram"></i> Contient un Diagramme de Gantt</object>
-                        </div>
+                        <div class="proj-link">Voir la fiche & Planification <i class="fas fa-arrow-right"></i></div>
                     </a>
                     <a href="fiche_stormshield.html" class="proj-card r">
                         <div class="proj-icon"><i class="fas fa-shield-alt"></i></div>
                         <h3>Sécurisation Réseau</h3>
-                        <p>Pare-feu Stormshield, NAT/PAT et VPN IPsec.</p>
+                        <p>Pare-feu Stormshield, VPN IPsec, DMZ et Reverse Proxy.</p>
                         <div class="proj-tags"><span class="proj-tag">Stormshield</span><span class="proj-tag">VPN</span></div>
                         <div class="proj-link">Voir la fiche <i class="fas fa-arrow-right"></i></div>
                     </a>
