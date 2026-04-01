@@ -73,10 +73,6 @@
         --accent-glow:  rgba(194, 65, 12, 0.08);
         --accent-line:  rgba(194, 65, 12, 0.25);
         
-        --green:        #c2410c; 
-        --green-glow:   rgba(194, 65, 12, 0.08);
-        --green-line:   rgba(194, 65, 12, 0.25);
-        
         --text-hi:      #0f172a;
         --text-mid:     #334155;
         --text:         #334155;
@@ -474,39 +470,41 @@
         <section id="veille">
             <div class="container">
                 <div class="sec-label r">Information</div>
-                <h2 class="sec-title r">Veille Technologique</h2>
+                <h2 class="sec-title r">Veille Technologique Passive</h2>
+                <p class="hero-desc r" style="margin-bottom: 3rem; font-size: 0.95rem;">Pour rester à jour sans perdre de temps de production, j'ai mis en place une méthode de <strong>veille passive</strong>. L'information critique vient directement à moi via des flux et alertes configurées.</p>
+                
                 <div class="veille-grid">
                     
-                    <a href="https://www.cert.ssi.gouv.fr/" target="_blank" class="veille-card r">
-                        <div class="v-icon"><i class="fas fa-shield-alt"></i></div>
-                        <h3>Cybersécurité & Vulnérabilités</h3>
-                        <p>Suivi régulier des failles critiques (Zero-Day), de la sécurité des infrastructures réseaux et des menaces ransomwares.</p>
-                        <div class="veille-tags"><span class="veille-tag">CERT-FR</span><span class="veille-tag">ANSSI</span></div>
-                        <div class="proj-link">Voir le site CERT-FR <i class="fas fa-external-link-alt" style="font-size: 0.7rem;"></i></div>
+                    <a href="https://www.google.fr/alerts" target="_blank" class="veille-card r">
+                        <div class="v-icon"><i class="fas fa-bell"></i></div>
+                        <h3>Alertes Automatisées</h3>
+                        <p>Configuration de mots-clés (Microsoft Intune, Faille Zero-Day, Windows Server) pour recevoir des résumés d'actualité directement par mail.</p>
+                        <div class="veille-tags"><span class="veille-tag">Google Alerts</span><span class="veille-tag">Mots-clés</span></div>
+                        <div class="proj-link">Outil de veille <i class="fas fa-external-link-alt" style="font-size: 0.7rem;"></i></div>
                     </a>
 
-                    <a href="https://techcommunity.microsoft.com/t5/microsoft-intune-blog/bg-p/MicrosoftIntuneBlog" target="_blank" class="veille-card r">
-                        <div class="v-icon"><i class="fab fa-microsoft"></i></div>
-                        <h3>Écosystème Microsoft Intune</h3>
-                        <p>Évolution du Modern Workplace, nouveautés Autopilot, et gestion des terminaux mobiles (MDM/MAM) en entreprise.</p>
-                        <div class="veille-tags"><span class="veille-tag">Tech Community</span><span class="veille-tag">Microsoft Learn</span></div>
-                        <div class="proj-link">Voir le Blog Intune <i class="fas fa-external-link-alt" style="font-size: 0.7rem;"></i></div>
+                    <a href="https://www.reddit.com/r/sysadmin/" target="_blank" class="veille-card r">
+                        <div class="v-icon"><i class="fab fa-reddit"></i></div>
+                        <h3>Communautés IT & Entraide</h3>
+                        <p>Lecture passive des retours d'expérience sur <strong>r/sysadmin</strong> et <strong>r/Intune</strong> pour anticiper les bugs des mises à jour Microsoft et découvrir des scripts.</p>
+                        <div class="veille-tags"><span class="veille-tag">r/sysadmin</span><span class="veille-tag">Forums</span></div>
+                        <div class="proj-link">Voir la communauté <i class="fas fa-external-link-alt" style="font-size: 0.7rem;"></i></div>
                     </a>
 
-                    <a href="https://www.it-connect.fr/lintelligence-artificielle-au-service-de-ladministrateur-systeme-et-reseau/" target="_blank" class="veille-card r">
+                    <a href="https://twitter.com/cert_fr" target="_blank" class="veille-card r">
+                        <div class="v-icon"><i class="fab fa-twitter"></i></div>
+                        <h3>Flux Cyber temps réel</h3>
+                        <p>Suivi en continu des annonces officielles du <strong>CERT-FR</strong> et d'experts cybersécurité pour être réactif en cas de menaces globales majeures.</p>
+                        <div class="veille-tags"><span class="veille-tag">CERT-FR</span><span class="veille-tag">Temps réel</span></div>
+                        <div class="proj-link">Voir les alertes CERT-FR <i class="fas fa-external-link-alt" style="font-size: 0.7rem;"></i></div>
+                    </a>
+
+                    <a href="https://techcommunity.microsoft.com/t5/microsoft-security-copilot-blog/bg-p/MicrosoftSecurityCopilotBlog" target="_blank" class="veille-card r">
                         <div class="v-icon"><i class="fas fa-robot"></i></div>
-                        <h3>L'IA dans l'IT (AIOps)</h3>
-                        <p>Impact de l'IA (Copilot, automatisation) sur la résolution d'incidents (Ticketing), le support utilisateur et la création de scripts.</p>
-                        <div class="veille-tags"><span class="veille-tag">IT Connect</span><span class="veille-tag">AIOps</span></div>
-                        <div class="proj-link">Article de veille IT <i class="fas fa-external-link-alt" style="font-size: 0.7rem;"></i></div>
-                    </a>
-
-                    <a href="https://feedly.com/" target="_blank" class="veille-card r">
-                        <div class="v-icon"><i class="fas fa-rss"></i></div>
-                        <h3>Outils & Méthodologie</h3>
-                        <p>Centralisation de l'information technique via des flux RSS, newsletters spécialisées et réseaux sociaux professionnels.</p>
-                        <div class="veille-tags"><span class="veille-tag">Feedly</span><span class="veille-tag">LinkedIn</span></div>
-                        <div class="proj-link">Mon outil de flux RSS <i class="fas fa-external-link-alt" style="font-size: 0.7rem;"></i></div>
+                        <h3>L'IA pour les Administrateurs</h3>
+                        <p>Suivi officiel du développement de l'<strong>AIOps</strong> et de <strong>Microsoft Security Copilot</strong> pour comprendre l'avenir du support technique et de la sécurisation.</p>
+                        <div class="veille-tags"><span class="veille-tag">Security Copilot</span><span class="veille-tag">AIOps</span></div>
+                        <div class="proj-link">Voir le blog Microsoft IA <i class="fas fa-external-link-alt" style="font-size: 0.7rem;"></i></div>
                     </a>
 
                 </div>
