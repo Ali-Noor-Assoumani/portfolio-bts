@@ -3,8 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
     <title>Projet osTicket — Ali-Noor ASSOUMANI</title>
-    <meta name="description" content="Déploiement d'osTicket par Ali-Noor ASSOUMANI (BTS SIO). Guide d'installation technique et diagramme de Gantt.">
+    <meta name="description" content="Déploiement d'osTicket par Ali-Noor ASSOUMANI (BTS SIO). Architecture réseau, guide d'installation et planification.">
     <meta name="robots" content="index, follow">
 
     <link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700&family=Geist+Mono:wght@300;400;500&display=swap" rel="stylesheet">
@@ -14,29 +15,37 @@
     :root {
         --bg: #050505; --bg-sidebar: rgba(5,5,5,0.6); --bg-card: rgba(20,20,25,0.5); --bg-hover: rgba(35,35,45,0.7);
         --border: rgba(255,255,255,0.1); --border-h: rgba(255,255,255,0.3);
-        --accent: #ff6a00; --accent-dim: #ee5d00; --accent-glow: rgba(255,106,0,0.18);
+        --accent: #ff6a00; --accent-glow: rgba(255,106,0,0.18); --accent-line: rgba(255,106,0,0.4);
         --text-hi: #ffffff; --text-mid: #e2e8f0; --text: #e2e8f0; --text-muted: #94a3b8;
         --sans: 'Geist', sans-serif; --mono: 'Geist Mono', monospace; --r: 10px;
         --glow-grad: radial-gradient(circle at 10% 10%, rgba(255,106,0,0.2) 0%, rgba(239,68,68,0.1) 40%, transparent 70%);
         --ease: cubic-bezier(0.16, 1, 0.3, 1);
     }
     body.light-mode {
-        --bg: #f8fafc; --bg-sidebar: rgba(255,255,255,0.85); --bg-card: #ffffff; --bg-hover: #f1f5f9;
-        --border: rgba(0,0,0,0.1); --border-h: rgba(0,0,0,0.25);
-        --accent: #c2410c; --accent-dim: #9a3412; --accent-glow: rgba(194,65,12,0.08);
+        --bg: #f8fafc; --bg-sidebar: rgba(255,255,255,0.85); --bg-card: #ffffff;
+        --border: rgba(0,0,0,0.1); --accent: #c2410c; --accent-glow: rgba(194,65,12,0.08);
         --text-hi: #0f172a; --text-mid: #334155; --text: #334155; --text-muted: #64748b;
         --glow-grad: radial-gradient(circle at 10% 10%, rgba(249,115,22,0.08) 0%, transparent 70%);
     }
     body { font-family: var(--sans); background: var(--bg); color: var(--text); transition: background 0.3s, color 0.3s; }
     body::before { content: ''; position: fixed; top: -10%; left: 10%; width: 55vw; height: 55vw; background: var(--glow-grad); z-index: 0; pointer-events: none; filter: blur(80px); transition: background 0.5s;}
+    
     nav { position: fixed; top: 0; width: 100%; background: var(--bg-sidebar); backdrop-filter: blur(20px); border-bottom: 1px solid var(--border); padding: 1rem 2.5rem; z-index: 1000; display:flex; justify-content:space-between;}
     .nav-inner { max-width: 860px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; width: 100%;}
     .nav-logo, .nav-back { color: var(--text-muted); text-decoration: none; display: flex; align-items: center; gap: .6rem; }
     .nav-back { padding: .4rem .8rem; border: 1px solid var(--border); border-radius: 7px; }
     .theme-toggle { background: transparent; border: 1px solid var(--border); color: var(--text); padding: 0.4rem 0.8rem; border-radius: 6px; cursor: pointer; font-family: var(--sans); font-size: 0.8rem; margin-left: 1rem;}
+    
     .page { max-width: 860px; margin: 0 auto; padding: 7rem 2rem 5rem; position: relative; z-index: 1; }
     h1 { font-size: 2.5rem; color: var(--text-hi); margin-bottom: 1rem; }
-    .preuves { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px,1fr)); gap: 1.5rem; margin-top: 1.5rem;}
+    h2 { font-size: 1.5rem; color: var(--text-hi); margin-top: 3rem; margin-bottom: 1.5rem; }
+
+    /* Architecture Image Styling */
+    .schema-box { background: var(--bg-card); border: 1px solid var(--border); border-radius: 12px; padding: 1.5rem; text-align: center; margin-top: 1rem; }
+    .schema-box img { max-width: 100%; height: auto; border-radius: 8px; border: 1px solid var(--border); background: #fff; } /* Fond blanc pour que le schéma soit lisible même en mode sombre */
+    .schema-caption { font-size: 0.85rem; color: var(--text-muted); margin-top: 1rem; font-style: italic; }
+
+    .preuves { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px,1fr)); gap: 1.5rem; margin-top: 1rem;}
     .p-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--r); text-decoration: none; display: flex; flex-direction: column; transition: all 0.2s;}
     .p-card:hover { border-color: var(--accent); transform: translateY(-4px); }
     .p-thumb { height: 120px; display: flex; align-items: center; justify-content: center; border-bottom: 1px solid var(--border); font-size: 2.5rem; color: var(--accent); background: var(--accent-glow);}
@@ -44,22 +53,15 @@
     .p-body h4 { color: var(--text-hi); margin-bottom: 0.5rem; }
     .p-link { display: inline-flex; gap: 0.5rem; color: var(--text-muted); margin-top: 0.5rem;}
 
-    /* ===== CSS DU DIAGRAMME DE GANTT ===== */
-    .gantt-container { background: var(--bg-card); border: 1px solid var(--border); border-radius: 12px; padding: 2rem; margin-top: 3rem; }
-    .gantt-header { font-size: 1.2rem; font-weight: 600; color: var(--text-hi); margin-bottom: 2rem; display: flex; align-items: center; gap: 0.8rem; }
-    .gantt-header i { color: var(--accent); }
+    /* Gantt Style */
+    .gantt-container { background: var(--bg-card); border: 1px solid var(--border); border-radius: 12px; padding: 2rem; margin-top: 2rem; }
+    .gantt-header { font-size: 1.1rem; font-weight: 600; color: var(--text-hi); margin-bottom: 1.5rem; display: flex; align-items: center; gap: 0.8rem; }
     .gantt-row { display: flex; align-items: center; margin-bottom: 1rem; gap: 1rem; }
-    .gantt-label { width: 220px; font-size: 0.85rem; color: var(--text-mid); font-weight: 500; flex-shrink: 0; }
-    .gantt-track { flex: 1; background: rgba(255,255,255,0.05); height: 10px; border-radius: 5px; position: relative; }
+    .gantt-label { width: 200px; font-size: 0.8rem; color: var(--text-mid); flex-shrink: 0; }
+    .gantt-track { flex: 1; background: rgba(255,255,255,0.05); height: 8px; border-radius: 4px; position: relative; }
     body.light-mode .gantt-track { background: rgba(0,0,0,0.06); }
-    .gantt-bar { position: absolute; top: 0; bottom: 0; background: linear-gradient(90deg, var(--accent-dim), var(--accent)); border-radius: 5px; box-shadow: 0 0 12px var(--accent-glow); transition: width 1.5s var(--ease); }
-    .gantt-date { width: 120px; font-family: var(--mono); font-size: 0.75rem; color: var(--text-muted); text-align: right; flex-shrink: 0; }
-    @media (max-width: 768px) {
-        .gantt-row { flex-direction: column; align-items: flex-start; gap: 0.4rem; margin-bottom: 1.5rem; }
-        .gantt-label { width: 100%; font-size: 0.9rem; }
-        .gantt-date { text-align: left; width: 100%; margin-top: 0.2rem; }
-        .gantt-track { width: 100%; }
-    }
+    .gantt-bar { position: absolute; top: 0; bottom: 0; background: var(--accent); border-radius: 4px; transition: width 1.5s var(--ease); }
+    .gantt-date { width: 100px; font-family: var(--mono); font-size: 0.7rem; color: var(--text-muted); text-align: right; flex-shrink: 0; }
     </style>
 </head>
 <body>
@@ -72,18 +74,25 @@
         </div>
     </div>
 </nav>
+
 <div class="page">
     <h1>Déploiement d'osTicket</h1>
-    <p style="color:var(--text-muted); margin-bottom:3rem;">Mise en place d'une plateforme de ticketing sous Debian. Configuration complète de l'environnement (Apache, MariaDB, PHP), sécurisation via HTTPS, certificats et routage DMZ.</p>
+    <p style="color:var(--text-muted); margin-bottom:2rem;">Mise en place d'une plateforme de ticketing sécurisée sous Linux Debian 11. Ce projet intègre la gestion de certificats SSL, une segmentation réseau stricte (DMZ) et la publication sécurisée sur Internet.</p>
     
-    <h2 style="color:var(--text-hi);">Documentation technique</h2>
+    <h2>Architecture Réseau & Topologie</h2>
+    <div class="schema-box">
+        <img src="schema_osticket.png" alt="Schéma logique osTicket">
+        <p class="schema-caption">Topologie logique : Publication du serveur osTicket en DMZ avec translation d'adresse (NAT/PAT) via le pare-feu Stormshield.</p>
+    </div>
+
+    <h2>Documentation technique</h2>
     <div class="preuves">
         <div class="p-card">
             <div class="p-thumb"><i class="fas fa-book"></i></div>
             <div class="p-body">
                 <h4>Guide d'installation</h4>
-                <p style="font-size:0.85rem; color:var(--text-muted);">Procédure de déploiement technique pas à pas (LAMP, certificats, réseau).</p>
-                <a href="osTicket_Documentation.pdf" target="_blank" class="p-link"><i class="fas fa-file-pdf"></i> Voir le PDF</a>
+                <p style="font-size:0.85rem; color:var(--text-muted);">Procédure complète : LAMP, HTTPS, Routage et publication DMZ.</p>
+                <a href="osTicket_Documentation.pdf" target="_blank" class="p-link"><i class="fas fa-file-pdf"></i> Voir le document PDF</a>
             </div>
         </div>
     </div>
@@ -129,6 +138,7 @@
         </div>
     </div>
 </div>
+
 <script>
     const t = document.getElementById('themeToggle'); const b = document.body;
     if (localStorage.getItem('theme') === 'light-mode') { b.classList.add('light-mode'); t.innerHTML = '<i class="fas fa-moon"></i> Sombre'; }
