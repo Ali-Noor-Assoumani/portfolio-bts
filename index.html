@@ -73,6 +73,10 @@
         --accent-glow:  rgba(194, 65, 12, 0.08);
         --accent-line:  rgba(194, 65, 12, 0.25);
         
+        --green:        #c2410c; 
+        --green-glow:   rgba(194, 65, 12, 0.08);
+        --green-line:   rgba(194, 65, 12, 0.25);
+        
         --text-hi:      #0f172a;
         --text-mid:     #334155;
         --text:         #334155;
@@ -191,6 +195,7 @@
     .proof-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: 10px; overflow: hidden; display: flex; flex-direction: column; text-decoration: none; transition: all 0.3s; }
     .proof-card:hover { border-color: var(--accent); transform: translateY(-4px); }
     .proof-img { width: 100%; height: 140px; object-fit: cover; border-bottom: 1px solid var(--border); }
+    .proof-file-icon { height: 140px; display: flex; align-items: center; justify-content: center; background: var(--accent-glow); color: var(--accent); font-size: 2.4rem; border-bottom: 1px solid var(--border); }
     .proof-info { padding: 1rem; }
     .proof-info h5 { color: var(--text-hi); font-size: .85rem; margin-bottom: .3rem; }
     .proof-info p { color: var(--text-muted); font-size: .75rem; line-height: 1.5; }
@@ -471,40 +476,40 @@
             <div class="container">
                 <div class="sec-label r">Information</div>
                 <h2 class="sec-title r">Veille Technologique Passive</h2>
-                <p class="hero-desc r" style="margin-bottom: 3rem; font-size: 0.95rem;">Pour rester à jour sans perdre de temps de production, j'ai mis en place une méthode de <strong>veille passive</strong>. L'information critique vient directement à moi via des flux et alertes configurées.</p>
+                <p class="hero-desc r" style="margin-bottom: 3rem; font-size: 0.95rem;">Pour sécuriser mon infrastructure sans perdre de temps de production, j'ai mis en place une <strong>veille passive</strong> ciblée sur les failles des technologies que j'exploite au quotidien.</p>
                 
                 <div class="veille-grid">
                     
-                    <a href="https://www.google.fr/alerts" target="_blank" class="veille-card r">
-                        <div class="v-icon"><i class="fas fa-bell"></i></div>
-                        <h3>Alertes Automatisées</h3>
-                        <p>Configuration de mots-clés (Microsoft Intune, Faille Zero-Day, Windows Server) pour recevoir des résumés d'actualité directement par mail.</p>
-                        <div class="veille-tags"><span class="veille-tag">Google Alerts</span><span class="veille-tag">Mots-clés</span></div>
-                        <div class="proj-link">Outil de veille <i class="fas fa-external-link-alt" style="font-size: 0.7rem;"></i></div>
+                    <a href="https://msrc.microsoft.com/update-guide" target="_blank" class="veille-card r">
+                        <div class="v-icon"><i class="fab fa-windows"></i></div>
+                        <h3>Sécurité AD & AD CS</h3>
+                        <p>Suivi des failles critiques d'élévation de privilèges (ex: PetitPotam, Certifried) sur Active Directory et l'infrastructure de certificats via le flux MSRC et le subreddit <strong>r/sysadmin</strong>.</p>
+                        <div class="veille-tags"><span class="veille-tag">MSRC</span><span class="veille-tag">Vulnérabilités</span></div>
+                        <div class="proj-link">Bulletins Microsoft <i class="fas fa-external-link-alt" style="font-size: 0.7rem;"></i></div>
                     </a>
 
-                    <a href="https://www.reddit.com/r/sysadmin/" target="_blank" class="veille-card r">
-                        <div class="v-icon"><i class="fab fa-reddit"></i></div>
-                        <h3>Communautés IT & Entraide</h3>
-                        <p>Lecture passive des retours d'expérience sur <strong>r/sysadmin</strong> et <strong>r/Intune</strong> pour anticiper les bugs des mises à jour Microsoft et découvrir des scripts.</p>
-                        <div class="veille-tags"><span class="veille-tag">r/sysadmin</span><span class="veille-tag">Forums</span></div>
-                        <div class="proj-link">Voir la communauté <i class="fas fa-external-link-alt" style="font-size: 0.7rem;"></i></div>
+                    <a href="https://advisories.stormshield.eu/" target="_blank" class="veille-card r">
+                        <div class="v-icon"><i class="fas fa-shield-alt"></i></div>
+                        <h3>Avis de sécurité Stormshield</h3>
+                        <p>Abonnement aux <strong>Security Advisories</strong> de l'éditeur pour être alerté en temps réel des failles (Zero-Day) impactant le firmware et appliquer les correctifs sur les pare-feux SNS.</p>
+                        <div class="veille-tags"><span class="veille-tag">Firewall</span><span class="veille-tag">Advisories</span></div>
+                        <div class="proj-link">Alertes Stormshield <i class="fas fa-external-link-alt" style="font-size: 0.7rem;"></i></div>
                     </a>
 
-                    <a href="https://twitter.com/cert_fr" target="_blank" class="veille-card r">
-                        <div class="v-icon"><i class="fab fa-twitter"></i></div>
-                        <h3>Flux Cyber temps réel</h3>
-                        <p>Suivi en continu des annonces officielles du <strong>CERT-FR</strong> et d'experts cybersécurité pour être réactif en cas de menaces globales majeures.</p>
-                        <div class="veille-tags"><span class="veille-tag">CERT-FR</span><span class="veille-tag">Temps réel</span></div>
-                        <div class="proj-link">Voir les alertes CERT-FR <i class="fas fa-external-link-alt" style="font-size: 0.7rem;"></i></div>
+                    <a href="https://github.com/osTicket/osTicket/releases" target="_blank" class="veille-card r">
+                        <div class="v-icon"><i class="fas fa-ticket-alt"></i></div>
+                        <h3>Vulnérabilités osTicket</h3>
+                        <p>Surveillance passive des correctifs de sécurité (failles XSS, injections SQL) via le suivi des <em>Releases</em> sur GitHub et les alertes automatisées de la base NVD.</p>
+                        <div class="veille-tags"><span class="veille-tag">GitHub</span><span class="veille-tag">CVE</span></div>
+                        <div class="proj-link">Correctifs osTicket <i class="fas fa-external-link-alt" style="font-size: 0.7rem;"></i></div>
                     </a>
 
-                    <a href="https://techcommunity.microsoft.com/t5/microsoft-security-copilot-blog/bg-p/MicrosoftSecurityCopilotBlog" target="_blank" class="veille-card r">
-                        <div class="v-icon"><i class="fas fa-robot"></i></div>
-                        <h3>L'IA pour les Administrateurs</h3>
-                        <p>Suivi officiel du développement de l'<strong>AIOps</strong> et de <strong>Microsoft Security Copilot</strong> pour comprendre l'avenir du support technique et de la sécurisation.</p>
-                        <div class="veille-tags"><span class="veille-tag">Security Copilot</span><span class="veille-tag">AIOps</span></div>
-                        <div class="proj-link">Voir le blog Microsoft IA <i class="fas fa-external-link-alt" style="font-size: 0.7rem;"></i></div>
+                    <a href="https://feedly.com/" target="_blank" class="veille-card r">
+                        <div class="v-icon"><i class="fas fa-rss"></i></div>
+                        <h3>Automatisation de la veille</h3>
+                        <p>Centralisation des alertes d'experts du <strong>CERT-FR</strong> (sur X/Twitter) et des <strong>Google Alerts</strong> spécialisées dans mon outil Feedly pour que l'information vienne à moi.</p>
+                        <div class="veille-tags"><span class="veille-tag">Feedly</span><span class="veille-tag">CERT-FR</span></div>
+                        <div class="proj-link">Mon outil de centralisation <i class="fas fa-external-link-alt" style="font-size: 0.7rem;"></i></div>
                     </a>
 
                 </div>
