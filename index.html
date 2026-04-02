@@ -24,10 +24,12 @@
     *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
     html { scroll-behavior: smooth; }
 
-    /* ===== VARIABLES CSS (PALETTE ORANGE VIBRANTE) ===== */
+    /* ===== VARIABLES CSS ===== */
     :root {
+        --header-h:     80px; /* Hauteur de la nouvelle barre du haut */
+        
         --bg:           #050505;
-        --bg-sidebar:   rgba(5, 5, 5, 0.6);
+        --bg-header:    rgba(5, 5, 5, 0.85);
         --bg-card:      rgba(20, 20, 25, 0.5);
         --bg-hover:     rgba(35, 35, 45, 0.7);
         --border:       rgba(255, 255, 255, 0.1);
@@ -37,11 +39,6 @@
         --accent-dim:   #ee5d00; 
         --accent-glow:  rgba(255, 106, 0, 0.18);
         --accent-line:  rgba(255, 106, 0, 0.4);
-        
-        --green:        #ff6a00; 
-        --green-dim:    #ee5d00;
-        --green-glow:   rgba(255, 106, 0, 0.18);
-        --green-line:   rgba(255, 106, 0, 0.4);
         
         --text-hi:      #ffffff;
         --text-mid:     #e2e8f0;
@@ -54,7 +51,6 @@
         --mono:         'Geist Mono', monospace;
         --sans:         'Geist', sans-serif;
         --ease:         cubic-bezier(0.16, 1, 0.3, 1);
-        --sidebar:      300px;
         --r:            10px;
 
         --glow-grad: radial-gradient(circle at 10% 10%, rgba(255, 106, 0, 0.18) 0%, rgba(239, 68, 68, 0.08) 40%, transparent 70%);
@@ -63,7 +59,7 @@
     /* ===== MODE CLAIR ===== */
     body.light-mode {
         --bg:           #f8fafc;
-        --bg-sidebar:   rgba(255, 255, 255, 0.85);
+        --bg-header:    rgba(255, 255, 255, 0.95);
         --bg-card:      #ffffff;
         --bg-hover:     #f1f5f9;
         --border:       rgba(0, 0, 0, 0.1);
@@ -92,56 +88,59 @@
     ::-webkit-scrollbar-track { background: var(--bg); }
     ::-webkit-scrollbar-thumb { background: var(--text-lo-faint); border-radius: 4px; }
 
-    .layout { display: flex; min-height: 100vh; }
-    .container { max-width: 900px; margin: 0 auto; width: 100%; }
+    .layout { display: flex; flex-direction: column; min-height: 100vh; }
+    .container { max-width: 1000px; margin: 0 auto; width: 100%; padding: 0 2rem; }
 
-    /* Theme Toggle */
-    .theme-toggle { display: flex; align-items: center; justify-content: center; gap: 0.6rem; padding: 0.7rem 1.2rem; background: var(--bg-card); border: 1px solid var(--border); color: var(--text-mid); border-radius: 8px; font-family: var(--sans); font-size: 0.8rem; font-weight: 500; cursor: pointer; transition: all 0.2s var(--ease); margin-bottom: 2rem; width: 100%; }
-    .theme-toggle:hover { border-color: var(--accent); color: var(--accent); background: var(--bg-hover); }
+    /* NOUVEL EN-TÊTE HORIZONTAL (TOPBAR) */
+    .header { position: fixed; top: 0; left: 0; width: 100%; height: var(--header-h); background: var(--bg-header); backdrop-filter: blur(12px); border-bottom: 1px solid var(--border); display: flex; align-items: center; justify-content: space-between; padding: 0 4%; z-index: 1000; transition: background-color 0.3s, border-color 0.3s; }
+    .header-brand { display: flex; align-items: center; gap: 1rem; color: var(--text-hi); font-weight: 700; font-size: 1.1rem; text-decoration: none; }
+    .header-brand .avatar { width: 40px; height: 40px; border: 1px solid var(--border); border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 1rem; color: var(--text-hi); }
+    
+    .header-nav { display: flex; gap: 1.8rem; list-style: none; }
+    .header-nav a { font-size: 0.85rem; font-weight: 500; color: var(--text-mid); text-decoration: none; transition: color 0.2s var(--ease); display: flex; align-items: center; gap: 0.4rem; }
+    .header-nav a:hover, .header-nav a.active { color: var(--accent); }
+    
+    .header-actions { display: flex; align-items: center; gap: 1.5rem; }
+    .theme-toggle-icon { background: none; border: none; color: var(--text-mid); font-size: 1.15rem; cursor: pointer; transition: color 0.2s; display: flex; align-items: center; justify-content: center; }
+    .theme-toggle-icon:hover { color: var(--accent); }
 
-    /* Sidebar */
-    .sidebar { position: fixed; top: 0; left: 0; width: var(--sidebar); height: 100vh; display: flex; flex-direction: column; padding: 3.5rem 2.5rem; border-right: 1px solid var(--border); background: var(--bg-sidebar); backdrop-filter: blur(12px); z-index: 100; overflow-y: auto; transition: background-color 0.3s; }
-    .sidebar-top { flex: 1; }
-    .avatar { width: 56px; height: 56px; border: 1px solid var(--border); border-radius: 14px; display: flex; align-items: center; justify-content: center; font-size: 1.2rem; font-weight: 700; color: var(--text-hi); margin-bottom: 1.6rem; }
-    .sidebar-name { font-size: 1.1rem; font-weight: 700; color: var(--text-hi); margin-bottom: .3rem; }
-    .sidebar-role { font-family: var(--mono); font-size: .75rem; color: var(--accent); margin-bottom: 1.4rem; }
-    .sidebar-bio { font-size: .85rem; color: var(--text-lo); margin-bottom: 2rem; }
-    .status-badge { display: inline-flex; align-items: center; gap: .5rem; background: var(--accent-glow); border: 1px solid var(--accent-line); color: var(--accent); font-family: var(--mono); font-size: .7rem; padding: .3rem .8rem; border-radius: 20px; margin-bottom: 2.5rem; }
+    .status-badge { display: inline-flex; align-items: center; gap: .5rem; background: var(--accent-glow); border: 1px solid var(--accent-line); color: var(--accent); font-family: var(--mono); font-size: .7rem; padding: .3rem .8rem; border-radius: 20px; }
     .status-dot { width: 6px; height: 6px; background: var(--accent); border-radius: 50%; box-shadow: 0 0 8px var(--accent); animation: blink 2s ease infinite; }
     @keyframes blink { 0%,100%{opacity:1} 50%{opacity:.4} }
-    
-    .sidebar-nav { list-style: none; margin-bottom: 2.5rem; }
-    .sidebar-nav a { display: flex; align-items: center; gap: .75rem; padding: .6rem .8rem; font-size: .85rem; color: var(--text-mid); text-decoration: none; border-radius: 8px; transition: all 0.2s var(--ease); }
-    .sidebar-nav a:hover { background: var(--bg-hover); color: var(--text-hi); }
-    .sidebar-nav a.active { background: var(--accent-glow); color: var(--accent); }
-
-    .sidebar-contacts { display: flex; flex-direction: column; gap: .8rem; margin-bottom: 1.5rem; }
-    .sidebar-contact { display: flex; align-items: center; gap: .8rem; font-family: var(--mono); font-size: .75rem; color: var(--text-mid); text-decoration: none; transition: color 0.2s; }
-    .sidebar-contact:hover { color: var(--accent); }
-    .sidebar-cv { display: flex; align-items: center; justify-content: center; gap: .5rem; padding: .7rem 1rem; background: var(--text-hi); color: var(--bg); border-radius: 8px; font-size: .8rem; font-weight: 600; text-decoration: none; transition: all 0.2s var(--ease); }
-    .sidebar-cv:hover { transform: translateY(-2px); opacity: 0.9; }
 
     /* Main Content */
-    .main { margin-left: var(--sidebar); width: calc(100% - var(--sidebar)); min-height: 100vh; transition: margin 0.3s; }
-    section { padding: 6rem 3rem; border-bottom: 1px solid var(--border); position: relative; z-index: 1; }
+    .main { padding-top: var(--header-h); width: 100%; flex: 1; }
+    section { padding: 6rem 0; border-bottom: 1px solid var(--border); position: relative; z-index: 1; }
     section:last-of-type { border-bottom: none; }
     .sec-label { font-family: var(--mono); font-size: .7rem; letter-spacing: .15em; color: var(--accent); text-transform: uppercase; margin-bottom: 1rem; }
     .sec-title { font-size: clamp(1.8rem,3vw,2.5rem); font-weight: 700; color: var(--text-hi); margin-bottom: 3rem; }
 
     /* Hero */
-    #accueil { min-height: 100vh; display: flex; flex-direction: column; justify-content: center; }
+    #accueil { min-height: calc(100vh - var(--header-h)); display: flex; flex-direction: column; justify-content: center; }
     .hero-eyebrow { font-family: var(--mono); font-size: .8rem; color: var(--text-lo); margin-bottom: 1.5rem; display: flex; align-items: center; gap: .8rem; }
     .hero-eyebrow::before { content: ''; width: 30px; height: 1px; background: var(--border-h); }
     .hero-title { font-size: clamp(3rem,5vw,4.5rem); font-weight: 700; margin-bottom: 1.5rem; background: linear-gradient(to right, var(--text-hi), var(--text-lo-faint)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
     .hero-title span { background: linear-gradient(to right, var(--accent), var(--accent-dim)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
-    .hero-desc { font-size: 1.1rem; color: var(--text-mid); line-height: 1.8; max-width: 550px; margin-bottom: 2.5rem; }
+    .hero-desc { font-size: 1.1rem; color: var(--text-mid); line-height: 1.8; max-width: 600px; margin-bottom: 2.5rem; }
     .hero-desc strong { color: var(--text-hi); font-weight: 500; }
     .hero-actions { display: flex; gap: 1rem; flex-wrap: wrap; }
-    .btn { display: inline-flex; align-items: center; gap: .5rem; padding: .8rem 1.5rem; border-radius: 8px; font-size: .9rem; font-weight: 500; text-decoration: none; transition: all 0.2s var(--ease); border: none; cursor: pointer;}
+    .btn { display: inline-flex; align-items: center; justify-content: center; gap: .5rem; padding: .8rem 1.5rem; border-radius: 8px; font-size: .9rem; font-weight: 500; text-decoration: none; transition: all 0.2s var(--ease); border: none; cursor: pointer;}
     .btn-primary { background: var(--text-hi); color: var(--bg); }
     .btn-primary:hover { transform: translateY(-2px); opacity: 0.9; }
     .btn-ghost { background: var(--bg-card); border: 1px solid var(--border); color: var(--text-hi); backdrop-filter: blur(10px); }
     .btn-ghost:hover { border-color: var(--accent); color: var(--accent); }
+
+    /* À propos & Timeline */
+    .about-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: 16px; padding: 2.5rem; margin-bottom: 3rem; }
+    .about-text { font-size: 1.05rem; color: var(--text-mid); line-height: 1.8; margin-bottom: 2rem; }
+    .about-contacts { display: flex; gap: 1rem; flex-wrap: wrap; }
+    .timeline { position: relative; padding-left: 2rem; border-left: 2px solid var(--border); }
+    .timeline-item { position: relative; margin-bottom: 2.5rem; }
+    .timeline-item:last-child { margin-bottom: 0; }
+    .timeline-item::before { content: ''; position: absolute; left: -39px; top: 4px; width: 14px; height: 14px; border-radius: 50%; background: var(--bg); border: 3px solid var(--accent); box-shadow: 0 0 10px var(--accent-glow); }
+    .timeline-date { font-family: var(--mono); font-size: 0.85rem; color: var(--accent); font-weight: 600; margin-bottom: 0.3rem; }
+    .timeline-title { font-size: 1.1rem; color: var(--text-hi); font-weight: 600; margin-bottom: 0.3rem; }
+    .timeline-desc { font-size: 0.9rem; color: var(--text-lo); }
 
     /* Skills */
     .skills-cols { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; }
@@ -153,7 +152,7 @@
     .skill-track { height: 3px; background: var(--border); border-radius: 2px; }
     .skill-fill { height: 100%; background: var(--accent); border-radius: 2px; width: 0; transition: width 1.2s var(--ease); }
 
-    /* Table E5 Raccourcie */
+    /* Table E5 */
     .table-wrap { overflow-x: auto; border: 1px solid var(--border); border-radius: 12px; background: var(--bg-card); backdrop-filter: blur(10px); margin-top: 3rem; }
     table { width: 100%; border-collapse: collapse; min-width: 600px; }
     th { padding: 1.2rem; text-align: left; font-size: .8rem; color: var(--text-lo); border-bottom: 1px solid var(--border); }
@@ -175,7 +174,7 @@
     .exp-item h4 i { color: var(--accent); }
     .exp-item p { font-size: .8rem; color: var(--text-lo); }
 
-    /* ===== GANTT COMPLET & COLORÉ (POUR L'INDEX) ===== */
+    /* Gantt */
     .gantt-full { margin-top: 2rem; border-top: 1px solid var(--border); padding-top: 1.5rem; }
     .gantt-full h4 { font-size: 1rem; color: var(--text-hi); margin-bottom: 1.5rem; display: flex; align-items: center; gap: 0.5rem;}
     .gantt-full h4 i { color: var(--accent); }
@@ -186,7 +185,6 @@
     .gf-bar { position: absolute; top: 0; bottom: 0; border-radius: 5px; transition: width 1.5s var(--ease); }
     .gf-date { width: 90px; font-family: var(--mono); font-size: 0.7rem; color: var(--text-muted); text-align: right; }
     
-    /* Couleurs des barres de progression */
     .c-blue   { background: linear-gradient(90deg, #3b82f6, #60a5fa); box-shadow: 0 0 10px rgba(59, 130, 246, 0.4); }
     .c-orange { background: linear-gradient(90deg, #ea580c, #f97316); box-shadow: 0 0 10px rgba(234, 88, 12, 0.4); }
     .c-green  { background: linear-gradient(90deg, #10b981, #34d399); box-shadow: 0 0 10px rgba(16, 185, 129, 0.4); }
@@ -199,7 +197,6 @@
     .proof-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: 10px; overflow: hidden; display: flex; flex-direction: column; text-decoration: none; transition: all 0.3s; }
     .proof-card:hover { border-color: var(--accent); transform: translateY(-4px); }
     .proof-img { width: 100%; height: 140px; object-fit: cover; border-bottom: 1px solid var(--border); }
-    .proof-file-icon { height: 140px; display: flex; align-items: center; justify-content: center; background: var(--accent-glow); color: var(--accent); font-size: 2.4rem; border-bottom: 1px solid var(--border); }
     .proof-info { padding: 1rem; }
     .proof-info h5 { color: var(--text-hi); font-size: .85rem; margin-bottom: .3rem; }
     .proof-info p { color: var(--text-muted); font-size: .75rem; line-height: 1.5; }
@@ -227,49 +224,58 @@
     .form-group textarea { min-height: 120px; resize: vertical; }
 
     /* Footer */
-    footer { margin-left: var(--sidebar); padding: 3rem; border-top: 1px solid var(--border); background: var(--bg-card); }
-    .footer-content { display: flex; justify-content: space-between; color: var(--text-lo); font-size: 0.85rem; }
+    footer { padding: 3rem 0; border-top: 1px solid var(--border); background: var(--bg-card); text-align: center; }
+    .footer-content { color: var(--text-lo); font-size: 0.85rem; }
 
     .r { opacity: 0; transform: translateY(20px); transition: all 0.8s var(--ease); }
     .r.in { opacity: 1; transform: none; }
 
-    @media (max-width: 1024px) { :root { --sidebar: 280px; } section { padding: 5rem 2rem; } .skills-cols { gap: 2rem; } .projects-grid { grid-template-columns: 1fr; } }
-    @media (max-width: 768px) { .layout { flex-direction: column; } .sidebar { position: relative; width: 100%; height: auto; padding: 2rem; } .sidebar-nav { display: flex; flex-wrap: wrap; gap: 0.5rem; } .main { margin-left: 0; width: 100%; } footer { margin-left: 0; } .contact-layout, .exp-grid, .form-row { grid-template-columns: 1fr; } .gf-label { width: 100%;} .gf-date { width: 100%; text-align: left; } .gf-row { flex-direction: column; align-items: flex-start; gap: 0.4rem; } .gf-track { width: 100%; } }
+    /* RAPPEL SUR MOBILE */
+    @media (max-width: 900px) {
+        .header { flex-direction: column; height: auto; padding: 1rem; gap: 1rem; }
+        .header-brand { width: 100%; justify-content: center; }
+        .header-nav { flex-wrap: wrap; justify-content: center; gap: 0.8rem; }
+        .header-actions { width: 100%; justify-content: center; }
+        .main { padding-top: 160px; } /* Ajustement pour la barre agrandie */
+        
+        .skills-cols { gap: 2rem; grid-template-columns: 1fr; } 
+        .projects-grid, .veille-grid { grid-template-columns: 1fr; }
+        .contact-layout, .exp-grid, .form-row { grid-template-columns: 1fr; }
+        .gf-row { flex-direction: column; align-items: flex-start; gap: 0.4rem; } 
+        .gf-label, .gf-date, .gf-track { width: 100%; text-align: left; }
+    }
     </style>
 </head>
 <body>
 
 <div class="layout">
-    <aside class="sidebar">
-        <div class="sidebar-top">
-            <button id="themeToggle" class="theme-toggle">
-                <i class="fas fa-sun"></i> Mode Clair
-            </button>
+    
+    <header class="header">
+        <a href="#accueil" class="header-brand">
             <div class="avatar">AN</div>
-            <div class="sidebar-name">Ali-Noor ASSOUMANI</div>
-            <div class="sidebar-role">BTS SIO · SISR</div>
-            <div class="sidebar-bio">Étudiant en BTS SIO (SISR) fort d'une double expérience chez SMABTP. Spécialisé en déploiement (Intune/Autopilot) et support de proximité.</div>
-            <div class="status-badge"><span class="status-dot"></span> À la recherche d'opportunités</div>
-
-            <ul class="sidebar-nav" id="sidenav">
-                <li><a href="#accueil" class="active"><i class="fas fa-home"></i> Accueil</a></li>
-                <li><a href="#profil"><i class="fas fa-code"></i> Compétences</a></li>
-                <li><a href="#epreuve-e5"><i class="fas fa-table"></i> Épreuve E5</a></li>
-                <li><a href="#experience"><i class="fas fa-briefcase"></i> Expérience</a></li>
-                <li><a href="#projets"><i class="fas fa-layer-group"></i> Projets</a></li>
-                <li><a href="#veille"><i class="fas fa-satellite-dish"></i> Veille</a></li>
-                <li><a href="#contact"><i class="fas fa-paper-plane"></i> Contact</a></li>
-            </ul>
+            Ali-Noor ASSOUMANI
+        </a>
+        
+        <ul class="header-nav" id="sidenav">
+            <li><a href="#accueil" class="active">Accueil</a></li>
+            <li><a href="#a-propos">À propos</a></li>
+            <li><a href="#profil">Compétences</a></li>
+            <li><a href="#epreuve-e5">E5</a></li>
+            <li><a href="#experience">Expérience</a></li>
+            <li><a href="#projets">Projets</a></li>
+            <li><a href="#veille">Veille</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+        
+        <div class="header-actions">
+            <button id="themeToggle" class="theme-toggle-icon" title="Mode Clair / Sombre">
+                <i class="fas fa-sun"></i>
+            </button>
+            <a href="ASSOUMANI_CV.pdf" target="_blank" class="btn btn-primary" style="padding: 0.4rem 1rem; font-size: 0.8rem;">
+                <i class="fas fa-file-pdf"></i> Mon CV
+            </a>
         </div>
-        <div class="sidebar-bottom">
-            <div class="sidebar-contacts">
-                <a href="mailto:alinoor.assoumani.sio@gmail.com" class="sidebar-contact"><i class="fas fa-envelope"></i> Email</a>
-                <a href="tel:0686546711" class="sidebar-contact"><i class="fas fa-phone"></i> 06 86 54 67 11</a>
-                <a href="https://www.linkedin.com/in/ali-noor-assoumani-28b496327" target="_blank" class="sidebar-contact"><i class="fab fa-linkedin"></i> LinkedIn</a>
-            </div>
-            <a href="ASSOUMANI_CV.pdf" target="_blank" class="sidebar-cv"><i class="fas fa-file-pdf"></i> Voir mon CV</a>
-        </div>
-    </aside>
+    </header>
 
     <main class="main">
         <section id="accueil">
@@ -282,6 +288,40 @@
                 <div class="hero-actions r">
                     <a href="#projets" class="btn btn-primary">Explorer mes travaux</a>
                     <a href="#contact" class="btn btn-ghost">Me contacter</a>
+                </div>
+            </div>
+        </section>
+
+        <section id="a-propos">
+            <div class="container">
+                <div class="sec-label r">Découvrir</div>
+                <h2 class="sec-title r">À propos de moi</h2>
+                
+                <div class="about-card r">
+                    <div class="status-badge" style="margin-bottom: 1.5rem;"><span class="status-dot"></span> À la recherche d'opportunités</div>
+                    <p class="about-text">
+                        Étudiant en BTS SIO (SISR) fort d'une double expérience chez SMABTP. Spécialisé en déploiement (Intune/Autopilot) et support de proximité.<br><br>
+                        Passionné par l'informatique et les nouvelles technologies, j'ai orienté mes études vers l'administration des systèmes et réseaux. Mon objectif est d'assurer la continuité des services, la sécurité et l'évolution des infrastructures informatiques. Rigoureux et doté d'un bon relationnel, j'apprécie autant la résolution de problèmes techniques complexes que l'accompagnement des utilisateurs.
+                    </p>
+                    <div class="about-contacts">
+                        <a href="mailto:alinoor.assoumani.sio@gmail.com" class="btn btn-ghost" style="padding: 0.4rem 0.8rem; font-size: 0.85rem;"><i class="fas fa-envelope"></i> Email</a>
+                        <a href="tel:0686546711" class="btn btn-ghost" style="padding: 0.4rem 0.8rem; font-size: 0.85rem;"><i class="fas fa-phone"></i> 06 86 54 67 11</a>
+                        <a href="https://www.linkedin.com/in/ali-noor-assoumani-28b496327" target="_blank" class="btn btn-ghost" style="padding: 0.4rem 0.8rem; font-size: 0.85rem;"><i class="fab fa-linkedin"></i> LinkedIn</a>
+                    </div>
+                </div>
+
+                <h3 class="sec-title r" style="font-size: 1.5rem; margin-bottom: 2rem;">Parcours Scolaire</h3>
+                <div class="timeline r">
+                    <div class="timeline-item">
+                        <div class="timeline-date">2024 - 2026</div>
+                        <div class="timeline-title">BTS SIO - Option SISR (Solutions d'Infrastructure, Systèmes et Réseaux)</div>
+                        <div class="timeline-desc">Lycée Louis Armand — Nogent-sur-Marne</div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-date">2022 - 2024</div>
+                        <div class="timeline-title">Baccalauréat</div>
+                        <div class="timeline-desc">Lycée Eugène Hénaff — Bagnolet</div>
+                    </div>
                 </div>
             </div>
         </section>
@@ -579,6 +619,12 @@
             </div>
         </section>
     </main>
+    
+    <footer>
+        <div class="container footer-content">
+            <p>&copy; 2026 Ali-Noor ASSOUMANI. Tous droits réservés.</p>
+        </div>
+    </footer>
 </div>
 
 <script>
@@ -587,30 +633,29 @@ const themeToggle = document.getElementById('themeToggle');
 const themeIcon = themeToggle.querySelector('i');
 const body = document.body;
 const currentTheme = localStorage.getItem('theme');
+
 if (currentTheme === 'light-mode') {
     body.classList.add('light-mode');
     themeIcon.classList.replace('fa-sun', 'fa-moon');
-    themeToggle.childNodes[2].textContent = " Mode Sombre";
 }
+
 themeToggle.addEventListener('click', () => {
     body.classList.toggle('light-mode');
     let theme = body.classList.contains('light-mode') ? 'light-mode' : 'dark-mode';
     if (theme === 'light-mode') {
         themeIcon.classList.replace('fa-sun', 'fa-moon');
-        themeToggle.childNodes[2].textContent = " Mode Sombre";
     } else {
         themeIcon.classList.replace('fa-moon', 'fa-sun');
-        themeToggle.childNodes[2].textContent = " Mode Clair";
     }
     localStorage.setItem('theme', theme);
 });
 
 /* Active Nav */
 const sections = document.querySelectorAll('section[id]');
-const navLinks = document.querySelectorAll('.sidebar-nav a');
+const navLinks = document.querySelectorAll('.header-nav a');
 window.addEventListener('scroll', () => {
     let cur = '';
-    sections.forEach(s => { if (window.scrollY >= s.offsetTop - 200) cur = s.id; });
+    sections.forEach(s => { if (window.scrollY >= s.offsetTop - 150) cur = s.id; });
     navLinks.forEach(a => a.classList.toggle('active', a.getAttribute('href') === '#' + cur));
 });
 
