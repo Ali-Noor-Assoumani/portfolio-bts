@@ -26,7 +26,7 @@
 
     /* ===== VARIABLES CSS ===== */
     :root {
-        --header-h:     80px; /* Hauteur de la nouvelle barre du haut */
+        --header-h:     80px;
         
         --bg:           #050505;
         --bg-header:    rgba(5, 5, 5, 0.85);
@@ -39,6 +39,11 @@
         --accent-dim:   #ee5d00; 
         --accent-glow:  rgba(255, 106, 0, 0.18);
         --accent-line:  rgba(255, 106, 0, 0.4);
+        
+        --green:        #ff6a00; 
+        --green-dim:    #ee5d00;
+        --green-glow:   rgba(255, 106, 0, 0.18);
+        --green-line:   rgba(255, 106, 0, 0.4);
         
         --text-hi:      #ffffff;
         --text-mid:     #e2e8f0;
@@ -236,7 +241,7 @@
         .header-brand { width: 100%; justify-content: center; }
         .header-nav { flex-wrap: wrap; justify-content: center; gap: 0.8rem; }
         .header-actions { width: 100%; justify-content: center; }
-        .main { padding-top: 160px; } /* Ajustement pour la barre agrandie */
+        .main { padding-top: 160px; } 
         
         .skills-cols { gap: 2rem; grid-template-columns: 1fr; } 
         .projects-grid, .veille-grid { grid-template-columns: 1fr; }
@@ -490,21 +495,21 @@
 
                 <div class="exp-block r">
                     <div class="exp-top"><div class="exp-icon"><i class="fas fa-building"></i></div><div class="exp-meta"><h3>SMABTP — DSI</h3><div class="exp-role">Technicien Support · Stage 2025</div></div></div>
-                    <p class="exp-desc">Première expérience axée sur la réparation matérielle et le déploiement de postes.</p>
+                    <p class="exp-desc">Première expérience axée sur la réparation matérielle, la gestion de parc et le déploiement de postes.</p>
                     <div class="proof-section">
-                        <div class="proof-section-label">Galerie des missions</div>
+                        <div class="sec-label">Galerie des missions</div>
                         <div class="proof-grid">
-                            <a href="Maintenance_Materiel.jpg" target="_blank" class="proof-card">
-                                <img src="Maintenance_Materiel.jpg" class="proof-img">
-                                <div class="proof-info"><h5>Maintenance</h5><p>Diagnostic et remplacement matériel.</p></div>
+                            <a href="Inventaire.jpg" target="_blank" class="proof-card">
+                                <img src="Inventaire.jpg" class="proof-img" alt="Inventaire de parc">
+                                <div class="proof-info"><h5>Gestion de Parc</h5><p>Inventaire et tri massif des équipements informatiques de la DSI.</p></div>
                             </a>
-                            <a href="Masterisation_Table_1.jpg" target="_blank" class="proof-card">
-                                <img src="Masterisation_Table_1.jpg" class="proof-img">
-                                <div class="proof-info"><h5>Mastérisation</h5><p>Déploiement réseau en série.</p></div>
+                            <a href="Invetaire_PC.jpg" target="_blank" class="proof-card">
+                                <img src="Invetaire_PC.jpg" class="proof-img" alt="Préparation des PC">
+                                <div class="proof-info"><h5>Préparation Logistique</h5><p>Stockage et organisation des postes sur chariots avant déploiement.</p></div>
                             </a>
-                            <a href="Masterisation_Table_2.jpg" target="_blank" class="proof-card">
-                                <img src="Masterisation_Table_2.jpg" class="proof-img">
-                                <div class="proof-info"><h5>Processus</h5><p>Amorçage PXE et OS.</p></div>
+                            <a href="Inventaire_plus_ maintenance.jpg" target="_blank" class="proof-card">
+                                <img src="Inventaire_plus_ maintenance.jpg" class="proof-img" alt="Maintenance et inventaire">
+                                <div class="proof-info"><h5>Maintenance & Suivi</h5><p>Démontage matériel croisé avec le suivi du fichier d'inventaire.</p></div>
                             </a>
                         </div>
                     </div>
