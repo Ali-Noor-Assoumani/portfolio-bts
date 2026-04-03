@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
     <title>Projet Stormshield — Ali-Noor ASSOUMANI</title>
-    <meta name="description" content="Configuration de pare-feu Stormshield par Ali-Noor ASSOUMANI : laboratoire d'introduction et Mission AP 2 (VPN IPsec, DMZ, Reverse Proxy).">
+    <meta name="description" content="Déploiement et configuration d'un pare-feu Stormshield par Ali-Noor ASSOUMANI. Filtrage, NAT/PAT, DMZ, VPN IPsec et VPN SSL.">
     <meta name="robots" content="index, follow">
 
     <link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700&family=Geist+Mono:wght@300;400;500&display=swap" rel="stylesheet">
@@ -16,76 +16,225 @@
         --bg: #050505; --bg-sidebar: rgba(5,5,5,0.6); --bg-card: rgba(20,20,25,0.5); --bg-hover: rgba(35,35,45,0.7);
         --border: rgba(255,255,255,0.1); --border-h: rgba(255,255,255,0.3);
         --accent: #ff6a00; --accent-glow: rgba(255,106,0,0.18); --accent-line: rgba(255,106,0,0.4);
-        --text-hi: #ffffff; --text-mid: #e2e8f0; --text: #e2e8f0; --text-muted: #94a3b8; --text-faint: #64748b;
-        --sans: 'Geist', sans-serif; --r: 10px;
+        --text-hi: #ffffff; --text-mid: #e2e8f0; --text: #e2e8f0; --text-muted: #94a3b8;
+        --sans: 'Geist', sans-serif; --mono: 'Geist Mono', monospace; --r: 10px;
         --glow-grad: radial-gradient(circle at 10% 10%, rgba(255,106,0,0.2) 0%, rgba(239,68,68,0.1) 40%, transparent 70%);
+        --ease: cubic-bezier(0.16, 1, 0.3, 1);
     }
     body.light-mode {
-        --bg: #f8fafc; --bg-sidebar: rgba(255,255,255,0.85); --bg-card: #ffffff; --bg-hover: #f1f5f9;
-        --border: rgba(0,0,0,0.1); --border-h: rgba(0,0,0,0.25);
-        --accent: #c2410c; --accent-glow: rgba(194,65,12,0.08); --accent-line: rgba(194,65,12,0.25);
-        --text-hi: #0f172a; --text-mid: #334155; --text: #334155; --text-muted: #64748b; --text-faint: #94a3b8;
+        --bg: #f8fafc; --bg-sidebar: rgba(255,255,255,0.85); --bg-card: #ffffff;
+        --border: rgba(0,0,0,0.1); --accent: #c2410c; --accent-glow: rgba(194,65,12,0.08);
+        --text-hi: #0f172a; --text-mid: #334155; --text: #334155; --text-muted: #64748b;
         --glow-grad: radial-gradient(circle at 10% 10%, rgba(249,115,22,0.08) 0%, transparent 70%);
     }
     body { font-family: var(--sans); background: var(--bg); color: var(--text); transition: background 0.3s, color 0.3s; }
     body::before { content: ''; position: fixed; top: -10%; left: 10%; width: 55vw; height: 55vw; background: var(--glow-grad); z-index: 0; pointer-events: none; filter: blur(80px); transition: background 0.5s;}
+    
     nav { position: fixed; top: 0; width: 100%; background: var(--bg-sidebar); backdrop-filter: blur(20px); border-bottom: 1px solid var(--border); padding: 1rem 2.5rem; z-index: 1000; display:flex; justify-content:space-between;}
     .nav-inner { max-width: 860px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; width: 100%;}
     .nav-logo, .nav-back { color: var(--text-muted); text-decoration: none; display: flex; align-items: center; gap: .6rem; }
     .nav-back { padding: .4rem .8rem; border: 1px solid var(--border); border-radius: 7px; }
     .theme-toggle { background: transparent; border: 1px solid var(--border); color: var(--text); padding: 0.4rem 0.8rem; border-radius: 6px; cursor: pointer; font-family: var(--sans); font-size: 0.8rem; margin-left: 1rem;}
+    
     .page { max-width: 860px; margin: 0 auto; padding: 7rem 2rem 5rem; position: relative; z-index: 1; }
     h1 { font-size: 2.5rem; color: var(--text-hi); margin-bottom: 1rem; }
-    .preuves { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px,1fr)); gap: 1.5rem; margin-top: 1.5rem;}
+    h2 { font-size: 1.5rem; color: var(--text-hi); margin-top: 3rem; margin-bottom: 1.5rem; }
+
+    /* Architecture Schema Styling */
+    .schema-box { background: var(--bg-card); border: 1px solid var(--border); border-radius: 12px; padding: 2rem 1.5rem; text-align: center; margin-top: 1rem; }
+    
+    .diagram-container { display: flex; flex-direction: column; align-items: center; gap: 1rem; }
+    
+    .arch-node { background: var(--bg-hover); border: 1px solid var(--border); border-radius: 12px; padding: 1.5rem; width: 220px; text-align: center; position: relative; transition: all 0.3s; z-index: 2; }
+    .arch-node:hover { transform: translateY(-5px); border-color: var(--accent); }
+    .arch-node i { font-size: 2.5rem; margin-bottom: 1rem; }
+    .arch-node h4 { color: var(--text-hi); font-size: 1rem; margin-bottom: 0.5rem; }
+    .arch-node p { font-size: 0.8rem; color: var(--text-muted); margin: 0; line-height: 1.4; font-family: var(--mono); }
+    
+    .firewall-node { border-color: #ef4444; box-shadow: 0 0 20px rgba(239, 68, 68, 0.15); width: 260px; }
+    .firewall-node i { color: #ef4444; }
+    
+    .cloud-node i { color: #3b82f6; }
+    .lan-node i { color: #10b981; }
+    .dmz-node i { color: #f59e0b; }
+
+    .arch-link-vertical { display: flex; flex-direction: column; align-items: center; color: var(--text-muted); font-family: var(--mono); font-size: 0.75rem; margin: 0.5rem 0; }
+    .arch-link-vertical i { font-size: 1.5rem; color: var(--border-h); margin: 0.2rem 0; }
+
+    .split-networks { display: flex; justify-content: space-between; width: 100%; max-width: 600px; position: relative; gap: 2rem; margin-top: 1rem; }
+    
+    /* Lignes de connexion SVG pour la séparation LAN/DMZ */
+    .connection-lines { position: absolute; top: -30px; left: 50%; width: 100%; height: 30px; transform: translateX(-50%); display: flex; justify-content: center; z-index: 1; }
+    .line-left, .line-right { width: 50%; height: 100%; border-top: 2px dashed var(--border-h); }
+    .line-left { border-left: 2px dashed var(--border-h); border-top-left-radius: 10px; }
+    .line-right { border-right: 2px dashed var(--border-h); border-top-right-radius: 10px; }
+    .line-center { width: 2px; height: 100%; background: dashed var(--border-h); position: absolute; left: 50%; }
+
+    .schema-caption { font-size: 0.85rem; color: var(--text-muted); margin-top: 2rem; font-style: italic; border-top: 1px solid var(--border); padding-top: 1.5rem; }
+
+    .preuves { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px,1fr)); gap: 1.5rem; margin-top: 1rem;}
     .p-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--r); text-decoration: none; display: flex; flex-direction: column; transition: all 0.2s;}
     .p-card:hover { border-color: var(--accent); transform: translateY(-4px); }
     .p-thumb { height: 120px; display: flex; align-items: center; justify-content: center; border-bottom: 1px solid var(--border); font-size: 2.5rem; color: var(--accent); background: var(--accent-glow);}
-    .p-body { padding: 1rem; }
+    .p-body { padding: 1rem; flex: 1; display: flex; flex-direction: column;}
     .p-body h4 { color: var(--text-hi); margin-bottom: 0.5rem; }
-    .p-link { display: inline-flex; gap: 0.5rem; color: var(--text-muted); margin-top: 0.5rem;}
+    .p-link { display: inline-flex; align-items: center; gap: 0.5rem; margin-top: auto; padding-top: 1rem; font-weight: 500;}
+
+    /* Gantt Style */
+    .gantt-container { background: var(--bg-card); border: 1px solid var(--border); border-radius: 12px; padding: 2rem; margin-top: 2rem; }
+    .gantt-header { font-size: 1.1rem; font-weight: 600; color: var(--text-hi); margin-bottom: 1.5rem; display: flex; align-items: center; gap: 0.8rem; }
+    .gantt-row { display: flex; align-items: center; margin-bottom: 1rem; gap: 1rem; }
+    .gantt-label { width: 260px; font-size: 0.8rem; color: var(--text-mid); flex-shrink: 0; }
+    .gantt-track { flex: 1; background: rgba(255,255,255,0.05); height: 8px; border-radius: 4px; position: relative; }
+    body.light-mode .gantt-track { background: rgba(0,0,0,0.06); }
+    .gantt-bar { position: absolute; top: 0; bottom: 0; background: var(--accent); border-radius: 4px; transition: width 1.5s var(--ease); }
+    .gantt-date { width: 100px; font-family: var(--mono); font-size: 0.7rem; color: var(--text-muted); text-align: right; flex-shrink: 0; }
+    
+    @media (max-width: 768px) {
+        .split-networks { flex-direction: column; align-items: center; gap: 2rem; }
+        .connection-lines { display: none; }
+        .gantt-label { width: 200px; }
+    }
     </style>
 </head>
 <body>
 <nav>
     <div class="nav-inner">
-        <a href="index.html" class="nav-logo"><i class="fas fa-circle" style="color:var(--accent);"></i> Ali-Noor</a>
+        <a href="index.html" class="nav-logo"><i class="fas fa-network-wired" style="color:var(--accent);"></i> Ali-Noor</a>
         <div style="display:flex; align-items:center;">
             <a href="index.html#projets" class="nav-back"><i class="fas fa-arrow-left"></i> Retour</a>
             <button id="themeToggle" class="theme-toggle"><i class="fas fa-sun"></i> Mode Clair</button>
         </div>
     </div>
 </nav>
+
 <div class="page">
-    <h1>Sécurisation Stormshield</h1>
-    <p style="color:var(--text-muted); margin-bottom:3rem;">Apprentissage et mise en œuvre avancée de pare-feux matériels Stormshield. De la configuration de base à l'interconnexion sécurisée multi-sites (VPN IPsec, DMZ, Reverse Proxy).</p>
+    <h1>Sécurisation périmétrique (Stormshield)</h1>
+    <p style="color:var(--text-muted); margin-bottom:2rem;">Déploiement et configuration d'un pare-feu Stormshield Network Security. Ce projet a pour but de sécuriser l'infrastructure interne, d'exposer de manière contrôlée les services web via une DMZ, et de permettre un accès distant sécurisé aux administrateurs et utilisateurs nomades via des tunnels VPN (IPsec et SSL).</p>
     
-    <h2 style="color:var(--text-hi);">Laboratoires & Missions</h2>
+    <div style="background: var(--bg-card); border: 1px solid var(--border); border-left: 4px solid #ef4444; border-radius: 12px; padding: 1.5rem; margin-bottom: 2.5rem;">
+        <h3 style="color: var(--text-hi); font-size: 1.1rem; margin-bottom: 1rem; margin-top: 0;"><i class="fas fa-shield-alt" style="color: #ef4444; margin-right: 8px;"></i> Mon cas d'usage : Protection, Cloisonnement et Mobilité</h3>
+        <p style="color: var(--text-mid); font-size: 0.95rem; line-height: 1.6;">
+            Le pare-feu est le cœur de mon architecture réseau. J'ai mis en place une ségrégation stricte pour protéger mes équipements :
+        </p>
+        <ul style="color: var(--text-mid); font-size: 0.95rem; line-height: 1.6; margin-left: 1.5rem; margin-top: 0.5rem; margin-bottom: 0.5rem;">
+            <li><strong>Le LAN (Réseau IN) :</strong> Zone de confiance absolue abritant mon contrôleur de domaine Windows Server et les postes clients.</li>
+            <li><strong>La DMZ :</strong> Zone démilitarisée abritant mon serveur web Debian (osTicket). Elle est accessible depuis l'extérieur (Internet) grâce à des règles de NAT/PAT précises (Redirection des ports 80/443).</li>
+        </ul>
+        <p style="color: var(--text-mid); font-size: 0.95rem; line-height: 1.6; margin-bottom: 0;">
+            De plus, j'ai configuré des connexions <strong>VPN IPsec et VPN SSL</strong> pour garantir un accès distant sécurisé aux ressources internes, répondant ainsi aux besoins d'administration à distance et de télétravail.
+        </p>
+    </div>
+
+    <h2>Topologie et Règles de flux</h2>
+    <div class="schema-box">
+        
+        <div class="diagram-container">
+            <div class="arch-node cloud-node">
+                <i class="fas fa-cloud"></i>
+                <h4>Réseau OUT (Internet)</h4>
+                <p>WAN IP : 192.36.253.5<br>Accès Public osTicket</p>
+            </div>
+
+            <div class="arch-link-vertical">
+                <span>Trafic entrant (VPN / HTTP / HTTPS)</span>
+                <i class="fas fa-arrow-down"></i>
+            </div>
+
+            <div class="arch-node firewall-node">
+                <i class="fas fa-fire-alt"></i>
+                <h4>Pare-Feu Stormshield</h4>
+                <p>Filtrage d'état (Stateful)<br>Règles NAT/PAT<br>Tunnels VPN IPsec & SSL</p>
+            </div>
+
+            <div class="arch-link-vertical">
+                <i class="fas fa-arrow-down"></i>
+                <span>Routage & Inspection</span>
+            </div>
+
+            <div class="split-networks">
+                <div class="connection-lines">
+                    <div class="line-left"></div>
+                    <div class="line-center"></div>
+                    <div class="line-right"></div>
+                </div>
+
+                <div class="arch-node lan-node" style="margin-top: 15px;">
+                    <i class="fas fa-network-wired"></i>
+                    <h4>[ Réseau IN ]</h4>
+                    <p style="color: var(--text-hi); margin-bottom: 5px;">192.168.5.0/24</p>
+                    <p>Windows Server 2022<br>(192.168.5.100)<br>Client Win 11<br>(192.168.5.2)</p>
+                </div>
+
+                <div class="arch-node dmz-node" style="margin-top: 15px;">
+                    <i class="fas fa-server"></i>
+                    <h4>[ Réseau DMZ ]</h4>
+                    <p style="color: var(--text-hi); margin-bottom: 5px;">172.16.5.0/24</p>
+                    <p>Serveur Web Debian<br>(172.16.5.2)<br>Ports ouverts : 80 / 443</p>
+                </div>
+            </div>
+        </div>
+
+        <p class="schema-caption">Topologie de l'infrastructure : Le pare-feu bloque par défaut tout le trafic entrant. Seul le trafic web légitime est redirigé (NAT/PAT) vers la DMZ. Le réseau IN n'est pas exposé directement, mais reste accessible de manière chiffrée via les tunnels VPN IPsec et SSL.</p>
+    </div>
+
+    <h2>Documentation technique</h2>
     <div class="preuves">
-        
         <div class="p-card">
-            <div class="p-thumb"><i class="fas fa-flask"></i></div>
+            <div class="p-thumb"><i class="fas fa-list-ul"></i></div>
             <div class="p-body">
-                <h4>Laboratoire d'introduction</h4>
-                <p style="font-size:0.85rem; color:var(--text-muted);">Prise en main de l'appliance, configuration des interfaces, NAT/PAT et règles de filtrage de base.</p>
-                <a href="Preuves_Stormshield.pdf" target="_blank" class="p-link"><i class="fas fa-file-pdf"></i> Voir le PDF</a>
+                <h4>Règles de Filtrage & NAT</h4>
+                <p style="font-size:0.85rem; color:var(--text-muted);">Captures d'écran de l'interface d'administration Stormshield montrant la configuration des règles de redirection vers la DMZ.</p>
+                <a href="#" class="p-link" style="color: var(--text-muted);"><i class="fas fa-image"></i> Bientôt disponible</a>
             </div>
         </div>
         
         <div class="p-card">
-            <div class="p-thumb"><i class="fas fa-network-wired"></i></div>
+            <div class="p-thumb"><i class="fas fa-key"></i></div>
             <div class="p-body">
-                <h4>Mission AP 2 : Interconnexion</h4>
-                <p style="font-size:0.85rem; color:var(--text-muted);">Interconnexion sécurisée entre 2 sites. Tunnel VPN IPsec, Active Directory, DMZ et Reverse Proxy.</p>
-                <a href="Mission_AP_2.pdf" target="_blank" class="p-link"><i class="fas fa-file-pdf"></i> Voir le PDF</a>
+                <h4>Configuration VPN IPsec & SSL</h4>
+                <p style="font-size:0.85rem; color:var(--text-muted);">Paramétrage des politiques VPN pour l'accès distant sécurisé des utilisateurs et administrateurs.</p>
+                <a href="#" class="p-link" style="color: var(--text-muted);"><i class="fas fa-image"></i> Bientôt disponible</a>
             </div>
         </div>
-        
+    </div>
+
+    <div class="gantt-container">
+        <div class="gantt-header">
+            <i class="fas fa-project-diagram"></i> Planification du Projet de Sécurisation
+        </div>
+        <div class="gantt-row">
+            <div class="gantt-label">Phase 1 : Initialisation & Création des objets réseaux</div>
+            <div class="gantt-track"><div class="gantt-bar" style="background: #3b82f6; left: 0%; width: 15%;"></div></div>
+            <div class="gantt-date">J1 - J2</div>
+        </div>
+        <div class="gantt-row">
+            <div class="gantt-label">Phase 2 : Ségrégation (Création VLANs / DMZ)</div>
+            <div class="gantt-track"><div class="gantt-bar" style="background: #f59e0b; left: 15%; width: 25%;"></div></div>
+            <div class="gantt-date">J3 - J5</div>
+        </div>
+        <div class="gantt-row">
+            <div class="gantt-label">Phase 3 : Règles de Filtrage sortant et inter-zones</div>
+            <div class="gantt-track"><div class="gantt-bar" style="background: #10b981; left: 40%; width: 25%;"></div></div>
+            <div class="gantt-date">J6 - J8</div>
+        </div>
+        <div class="gantt-row">
+            <div class="gantt-label">Phase 4 : Configuration NAT/PAT (Exposition Web)</div>
+            <div class="gantt-track"><div class="gantt-bar" style="background: #ef4444; left: 65%; width: 20%;"></div></div>
+            <div class="gantt-date">J9 - J11</div>
+        </div>
+        <div class="gantt-row">
+            <div class="gantt-label">Phase 5 : Déploiement et tests des VPN IPsec & SSL</div>
+            <div class="gantt-track"><div class="gantt-bar" style="background: #8b5cf6; left: 85%; width: 15%;"></div></div>
+            <div class="gantt-date">J12 - J14</div>
+        </div>
     </div>
 </div>
+
 <script>
     const t = document.getElementById('themeToggle'); const b = document.body;
-    if (localStorage.getItem('theme') === 'light-mode') { b.classList.add('light-mode'); t.innerHTML = '<i class="fas fa-moon"></i> Sombre'; }
-    t.addEventListener('click', () => { b.classList.toggle('light-mode'); const isL = b.classList.contains('light-mode'); localStorage.setItem('theme', isL ? 'light-mode' : 'dark-mode'); t.innerHTML = isL ? '<i class="fas fa-moon"></i> Sombre' : '<i class="fas fa-sun"></i> Clair'; });
+    if (localStorage.getItem('theme') === 'light-mode') { b.classList.add('light-mode'); t.innerHTML = '<i class="fas fa-moon"></i> Mode Sombre'; }
+    t.addEventListener('click', () => { b.classList.toggle('light-mode'); const isL = b.classList.contains('light-mode'); localStorage.setItem('theme', isL ? 'light-mode' : 'dark-mode'); t.innerHTML = isL ? '<i class="fas fa-moon"></i> Mode Sombre' : '<i class="fas fa-sun"></i> Mode Clair'; });
 </script>
 </body>
 </html>
