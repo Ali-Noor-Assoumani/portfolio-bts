@@ -186,7 +186,7 @@
     .gf-row { display: flex; align-items: center; margin-bottom: 0.8rem; gap: 1rem; }
     .gf-label { width: 180px; font-size: 0.8rem; color: var(--text-mid); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; font-weight: 500; }
     .gf-track { flex: 1; background: rgba(255,255,255,0.05); height: 10px; border-radius: 5px; position: relative; }
-    body.light-mode .gf-track { background: rgba(0,0,0,0.06); }
+    body.light-mode .gantt-track { background: rgba(0,0,0,0.06); }
     .gf-bar { position: absolute; top: 0; bottom: 0; border-radius: 5px; transition: width 1.5s var(--ease); }
     .gf-date { width: 90px; font-family: var(--mono); font-size: 0.7rem; color: var(--text-muted); text-align: right; }
     
@@ -338,7 +338,7 @@
                 <div class="skills-cols r">
                     <div>
                         <div class="skill-group-label">Infrastructures & Réseaux</div>
-                        <div class="skill-item"><div class="skill-row"><span class="skill-name">Windows Server / AD</span></div><div class="skill-track"><div class="skill-fill" data-w="85"></div></div></div>
+                        <div class="skill-item"><div class="skill-row"><span class="skill-name">Windows Server (AD, DNS, PKI)</span></div><div class="skill-track"><div class="skill-fill" data-w="85"></div></div></div>
                         <div class="skill-item"><div class="skill-row"><span class="skill-name">Intune / Autopilot</span></div><div class="skill-track"><div class="skill-fill" data-w="80"></div></div></div>
                         <div class="skill-item"><div class="skill-row"><span class="skill-name">Stormshield & Cisco</span></div><div class="skill-track"><div class="skill-fill" data-w="65"></div></div></div>
                     </div>
@@ -544,13 +544,15 @@
                         <div class="proj-tags"><span class="proj-tag">Stormshield</span><span class="proj-tag">VPN</span></div>
                         <div class="proj-link">Voir la fiche <i class="fas fa-arrow-right"></i></div>
                     </a>
+                    
                     <a href="fiche_windows_server.html" class="proj-card r">
                         <div class="proj-icon"><i class="fas fa-server"></i></div>
-                        <h3>Windows Server</h3>
-                        <p>AD DS, DNS et scripts de connexion via GPO.</p>
-                        <div class="proj-tags"><span class="proj-tag">Active Directory</span><span class="proj-tag">GPO</span></div>
+                        <h3>Windows Server & Sécurité</h3>
+                        <p>Déploiement AD DS, gestion DNS, et mise en place d'une PKI (AD CS) pour sécuriser les échanges (HTTPS/LDAP).</p>
+                        <div class="proj-tags"><span class="proj-tag">Active Directory</span><span class="proj-tag">AD CS</span><span class="proj-tag">DNS</span></div>
                         <div class="proj-link">Voir la fiche <i class="fas fa-arrow-right"></i></div>
                     </a>
+                    
                     <a href="fiche_zabbix.html" class="proj-card r">
                         <div class="proj-icon"><i class="fas fa-heartbeat"></i></div>
                         <h3>Supervision Zabbix</h3>
