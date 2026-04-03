@@ -40,18 +40,25 @@
     h1 { font-size: 2.5rem; color: var(--text-hi); margin-bottom: 1rem; }
     h2 { font-size: 1.5rem; color: var(--text-hi); margin-top: 3rem; margin-bottom: 1.5rem; }
 
-    /* Architecture Image Styling */
-    .schema-box { background: var(--bg-card); border: 1px solid var(--border); border-radius: 12px; padding: 1.5rem; text-align: center; margin-top: 1rem; }
-    .schema-box img { max-width: 100%; height: auto; border-radius: 8px; border: 1px solid var(--border); background: #fff; } 
-    .schema-caption { font-size: 0.85rem; color: var(--text-muted); margin-top: 1rem; font-style: italic; }
+    /* Architecture Schema Styling */
+    .schema-box { background: var(--bg-card); border: 1px solid var(--border); border-radius: 12px; padding: 2rem 1.5rem; text-align: center; margin-top: 1rem; }
+    .arch-diagram { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1.5rem; margin-bottom: 1.5rem; }
+    .arch-node { background: var(--bg-hover); border: 1px solid var(--border); border-radius: 12px; padding: 1.5rem; width: 190px; text-align: center; position: relative; transition: all 0.3s; }
+    .arch-node:hover { transform: translateY(-5px); border-color: var(--accent); }
+    .arch-node i { font-size: 2.5rem; color: var(--accent); margin-bottom: 1rem; }
+    .arch-node h4 { color: var(--text-hi); font-size: 1rem; margin-bottom: 0.5rem; }
+    .arch-node p { font-size: 0.8rem; color: var(--text-muted); margin: 0; line-height: 1.4; }
+    .arch-link { display: flex; flex-direction: column; align-items: center; color: var(--text-muted); font-family: var(--mono); font-size: 0.75rem; }
+    .arch-link i { font-size: 1.5rem; color: var(--border-h); margin: 0.5rem 0; }
+    .schema-caption { font-size: 0.85rem; color: var(--text-muted); margin-top: 1.5rem; font-style: italic; border-top: 1px solid var(--border); padding-top: 1.5rem; }
 
     .preuves { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px,1fr)); gap: 1.5rem; margin-top: 1rem;}
     .p-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--r); text-decoration: none; display: flex; flex-direction: column; transition: all 0.2s;}
     .p-card:hover { border-color: var(--accent); transform: translateY(-4px); }
     .p-thumb { height: 120px; display: flex; align-items: center; justify-content: center; border-bottom: 1px solid var(--border); font-size: 2.5rem; color: var(--accent); background: var(--accent-glow);}
-    .p-body { padding: 1rem; }
+    .p-body { padding: 1rem; flex: 1; display: flex; flex-direction: column;}
     .p-body h4 { color: var(--text-hi); margin-bottom: 0.5rem; }
-    .p-link { display: inline-flex; gap: 0.5rem; color: var(--text-muted); margin-top: 0.5rem;}
+    .p-link { display: inline-flex; align-items: center; gap: 0.5rem; margin-top: auto; padding-top: 1rem; font-weight: 500;}
 
     /* Gantt Style */
     .gantt-container { background: var(--bg-card); border: 1px solid var(--border); border-radius: 12px; padding: 2rem; margin-top: 2rem; }
@@ -62,6 +69,12 @@
     body.light-mode .gantt-track { background: rgba(0,0,0,0.06); }
     .gantt-bar { position: absolute; top: 0; bottom: 0; background: var(--accent); border-radius: 4px; transition: width 1.5s var(--ease); }
     .gantt-date { width: 100px; font-family: var(--mono); font-size: 0.7rem; color: var(--text-muted); text-align: right; flex-shrink: 0; }
+    
+    @media (max-width: 768px) {
+        .arch-diagram { flex-direction: column; }
+        .arch-link i { transform: rotate(90deg); }
+        .arch-right { margin-left: 0 !important; width: 100%; justify-content: center; }
+    }
     </style>
 </head>
 <body>
@@ -77,22 +90,83 @@
 
 <div class="page">
     <h1>Supervision Zabbix</h1>
-    <p style="color:var(--text-muted); margin-bottom:2rem;">Déploiement d'un serveur de supervision Zabbix sous Linux Debian pour surveiller proactivement l'infrastructure. Ce projet inclut le déploiement d'Agents sur les serveurs Windows, la configuration SNMP pour les équipements réseaux (Stormshield) et la création de tableaux de bord d'alertes.</p>
+    <p style="color:var(--text-muted); margin-bottom:2rem;">Déploiement d'un serveur de supervision Zabbix sous <strong>Ubuntu</strong> pour surveiller proactivement l'infrastructure. Ce projet inclut le déploiement d'Agents sur les serveurs (Windows/Debian), la configuration SNMP pour les équipements réseaux (Stormshield) et la création de tableaux de bord d'alertes.</p>
     
+    <div style="background: var(--bg-card); border: 1px solid var(--border); border-left: 4px solid var(--accent); border-radius: 12px; padding: 1.5rem; margin-bottom: 2.5rem;">
+        <h3 style="color: var(--text-hi); font-size: 1.1rem; margin-bottom: 1rem; margin-top: 0;"><i class="fas fa-crosshairs" style="color: var(--accent); margin-right: 8px;"></i> Mon cas d'usage : Supervision de l'infrastructure</h3>
+        <p style="color: var(--text-mid); font-size: 0.95rem; line-height: 1.6;">
+            Dans mon projet, Zabbix joue un rôle central. Il me permet d'observer en temps réel l'état de santé de mes deux serveurs principaux pour vérifier s'ils ont des problèmes ou non :
+        </p>
+        <ul style="color: var(--text-mid); font-size: 0.95rem; line-height: 1.6; margin-left: 1.5rem; margin-top: 0.5rem; margin-bottom: 0.5rem;">
+            <li><strong>Mon serveur Windows Server 2022</strong> (Contrôleur de domaine, AD DS, DNS, AD CS).</li>
+            <li><strong>Mon serveur Linux Debian 11</strong> (Hébergeant ma plateforme de ticketing osTicket).</li>
+        </ul>
+        <p style="color: var(--text-mid); font-size: 0.95rem; line-height: 1.6; margin-bottom: 0;">
+            Grâce aux agents Zabbix installés sur ces machines, je peux détecter instantanément toute anomalie (surcharge CPU, manque de RAM, service arrêté) et réagir rapidement avant que cela n'impacte les utilisateurs.
+        </p>
+    </div>
+
     <h2>Architecture de Supervision</h2>
     <div class="schema-box">
-        <div style="width:100%; height:200px; border:2px dashed var(--border-h); display:flex; align-items:center; justify-content:center; color:var(--text-muted); font-family:var(--mono);">[ Espace pour schéma Zabbix (Agent & SNMP) ]</div>
-        <p class="schema-caption">Le serveur Zabbix centralise les métriques remontées par les Agents (Windows) et requêtes SNMP (Pare-feu).</p>
+        <div class="arch-diagram">
+            
+            <div style="display: flex; align-items: center; gap: 1.5rem; flex-wrap: wrap;">
+                
+                <div style="display: flex; flex-direction: column; gap: 1.5rem;">
+                    <div class="arch-node">
+                        <i class="fab fa-Bindoj"></i>
+                        <h4>Windows Server</h4>
+                        <p>Contrôleur AD DS<br>Agent Zabbix</p>
+                    </div>
+                    <div class="arch-node">
+                        <i class="fab fa-linux"></i>
+                        <h4>Serveur Debian</h4>
+                        <p>osTicket<br>Agent Zabbix</p>
+                    </div>
+                </div>
+                
+                <div class="arch-link">
+                    <span>Flux Agents</span>
+                    <i class="fas fa-arrow-right"></i>
+                    <span>Port 10050</span>
+                </div>
+
+                <div class="arch-node" style="border-color: var(--accent); box-shadow: 0 0 15px var(--accent-glow);">
+                    <i class="fas fa-server"></i>
+                    <h4>Serveur Zabbix</h4>
+                    <p>Ubuntu<br>Base de données MySQL</p>
+                </div>
+
+            </div>
+
+            <div class="arch-right" style="display: flex; align-items: center; gap: 1.5rem; margin-left: auto; flex-wrap: wrap;">
+                
+                <div class="arch-link">
+                    <span>Requêtes SNMP</span>
+                    <i class="fas fa-arrow-right"></i>
+                    <span>Port 161</span>
+                </div>
+
+                <div class="arch-node" style="border-color: #3b82f6; box-shadow: 0 0 15px rgba(59, 130, 246, 0.15);">
+                    <i class="fas fa-shield-alt" style="color: #3b82f6;"></i>
+                    <h4>Stormshield</h4>
+                    <p>Pare-feu<br>Configuration SNMPv3</p>
+                </div>
+
+            </div>
+            
+        </div>
+        <p class="schema-caption">Le serveur Zabbix (sur Ubuntu) centralise les métriques de l'infrastructure. Il récupère les données des serveurs Windows et Debian via leurs Agents respectifs, et interroge indépendamment le pare-feu Stormshield en SNMP.</p>
     </div>
 
     <h2>Documentation technique</h2>
     <div class="preuves">
         <div class="p-card">
-            <div class="p-thumb"><i class="fas fa-heartbeat"></i></div>
+            <div class="p-thumb"><i class="fas fa-file-pdf"></i></div>
             <div class="p-body">
-                <h4>Guide d'intégration</h4>
-                <p style="font-size:0.85rem; color:var(--text-muted);">Procédure d'installation du serveur Zabbix, ajout des hôtes et création de triggers.</p>
-                <a href="Zabbix_Documentation.pdf" target="_blank" class="p-link"><i class="fas fa-file-pdf"></i> Bientôt disponible</a>
+                <h4>Support de TP (Initiation)</h4>
+                <p style="font-size:0.85rem; color:var(--text-muted);">Document ressource m'ayant permis de m'initier à Zabbix et de configurer l'environnement (LAMP) sur Ubuntu pas à pas.</p>
+                <a href="Installation et configuration de Zabbix sur Ubuntu.pdf" target="_blank" class="p-link" style="color: var(--accent);"><i class="fas fa-external-link-alt"></i> Consulter le document</a>
             </div>
         </div>
         
@@ -101,7 +175,7 @@
             <div class="p-body">
                 <h4>Tableaux de Bord</h4>
                 <p style="font-size:0.85rem; color:var(--text-muted);">Aperçu des Dashboards configurés pour surveiller la RAM, le CPU et le réseau.</p>
-                <a href="#" class="p-link"><i class="fas fa-image"></i> Bientôt disponible</a>
+                <a href="#" class="p-link" style="color: var(--text-muted);"><i class="fas fa-image"></i> Bientôt disponible</a>
             </div>
         </div>
     </div>
@@ -111,7 +185,7 @@
             <i class="fas fa-project-diagram"></i> Planification du Projet Zabbix
         </div>
         <div class="gantt-row">
-            <div class="gantt-label">Phase 1 : Préparation & Installation Debian</div>
+            <div class="gantt-label">Phase 1 : Préparation & Installation Ubuntu</div>
             <div class="gantt-track"><div class="gantt-bar" style="left: 0%; width: 15%;"></div></div>
             <div class="gantt-date">J1 - J3</div>
         </div>
@@ -121,7 +195,7 @@
             <div class="gantt-date">J4 - J7</div>
         </div>
         <div class="gantt-row">
-            <div class="gantt-label">Phase 3 : Déploiement Zabbix Agents (AD)</div>
+            <div class="gantt-label">Phase 3 : Déploiement Zabbix Agents (AD & Debian)</div>
             <div class="gantt-track"><div class="gantt-bar" style="left: 35%; width: 25%;"></div></div>
             <div class="gantt-date">J8 - J12</div>
         </div>
@@ -140,8 +214,8 @@
 
 <script>
     const t = document.getElementById('themeToggle'); const b = document.body;
-    if (localStorage.getItem('theme') === 'light-mode') { b.classList.add('light-mode'); t.innerHTML = '<i class="fas fa-moon"></i> Sombre'; }
-    t.addEventListener('click', () => { b.classList.toggle('light-mode'); const isL = b.classList.contains('light-mode'); localStorage.setItem('theme', isL ? 'light-mode' : 'dark-mode'); t.innerHTML = isL ? '<i class="fas fa-moon"></i> Sombre' : '<i class="fas fa-sun"></i> Clair'; });
+    if (localStorage.getItem('theme') === 'light-mode') { b.classList.add('light-mode'); t.innerHTML = '<i class="fas fa-moon"></i> Mode Sombre'; }
+    t.addEventListener('click', () => { b.classList.toggle('light-mode'); const isL = b.classList.contains('light-mode'); localStorage.setItem('theme', isL ? 'light-mode' : 'dark-mode'); t.innerHTML = isL ? '<i class="fas fa-moon"></i> Mode Sombre' : '<i class="fas fa-sun"></i> Mode Clair'; });
 </script>
 </body>
 </html>
