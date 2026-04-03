@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
     <title>Projet Windows Server — Ali-Noor ASSOUMANI</title>
-    <meta name="description" content="Déploiement d'Active Directory par Ali-Noor ASSOUMANI. DNS, droits NTFS et stratégies de groupe GPO.">
+    <meta name="description" content="Déploiement Bindoj Server par Ali-Noor ASSOUMANI. DNS, AD CS (Certificats) et intégration LDAP avec osTicket.">
     <meta name="robots" content="index, follow">
 
     <link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700&family=Geist+Mono:wght@300;400;500&display=swap" rel="stylesheet">
@@ -15,10 +15,11 @@
     :root {
         --bg: #050505; --bg-sidebar: rgba(5,5,5,0.6); --bg-card: rgba(20,20,25,0.5); --bg-hover: rgba(35,35,45,0.7);
         --border: rgba(255,255,255,0.1); --border-h: rgba(255,255,255,0.3);
-        --accent: #ff6a00; --accent-glow: rgba(255,106,0,0.18);
+        --accent: #ff6a00; --accent-glow: rgba(255,106,0,0.18); --accent-line: rgba(255,106,0,0.4);
         --text-hi: #ffffff; --text-mid: #e2e8f0; --text: #e2e8f0; --text-muted: #94a3b8;
-        --sans: 'Geist', sans-serif; --mono: 'Geist Mono', monospace;
+        --sans: 'Geist', sans-serif; --mono: 'Geist Mono', monospace; --r: 10px;
         --glow-grad: radial-gradient(circle at 10% 10%, rgba(255,106,0,0.2) 0%, rgba(239,68,68,0.1) 40%, transparent 70%);
+        --ease: cubic-bezier(0.16, 1, 0.3, 1);
     }
     body.light-mode {
         --bg: #f8fafc; --bg-sidebar: rgba(255,255,255,0.85); --bg-card: #ffffff;
@@ -28,40 +29,167 @@
     }
     body { font-family: var(--sans); background: var(--bg); color: var(--text); transition: background 0.3s, color 0.3s; }
     body::before { content: ''; position: fixed; top: -10%; left: 10%; width: 55vw; height: 55vw; background: var(--glow-grad); z-index: 0; pointer-events: none; filter: blur(80px); transition: background 0.5s;}
-    nav { position: fixed; top: 0; width: 100%; background: var(--bg-sidebar); backdrop-filter: blur(20px); border-bottom: 1px solid var(--border); padding: 1rem 2.5rem; z-index: 1000;}
-    .nav-inner { max-width: 860px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center;}
-    .nav-logo { font-family: var(--mono); color: var(--text-muted); text-decoration: none; display: flex; align-items: center; gap: .6rem; }
-    .nav-back { font-family: var(--mono); color: var(--text-muted); text-decoration: none; padding: .4rem .8rem; border: 1px solid var(--border); border-radius: 7px; }
+    
+    nav { position: fixed; top: 0; width: 100%; background: var(--bg-sidebar); backdrop-filter: blur(20px); border-bottom: 1px solid var(--border); padding: 1rem 2.5rem; z-index: 1000; display:flex; justify-content:space-between;}
+    .nav-inner { max-width: 860px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; width: 100%;}
+    .nav-logo, .nav-back { color: var(--text-muted); text-decoration: none; display: flex; align-items: center; gap: .6rem; }
+    .nav-back { padding: .4rem .8rem; border: 1px solid var(--border); border-radius: 7px; }
     .theme-toggle { background: transparent; border: 1px solid var(--border); color: var(--text); padding: 0.4rem 0.8rem; border-radius: 6px; cursor: pointer; font-family: var(--sans); font-size: 0.8rem; margin-left: 1rem;}
+    
     .page { max-width: 860px; margin: 0 auto; padding: 7rem 2rem 5rem; position: relative; z-index: 1; }
     h1 { font-size: 2.5rem; color: var(--text-hi); margin-bottom: 1rem; }
-    .p-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: 10px; padding: 2rem; margin-top:2rem;}
-    .p-link { display: inline-flex; gap: 0.5rem; color: var(--text-muted); margin-top: 1rem; text-decoration: none;}
+    h2 { font-size: 1.5rem; color: var(--text-hi); margin-top: 3rem; margin-bottom: 1.5rem; }
+
+    /* Architecture Schema Styling */
+    .schema-box { background: var(--bg-card); border: 1px solid var(--border); border-radius: 12px; padding: 2rem 1.5rem; text-align: center; margin-top: 1rem; }
+    .arch-diagram { display: flex; align-items: center; justify-content: space-around; flex-wrap: wrap; gap: 1.5rem; margin-bottom: 1.5rem; }
+    .arch-node { background: var(--bg-hover); border: 1px solid var(--border); border-radius: 12px; padding: 1.5rem; width: 220px; text-align: center; position: relative; transition: all 0.3s; z-index: 2; }
+    .arch-node:hover { transform: translateY(-5px); border-color: var(--accent); }
+    .arch-node i { font-size: 2.5rem; color: var(--accent); margin-bottom: 1rem; }
+    .arch-node h4 { color: var(--text-hi); font-size: 1rem; margin-bottom: 0.5rem; }
+    .arch-node p { font-size: 0.8rem; color: var(--text-muted); margin: 0; line-height: 1.4; font-family: var(--mono); }
+    
+    .ad-node { border-color: #3b82f6; box-shadow: 0 0 20px rgba(59, 130, 246, 0.15); }
+    .ad-node i { color: #3b82f6; }
+    
+    .arch-link { display: flex; flex-direction: column; align-items: center; color: var(--text-muted); font-family: var(--mono); font-size: 0.75rem; }
+    .arch-link i { font-size: 1.5rem; color: var(--border-h); margin: 0.5rem 0; }
+    .schema-caption { font-size: 0.85rem; color: var(--text-muted); margin-top: 1.5rem; font-style: italic; border-top: 1px solid var(--border); padding-top: 1.5rem; }
+
+    .preuves { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px,1fr)); gap: 1.5rem; margin-top: 1rem;}
+    .p-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--r); text-decoration: none; display: flex; flex-direction: column; transition: all 0.2s;}
+    .p-card:hover { border-color: var(--accent); transform: translateY(-4px); }
+    .p-thumb { height: 120px; display: flex; align-items: center; justify-content: center; border-bottom: 1px solid var(--border); font-size: 2.5rem; color: var(--accent); background: var(--accent-glow);}
+    .p-body { padding: 1rem; flex: 1; display: flex; flex-direction: column;}
+    .p-body h4 { color: var(--text-hi); margin-bottom: 0.5rem; }
+    .p-link { display: inline-flex; align-items: center; gap: 0.5rem; margin-top: auto; padding-top: 1rem; font-weight: 500;}
+
+    /* Gantt Style */
+    .gantt-container { background: var(--bg-card); border: 1px solid var(--border); border-radius: 12px; padding: 2rem; margin-top: 2rem; }
+    .gantt-header { font-size: 1.1rem; font-weight: 600; color: var(--text-hi); margin-bottom: 1.5rem; display: flex; align-items: center; gap: 0.8rem; }
+    .gantt-row { display: flex; align-items: center; margin-bottom: 1rem; gap: 1rem; }
+    .gantt-label { width: 240px; font-size: 0.8rem; color: var(--text-mid); flex-shrink: 0; }
+    .gantt-track { flex: 1; background: rgba(255,255,255,0.05); height: 8px; border-radius: 4px; position: relative; }
+    body.light-mode .gantt-track { background: rgba(0,0,0,0.06); }
+    .gantt-bar { position: absolute; top: 0; bottom: 0; background: var(--accent); border-radius: 4px; transition: width 1.5s var(--ease); }
+    .gantt-date { width: 100px; font-family: var(--mono); font-size: 0.7rem; color: var(--text-muted); text-align: right; flex-shrink: 0; }
+    
+    @media (max-width: 768px) {
+        .arch-diagram { flex-direction: column; }
+        .arch-link i { transform: rotate(90deg); }
+    }
     </style>
 </head>
 <body>
 <nav>
     <div class="nav-inner">
-        <a href="index.html" class="nav-logo"><i class="fas fa-circle" style="color:var(--accent);"></i> Ali-Noor</a>
+        <a href="index.html" class="nav-logo"><i class="fas fa-network-wired" style="color:var(--accent);"></i> Ali-Noor</a>
         <div style="display:flex; align-items:center;">
             <a href="index.html#projets" class="nav-back"><i class="fas fa-arrow-left"></i> Retour</a>
             <button id="themeToggle" class="theme-toggle"><i class="fas fa-sun"></i> Mode Clair</button>
         </div>
     </div>
 </nav>
+
 <div class="page">
-    <h1>Domaine Windows Server</h1>
-    <p style="color:var(--text-muted);">Déploiement d'une infrastructure centralisée : installation des rôles AD DS et DNS, gestion fine des droits NTFS et automatisation via GPO.</p>
-    <div class="p-card">
-        <h4 style="color:var(--text-hi); font-size: 1.2rem; margin-bottom: 0.5rem;"><i class="fas fa-server" style="color:var(--accent); margin-right:10px;"></i> Active Directory</h4>
-        <p>Création d'OU, gestion des permissions et stratégies de groupe (GPMC).</p>
-        <a href="Preuves_Windows_Server.pdf" target="_blank" class="p-link"><i class="fas fa-file-pdf" style="color:var(--accent);"></i> Télécharger la fiche de preuves PDF</a>
+    <h1>Administration Windows Server & PKI</h1>
+    <p style="color:var(--text-muted); margin-bottom:2rem;">Mise en place d'un contrôleur de domaine Windows Server 2022. Ce projet se concentre sur la résolution de noms (DNS), la création d'une infrastructure à clés publiques (AD CS), et l'intégration de l'authentification centralisée avec d'autres services de l'infrastructure.</p>
+    
+    <div style="background: var(--bg-card); border: 1px solid var(--border); border-left: 4px solid #3b82f6; border-radius: 12px; padding: 1.5rem; margin-bottom: 2.5rem;">
+        <h3 style="color: var(--text-hi); font-size: 1.1rem; margin-bottom: 1rem; margin-top: 0;"><i class="fab fa-Bindoj" style="color: #3b82f6; margin-right: 8px;"></i> Mon cas d'usage : Identité, Résolution et Sécurité</h3>
+        <p style="color: var(--text-mid); font-size: 0.95rem; line-height: 1.6;">
+            Mon serveur Windows est le pilier identitaire de mon infrastructure. Mes interventions se sont concentrées sur trois axes majeurs :
+        </p>
+        <ul style="color: var(--text-mid); font-size: 0.95rem; line-height: 1.6; margin-left: 1.5rem; margin-top: 0.5rem; margin-bottom: 0.5rem;">
+            <li><strong>Le rôle DNS :</strong> Indispensable pour la résolution de noms au sein de mon réseau local, permettant aux machines de communiquer efficacement.</li>
+            <li><strong>Le rôle AD CS (Autorité de Certification) :</strong> Déploiement d'une PKI interne pour générer des certificats numériques, essentiels pour chiffrer les échanges sur le réseau en HTTPS.</li>
+            <li><strong>L'intégration avec osTicket :</strong> J'ai relié mon serveur Linux Debian (osTicket) à mon Windows Server pour permettre aux utilisateurs de se connecter au support informatique en utilisant leurs identifiants Active Directory (LDAP).</li>
+        </ul>
+    </div>
+
+    <h2>Architecture d'intégration (LDAP)</h2>
+    <div class="schema-box">
+        <div class="arch-diagram">
+            
+            <div class="arch-node">
+                <i class="fab fa-linux"></i>
+                <h4>Serveur Debian 11</h4>
+                <p>Application : osTicket<br>Plugin : Auth-LDAP</p>
+            </div>
+            
+            <div class="arch-link">
+                <span>Requêtes d'authentification</span>
+                <i class="fas fa-arrows-alt-h"></i>
+                <span>Protocole LDAP</span>
+            </div>
+
+            <div class="arch-node ad-node">
+                <i class="fab fa-Bindoj"></i>
+                <h4>Windows Server 2022</h4>
+                <p>Active Directory (Comptes)<br>DNS (Résolution)<br>AD CS (Certificats)</p>
+            </div>
+            
+        </div>
+        <p class="schema-caption">Interopérabilité des systèmes : Le serveur Debian (osTicket) interroge directement le contrôleur de domaine Windows Server pour vérifier les identifiants des utilisateurs. Le rôle AD CS permet de garantir la confiance des échanges sur le réseau.</p>
+    </div>
+
+    <h2>Documentation technique</h2>
+    <div class="preuves">
+        <div class="p-card">
+            <div class="p-thumb"><i class="fas fa-file-word"></i></div>
+            <div class="p-body">
+                <h4>Sécurisation HTTPS & DNS</h4>
+                <p style="font-size:0.85rem; color:var(--text-muted); line-height: 1.5;">Document détaillé sur l'ajout de l'enregistrement DNS de la machine Debian, ainsi que la création et le déploiement d'un certificat SSL via AD CS pour sécuriser l'accès web.</p>
+                <a href="Sécurisation_en_HTTPS_DNS.docx" target="_blank" class="p-link" style="color: var(--accent);"><i class="fas fa-download"></i> Télécharger le document</a>
+            </div>
+        </div>
+
+        <div class="p-card" style="border-color: var(--accent);">
+            <div class="p-thumb" style="color: var(--text-hi);"><i class="fas fa-book"></i></div>
+            <div class="p-body">
+                <h4>Intégration LDAP & AD</h4>
+                <p style="font-size:0.85rem; color:var(--text-muted); line-height: 1.5;">La documentation complète sur la configuration de la liaison entre l'Active Directory et osTicket se trouve dans le livrable de mon projet Ticketing principal.</p>
+                <a href="fiche_glpi.html" class="p-link" style="color: var(--accent);"><i class="fas fa-arrow-right"></i> Voir le projet osTicket</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="gantt-container">
+        <div class="gantt-header">
+            <i class="fas fa-project-diagram"></i> Planification de l'intégration Windows
+        </div>
+        <div class="gantt-row">
+            <div class="gantt-label">Phase 1 : Promo du serveur et config DNS</div>
+            <div class="gantt-track"><div class="gantt-bar" style="background: #3b82f6; left: 0%; width: 25%;"></div></div>
+            <div class="gantt-date">J1 - J2</div>
+        </div>
+        <div class="gantt-row">
+            <div class="gantt-label">Phase 2 : Déploiement de la PKI (AD CS)</div>
+            <div class="gantt-track"><div class="gantt-bar" style="background: #f59e0b; left: 25%; width: 25%;"></div></div>
+            <div class="gantt-date">J3 - J4</div>
+        </div>
+        <div class="gantt-row">
+            <div class="gantt-label">Phase 3 : Création des comptes de service AD</div>
+            <div class="gantt-track"><div class="gantt-bar" style="background: #10b981; left: 50%; width: 15%;"></div></div>
+            <div class="gantt-date">J5</div>
+        </div>
+        <div class="gantt-row">
+            <div class="gantt-label">Phase 4 : Configuration du plugin LDAP (osTicket)</div>
+            <div class="gantt-track"><div class="gantt-bar" style="background: #ef4444; left: 65%; width: 20%;"></div></div>
+            <div class="gantt-date">J6 - J7</div>
+        </div>
+        <div class="gantt-row">
+            <div class="gantt-label">Phase 5 : Tests de connexion inter-systèmes</div>
+            <div class="gantt-track"><div class="gantt-bar" style="background: #8b5cf6; left: 85%; width: 15%;"></div></div>
+            <div class="gantt-date">J8</div>
+        </div>
     </div>
 </div>
+
 <script>
     const t = document.getElementById('themeToggle'); const b = document.body;
-    if (localStorage.getItem('theme') === 'light-mode') { b.classList.add('light-mode'); t.innerHTML = '<i class="fas fa-moon"></i> Sombre'; }
-    t.addEventListener('click', () => { b.classList.toggle('light-mode'); const isL = b.classList.contains('light-mode'); localStorage.setItem('theme', isL ? 'light-mode' : 'dark-mode'); t.innerHTML = isL ? '<i class="fas fa-moon"></i> Sombre' : '<i class="fas fa-sun"></i> Clair'; });
+    if (localStorage.getItem('theme') === 'light-mode') { b.classList.add('light-mode'); t.innerHTML = '<i class="fas fa-moon"></i> Mode Sombre'; }
+    t.addEventListener('click', () => { b.classList.toggle('light-mode'); const isL = b.classList.contains('light-mode'); localStorage.setItem('theme', isL ? 'light-mode' : 'dark-mode'); t.innerHTML = isL ? '<i class="fas fa-moon"></i> Mode Sombre' : '<i class="fas fa-sun"></i> Mode Clair'; });
 </script>
 </body>
 </html>
