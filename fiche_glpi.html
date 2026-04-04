@@ -4,8 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
-    <title>Projet osTicket — Ali-Noor ASSOUMANI</title>
-    <meta name="description" content="Déploiement d'osTicket par Ali-Noor ASSOUMANI (BTS SIO). Architecture réseau, guide d'installation et planification.">
+    <title>Projet Ticketing osTicket — Ali-Noor ASSOUMANI</title>
+    <meta name="description" content="Déploiement de la plateforme de ticketing osTicket par Ali-Noor ASSOUMANI (BTS SIO). Installation LAMP, configuration ITIL et gestion des tickets.">
     <meta name="robots" content="index, follow">
 
     <link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700&family=Geist+Mono:wght@300;400;500&display=swap" rel="stylesheet">
@@ -40,34 +40,41 @@
     h1 { font-size: 2.5rem; color: var(--text-hi); margin-bottom: 1rem; }
     h2 { font-size: 1.5rem; color: var(--text-hi); margin-top: 3rem; margin-bottom: 1.5rem; }
 
-    /* Architecture Image Styling */
-    .schema-box { background: var(--bg-card); border: 1px solid var(--border); border-radius: 12px; padding: 1.5rem; text-align: center; margin-top: 1rem; }
-    .schema-box img { max-width: 100%; height: auto; border-radius: 8px; border: 1px solid var(--border); background: #fff; } /* Fond blanc pour que le schéma soit lisible même en mode sombre */
-    .schema-caption { font-size: 0.85rem; color: var(--text-muted); margin-top: 1rem; font-style: italic; }
+    /* Architecture Schema Styling */
+    .schema-box { background: var(--bg-card); border: 1px solid var(--border); border-radius: 12px; padding: 1rem; text-align: center; margin-top: 1rem; overflow: hidden; }
+    .schema-img { max-width: 100%; height: auto; border-radius: 8px; transition: transform 0.3s ease; display: block; margin: 0 auto; }
+    .schema-box:hover .schema-img { transform: scale(1.02); } 
+    .schema-caption { font-size: 0.85rem; color: var(--text-muted); margin-top: 1rem; font-style: italic; border-top: 1px solid var(--border); padding-top: 1rem; }
 
-    .preuves { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px,1fr)); gap: 1.5rem; margin-top: 1rem;}
-    .p-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--r); text-decoration: none; display: flex; flex-direction: column; transition: all 0.2s;}
-    .p-card:hover { border-color: var(--accent); transform: translateY(-4px); }
-    .p-thumb { height: 120px; display: flex; align-items: center; justify-content: center; border-bottom: 1px solid var(--border); font-size: 2.5rem; color: var(--accent); background: var(--accent-glow);}
-    .p-body { padding: 1rem; }
-    .p-body h4 { color: var(--text-hi); margin-bottom: 0.5rem; }
-    .p-link { display: inline-flex; gap: 0.5rem; color: var(--text-muted); margin-top: 0.5rem;}
+    /* Preuves modifiées pour centrer un seul élément */
+    .preuves { display: flex; justify-content: center; margin-top: 1rem;}
+    .p-card { width: 100%; max-width: 500px; background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--r); text-decoration: none; display: flex; flex-direction: column; transition: all 0.2s;}
+    .p-card:hover { border-color: var(--accent); transform: translateY(-4px); box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
+    .p-thumb { height: 140px; display: flex; align-items: center; justify-content: center; border-bottom: 1px solid var(--border); font-size: 3rem; color: var(--text-hi); background: var(--accent);}
+    .p-body { padding: 1.5rem; flex: 1; display: flex; flex-direction: column;}
+    .p-body h4 { color: var(--text-hi); margin-bottom: 0.8rem; font-size: 1.2rem; }
+    .p-link { display: inline-flex; align-items: center; gap: 0.5rem; margin-top: auto; padding-top: 1.5rem; font-weight: 600;}
 
     /* Gantt Style */
-    .gantt-container { background: var(--bg-card); border: 1px solid var(--border); border-radius: 12px; padding: 2rem; margin-top: 2rem; }
+    .gantt-container { background: var(--bg-card); border: 1px solid var(--border); border-radius: 12px; padding: 2rem; margin-top: 3rem; }
     .gantt-header { font-size: 1.1rem; font-weight: 600; color: var(--text-hi); margin-bottom: 1.5rem; display: flex; align-items: center; gap: 0.8rem; }
     .gantt-row { display: flex; align-items: center; margin-bottom: 1rem; gap: 1rem; }
-    .gantt-label { width: 200px; font-size: 0.8rem; color: var(--text-mid); flex-shrink: 0; }
+    .gantt-label { width: 220px; font-size: 0.8rem; color: var(--text-mid); flex-shrink: 0; }
     .gantt-track { flex: 1; background: rgba(255,255,255,0.05); height: 8px; border-radius: 4px; position: relative; }
     body.light-mode .gantt-track { background: rgba(0,0,0,0.06); }
     .gantt-bar { position: absolute; top: 0; bottom: 0; background: var(--accent); border-radius: 4px; transition: width 1.5s var(--ease); }
     .gantt-date { width: 100px; font-family: var(--mono); font-size: 0.7rem; color: var(--text-muted); text-align: right; flex-shrink: 0; }
+    
+    @media (max-width: 768px) {
+        .gantt-label { width: 160px; }
+        .p-card { max-width: 100%; }
+    }
     </style>
 </head>
 <body>
 <nav>
     <div class="nav-inner">
-        <a href="index.html" class="nav-logo"><i class="fas fa-circle" style="color:var(--accent);"></i> Ali-Noor</a>
+        <a href="index.html" class="nav-logo"><i class="fas fa-network-wired" style="color:var(--accent);"></i> Ali-Noor</a>
         <div style="display:flex; align-items:center;">
             <a href="index.html#projets" class="nav-back"><i class="fas fa-arrow-left"></i> Retour</a>
             <button id="themeToggle" class="theme-toggle"><i class="fas fa-sun"></i> Mode Clair</button>
@@ -76,73 +83,61 @@
 </nav>
 
 <div class="page">
-    <h1>Déploiement d'osTicket</h1>
-    <p style="color:var(--text-muted); margin-bottom:2rem;">Mise en place d'une plateforme de ticketing sécurisée sous Linux Debian 11. Ce projet intègre la gestion de certificats SSL, une segmentation réseau stricte (DMZ) et la publication sécurisée sur Internet.</p>
+    <h1>Plateforme de Ticketing osTicket</h1>
+    <p style="color:var(--text-muted); margin-bottom:2rem;">Déploiement complet d'une solution de gestion des incidents et des demandes (Ticketing) basée sur <strong>osTicket</strong> dans un environnement Linux Debian. Ce projet inclut la configuration ITIL (SLA, Catégories), l'authentification LDAP et la gestion du cycle de vie des tickets.</p>
     
-    <h2>Architecture Réseau & Topologie</h2>
+    <h2>Architecture Réseau</h2>
     <div class="schema-box">
-        <img src="schema_osticket.png" alt="Schéma logique osTicket">
-        <p class="schema-caption">Topologie logique : Publication du serveur osTicket en DMZ avec translation d'adresse (NAT/PAT) via le pare-feu Stormshield.</p>
+        <img src="schema_osticket.jpg" alt="Schéma Architecture osTicket" class="schema-img">
+        <p class="schema-caption">Flux logiques : Le Serveur Web osTicket (sur Debian 11 - 172.16.5.2) est hébergé en DMZ derrière le pare-feu Stormshield. Il communique en LDAP avec le contrôleur de domaine Windows Server (Réseau IN - 192.168.5.100) pour l'authentification.</p>
     </div>
 
     <h2>Documentation technique</h2>
     <div class="preuves">
         <div class="p-card">
-            <div class="p-thumb"><i class="fas fa-book"></i></div>
+            <div class="p-thumb"><i class="fas fa-file-pdf"></i></div>
             <div class="p-body">
-                <h4>Guide d'installation</h4>
-                <p style="font-size:0.85rem; color:var(--text-muted);">Procédure complète : LAMP, HTTPS, Routage et publication DMZ.</p>
-                <a href="osTicket_Documentation.pdf" target="_blank" class="p-link"><i class="fas fa-file-pdf"></i> Voir le document PDF</a>
+                <h4>Livrable Complet du Projet</h4>
+                <p style="font-size:0.95rem; color:var(--text-muted); line-height: 1.6;">Ce document unique retrace l'intégralité de mon intervention sur osTicket. Il contient :<br><br>
+                <i class="fas fa-check" style="color: var(--accent); margin-right: 5px;"></i> L'installation de la pile LAMP (Apache, MySQL, PHP).<br>
+                <i class="fas fa-check" style="color: var(--accent); margin-right: 5px;"></i> La configuration du plugin LDAP pour l'authentification AD.<br>
+                <i class="fas fa-check" style="color: var(--accent); margin-right: 5px;"></i> Le paramétrage ITIL (SLA, services, équipes).</p>
+                <a href="Installation_osTicket_Debian11.pdf" target="_blank" class="p-link" style="color: var(--accent);"><i class="fas fa-download"></i> Télécharger le document complet</a>
             </div>
         </div>
     </div>
 
     <div class="gantt-container">
         <div class="gantt-header">
-            <i class="fas fa-project-diagram"></i> Planification du Projet (Diagramme de Gantt)
+            <i class="fas fa-project-diagram"></i> Planification du Projet Ticketing
         </div>
         <div class="gantt-row">
-            <div class="gantt-label">Phase 1 : Lancement</div>
-            <div class="gantt-track"><div class="gantt-bar" style="left: 0%; width: 3%;"></div></div>
-            <div class="gantt-date">11/09 - 16/09</div>
+            <div class="gantt-label">Phase 1 : Installation LAMP & osTicket</div>
+            <div class="gantt-track"><div class="gantt-bar" style="left: 0%; width: 25%;"></div></div>
+            <div class="gantt-date">J1 - J5</div>
         </div>
         <div class="gantt-row">
-            <div class="gantt-label">Phase 2 : Configuration</div>
-            <div class="gantt-track"><div class="gantt-bar" style="left: 3%; width: 11%;"></div></div>
-            <div class="gantt-date">17/09 - 06/10</div>
+            <div class="gantt-label">Phase 2 : Configuration ITIL (SLA, Départements)</div>
+            <div class="gantt-track"><div class="gantt-bar" style="left: 25%; width: 30%;"></div></div>
+            <div class="gantt-date">J6 - J11</div>
         </div>
         <div class="gantt-row">
-            <div class="gantt-label">Phase 3 : Intégration</div>
-            <div class="gantt-track"><div class="gantt-bar" style="left: 14%; width: 7%;"></div></div>
-            <div class="gantt-date">07/10 - 20/10</div>
+            <div class="gantt-label">Phase 3 : Liaison Active Directory (LDAP)</div>
+            <div class="gantt-track"><div class="gantt-bar" style="left: 55%; width: 20%;"></div></div>
+            <div class="gantt-date">J12 - J15</div>
         </div>
         <div class="gantt-row">
-            <div class="gantt-label">Phase 4 : Tests</div>
-            <div class="gantt-track"><div class="gantt-bar" style="left: 21%; width: 3%;"></div></div>
-            <div class="gantt-date">21/10 - 27/10</div>
-        </div>
-        <div class="gantt-row">
-            <div class="gantt-label">Phase 5 : Déploiement</div>
-            <div class="gantt-track"><div class="gantt-bar" style="left: 24%; width: 11%;"></div></div>
-            <div class="gantt-date">28/10 - 16/11</div>
-        </div>
-        <div class="gantt-row">
-            <div class="gantt-label">Phase 6 : Configuration HTTPS</div>
-            <div class="gantt-track"><div class="gantt-bar" style="left: 35%; width: 13%;"></div></div>
-            <div class="gantt-date">17/11 - 11/12</div>
-        </div>
-        <div class="gantt-row">
-            <div class="gantt-label">Phase 7 : Routage IN vers DMZ</div>
-            <div class="gantt-track"><div class="gantt-bar" style="left: 48%; width: 52%;"></div></div>
-            <div class="gantt-date">12/12 - 09/03</div>
+            <div class="gantt-label">Phase 4 : Recette & Tests utilisateurs</div>
+            <div class="gantt-track"><div class="gantt-bar" style="left: 75%; width: 25%;"></div></div>
+            <div class="gantt-date">J16 - J20</div>
         </div>
     </div>
 </div>
 
 <script>
     const t = document.getElementById('themeToggle'); const b = document.body;
-    if (localStorage.getItem('theme') === 'light-mode') { b.classList.add('light-mode'); t.innerHTML = '<i class="fas fa-moon"></i> Sombre'; }
-    t.addEventListener('click', () => { b.classList.toggle('light-mode'); const isL = b.classList.contains('light-mode'); localStorage.setItem('theme', isL ? 'light-mode' : 'dark-mode'); t.innerHTML = isL ? '<i class="fas fa-moon"></i> Sombre' : '<i class="fas fa-sun"></i> Clair'; });
+    if (localStorage.getItem('theme') === 'light-mode') { b.classList.add('light-mode'); t.innerHTML = '<i class="fas fa-moon"></i> Mode Sombre'; }
+    t.addEventListener('click', () => { b.classList.toggle('light-mode'); const isL = b.classList.contains('light-mode'); localStorage.setItem('theme', isL ? 'light-mode' : 'dark-mode'); t.innerHTML = isL ? '<i class="fas fa-moon"></i> Mode Sombre' : '<i class="fas fa-sun"></i> Mode Clair'; });
 </script>
 </body>
 </html>
