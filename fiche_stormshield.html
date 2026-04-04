@@ -72,13 +72,19 @@
 
     .schema-caption { font-size: 0.85rem; color: var(--text-muted); margin-top: 2rem; font-style: italic; border-top: 1px solid var(--border); padding-top: 1.5rem; }
 
-    .preuves { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px,1fr)); gap: 1.5rem; margin-top: 1rem;}
-    .p-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--r); text-decoration: none; display: flex; flex-direction: column; transition: all 0.2s;}
+    /* Preuves & Images */
+    .preuves { display: grid; grid-template-columns: repeat(auto-fill, minmax(250px,1fr)); gap: 1.5rem; margin-top: 1rem;}
+    .p-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--r); text-decoration: none; display: flex; flex-direction: column; transition: all 0.2s; overflow: hidden; }
     .p-card:hover { border-color: var(--accent); transform: translateY(-4px); }
-    .p-thumb { height: 120px; display: flex; align-items: center; justify-content: center; border-bottom: 1px solid var(--border); font-size: 2.5rem; color: var(--accent); background: var(--accent-glow);}
-    .p-body { padding: 1rem; flex: 1; display: flex; flex-direction: column;}
-    .p-body h4 { color: var(--text-hi); margin-bottom: 0.5rem; }
-    .p-link { display: inline-flex; align-items: center; gap: 0.5rem; margin-top: auto; padding-top: 1rem; font-weight: 500;}
+    .p-thumb { height: 130px; position: relative; background: var(--bg-hover); display: flex; align-items: center; justify-content: center; border-bottom: 1px solid var(--border); }
+    .p-thumb img { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0.35; transition: opacity 0.3s; z-index: 1; }
+    .p-card:hover .p-thumb img { opacity: 0.7; }
+    .p-thumb i { font-size: 2.5rem; color: var(--accent); z-index: 2; text-shadow: 0 2px 10px rgba(0,0,0,0.5); }
+    .p-body { padding: 1.2rem; flex: 1; display: flex; flex-direction: column;}
+    .p-body h4 { color: var(--text-hi); margin-bottom: 0.5rem; font-size: 1.05rem; }
+    .p-link-container { display: flex; flex-wrap: wrap; gap: 0.8rem; margin-top: auto; padding-top: 1rem; }
+    .p-link { display: inline-flex; align-items: center; gap: 0.4rem; font-size: 0.85rem; font-weight: 500; color: var(--accent); text-decoration: none; transition: opacity 0.2s; }
+    .p-link:hover { opacity: 0.7; }
 
     /* Gantt Style */
     .gantt-container { background: var(--bg-card); border: 1px solid var(--border); border-radius: 12px; padding: 2rem; margin-top: 2rem; }
@@ -178,23 +184,49 @@
         <p class="schema-caption">Topologie de l'infrastructure : Le pare-feu bloque par défaut tout le trafic entrant. Seul le trafic web légitime est redirigé (NAT/PAT) vers la DMZ. Le réseau IN n'est pas exposé directement, mais reste accessible de manière chiffrée via les tunnels VPN IPsec et SSL.</p>
     </div>
 
-    <h2>Documentation technique</h2>
+    <h2>Documentation technique (Captures)</h2>
     <div class="preuves">
         <div class="p-card">
-            <div class="p-thumb"><i class="fas fa-list-ul"></i></div>
+            <div class="p-thumb">
+                <img src="Regles_FIltrage_AP2_1.jpg" alt="Règles de filtrage">
+                <i class="fas fa-list-ul"></i>
+            </div>
             <div class="p-body">
-                <h4>Règles de Filtrage & NAT</h4>
-                <p style="font-size:0.85rem; color:var(--text-muted);">Captures d'écran de l'interface d'administration Stormshield montrant la configuration des règles de redirection vers la DMZ.</p>
-                <a href="#" class="p-link" style="color: var(--text-muted);"><i class="fas fa-image"></i> Bientôt disponible</a>
+                <h4>Règles de Filtrage</h4>
+                <p style="font-size:0.85rem; color:var(--text-muted); line-height: 1.5;">Stratégie de sécurité du pare-feu définissant les autorisations de flux entre le WAN, le LAN et la DMZ.</p>
+                <div class="p-link-container">
+                    <a href="Regles_FIltrage_AP2_1.jpg" target="_blank" class="p-link"><i class="fas fa-external-link-alt"></i> Partie 1</a>
+                    <a href="Regles_FIltrage_AP2_2.jpg" target="_blank" class="p-link"><i class="fas fa-external-link-alt"></i> Partie 2</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="p-card">
+            <div class="p-thumb">
+                <img src="Regles_NAT_AP2.png" alt="Règles NAT">
+                <i class="fas fa-random"></i>
+            </div>
+            <div class="p-body">
+                <h4>Règles NAT/PAT</h4>
+                <p style="font-size:0.85rem; color:var(--text-muted); line-height: 1.5;">Translation d'adresses et redirection des ports (80/443) de l'IP publique vers le serveur web osTicket (DMZ).</p>
+                <div class="p-link-container">
+                    <a href="Regles_NAT_AP2.png" target="_blank" class="p-link"><i class="fas fa-external-link-alt"></i> Voir la capture</a>
+                </div>
             </div>
         </div>
         
         <div class="p-card">
-            <div class="p-thumb"><i class="fas fa-key"></i></div>
+            <div class="p-thumb">
+                <img src="Configuration_VPN_IPSEC.png" alt="Configuration VPN">
+                <i class="fas fa-key"></i>
+            </div>
             <div class="p-body">
-                <h4>Configuration VPN IPsec & SSL</h4>
-                <p style="font-size:0.85rem; color:var(--text-muted);">Paramétrage des politiques VPN pour l'accès distant sécurisé des utilisateurs et administrateurs.</p>
-                <a href="#" class="p-link" style="color: var(--text-muted);"><i class="fas fa-image"></i> Bientôt disponible</a>
+                <h4>Configuration Tunnels VPN</h4>
+                <p style="font-size:0.85rem; color:var(--text-muted); line-height: 1.5;">Paramétrage des accès cryptés distants via les protocoles IPsec (Site-à-Site) et SSL (Nomades).</p>
+                <div class="p-link-container" style="flex-direction: column; gap: 0.4rem;">
+                    <a href="Configuration_VPN_IPSEC.png" target="_blank" class="p-link"><i class="fas fa-external-link-alt"></i> Config IPsec</a>
+                    <a href="Configuration_VPNSSL.png" target="_blank" class="p-link"><i class="fas fa-external-link-alt"></i> Config SSL</a>
+                </div>
             </div>
         </div>
     </div>
