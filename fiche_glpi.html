@@ -40,14 +40,14 @@
     h1 { font-size: 2.5rem; color: var(--text-hi); margin-bottom: 1rem; }
     h2 { font-size: 1.5rem; color: var(--text-hi); margin-top: 3rem; margin-bottom: 1.5rem; }
 
-    /* Architecture Schema Styling */
+    /* Architecture Schema Styling - Spécifique pour l'image */
     .schema-box { background: var(--bg-card); border: 1px solid var(--border); border-radius: 12px; padding: 1rem; text-align: center; margin-top: 1rem; overflow: hidden; }
-    .schema-img { max-width: 100%; height: auto; border-radius: 8px; transition: transform 0.3s ease; display: block; margin: 0 auto; }
+    .schema-img { max-width: 100%; height: auto; border-radius: 8px; transition: transform 0.3s ease; display: block; margin: 0 auto; box-shadow: 0 4px 15px rgba(0,0,0,0.3); }
     .schema-box:hover .schema-img { transform: scale(1.02); } 
-    .schema-caption { font-size: 0.85rem; color: var(--text-muted); margin-top: 1rem; font-style: italic; border-top: 1px solid var(--border); padding-top: 1rem; }
+    .schema-caption { font-size: 0.85rem; color: var(--text-muted); margin-top: 1.5rem; font-style: italic; border-top: 1px solid var(--border); padding-top: 1rem; }
 
     /* Preuves modifiées pour centrer un seul élément */
-    .preuves { display: flex; justify-content: center; margin-top: 1rem;}
+    .preuves { display: flex; justify-content: center; margin-top: 1.5rem;}
     .p-card { width: 100%; max-width: 500px; background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--r); text-decoration: none; display: flex; flex-direction: column; transition: all 0.2s;}
     .p-card:hover { border-color: var(--accent); transform: translateY(-4px); box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
     .p-thumb { height: 140px; display: flex; align-items: center; justify-content: center; border-bottom: 1px solid var(--border); font-size: 3rem; color: var(--text-hi); background: var(--accent);}
@@ -89,6 +89,7 @@
     <h2>Architecture Réseau</h2>
     <div class="schema-box">
         <img src="schema_osticket.jpg" alt="Schéma Architecture osTicket" class="schema-img">
+        
         <p class="schema-caption">Flux logiques : Le Serveur Web osTicket (sur Debian 11 - 172.16.5.2) est hébergé en DMZ derrière le pare-feu Stormshield. Il communique en LDAP avec le contrôleur de domaine Windows Server (Réseau IN - 192.168.5.100) pour l'authentification.</p>
     </div>
 
